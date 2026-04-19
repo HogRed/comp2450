@@ -1,0 +1,11 @@
+---
+layout: default
+---
+<article class="floor">
+  <div class="floor-banner">
+    <div class="floor-number">{{ page.floor_number }}</div>
+    <h1>{{ page.title }}</h1>
+    {% if page.flavor_quote %}<p class="flavor-quote">{{ page.flavor_quote }}</p>{% endif %}
+  </div>
+  {{ content }}
+</article>

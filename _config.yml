@@ -1,0 +1,34 @@
+title: "COMP 2450 — The Descent"
+description: "Data Structures & Algorithms in C++. Harding University."
+baseurl: ""
+url: ""
+
+markdown: kramdown
+highlighter: rouge
+permalink: /:collection/:name/
+
+collections:
+  floors:
+    output: true
+    permalink: /floors/:name/
+
+defaults:
+  - scope:
+      path: ""
+      type: "floors"
+    values:
+      layout: "floor"
+  - scope:
+      path: ""
+    values:
+      layout: "default"
+
+exclude:
+  - instructor/
+  - README.md
+  - 2450-schedule.xlsx
+  - comp2450_zyBooks.pdf
+  - Gemfile
+  - Gemfile.lock
+  - vendor/
+  - .jekyll-cache/

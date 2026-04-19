@@ -1,0 +1,278 @@
+/* COMP 2450 — The Descent
+   Visual identity: Diablo-inspired, dungeon-crawl aesthetic.
+   Priorities: readable body text, evocative frame, consistent palette. */
+
+@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700&family=EB+Garamond:ital,wght@0,400;0,600;1,400&family=UnifrakturMaguntia&family=Fira+Code&display=swap');
+
+:root {
+  --stone-dark: #1a0e0e;
+  --stone-mid:  #2a1a1a;
+  --stone-edge: #3a2a20;
+  --parchment:  #e8d8b0;
+  --parchment-dark: #d4b98c;
+  --ink:        #2a1a0a;
+  --ink-soft:   #4a3a2a;
+  --blood:      #6b0f0f;
+  --blood-bright: #8b0000;
+  --gold:       #c9a227;
+  --gold-dark:  #8b5a00;
+  --ember:      #d97706;
+}
+
+* { box-sizing: border-box; }
+
+html, body {
+  margin: 0;
+  padding: 0;
+  background: var(--stone-dark);
+  color: var(--ink);
+  font-family: 'EB Garamond', Georgia, serif;
+  font-size: 19px;
+  line-height: 1.6;
+}
+
+/* Dungeon stone texture via layered gradients — no external images needed */
+body {
+  background:
+    radial-gradient(ellipse at top, #2a1515 0%, var(--stone-dark) 60%),
+    var(--stone-dark);
+  min-height: 100vh;
+}
+
+/* Top header: the gate */
+.site-header {
+  background: linear-gradient(180deg, #000 0%, var(--stone-mid) 100%);
+  border-bottom: 3px double var(--gold-dark);
+  padding: 1.2rem 2rem;
+  text-align: center;
+}
+
+.site-header a {
+  font-family: 'Cinzel', serif;
+  font-weight: 700;
+  font-size: 1.6rem;
+  color: var(--gold);
+  text-decoration: none;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  text-shadow: 0 0 8px rgba(201, 162, 39, 0.4);
+}
+
+.site-header a:hover {
+  color: #ffd966;
+}
+
+.site-tagline {
+  font-family: 'UnifrakturMaguntia', serif;
+  color: var(--parchment-dark);
+  font-size: 1.1rem;
+  margin-top: 0.3rem;
+  letter-spacing: 0.05em;
+}
+
+/* Main parchment content card */
+main {
+  max-width: 860px;
+  margin: 2rem auto;
+  padding: 3rem 3.5rem;
+  background: var(--parchment);
+  background-image:
+    radial-gradient(circle at 20% 10%, rgba(139, 90, 0, 0.08) 0%, transparent 50%),
+    radial-gradient(circle at 80% 90%, rgba(139, 90, 0, 0.08) 0%, transparent 50%);
+  border: 1px solid var(--gold-dark);
+  box-shadow:
+    0 0 0 4px var(--stone-mid),
+    0 0 0 5px var(--gold-dark),
+    0 12px 40px rgba(0, 0, 0, 0.7);
+  border-radius: 2px;
+}
+
+/* Headings: carved in stone */
+h1, h2, h3, h4 {
+  font-family: 'Cinzel', serif;
+  color: var(--blood);
+  margin-top: 1.8em;
+  margin-bottom: 0.5em;
+  letter-spacing: 0.04em;
+}
+
+h1 {
+  font-size: 2.2rem;
+  text-align: center;
+  margin-top: 0.2em;
+  border-bottom: 2px solid var(--gold-dark);
+  padding-bottom: 0.4em;
+}
+
+h2 {
+  font-size: 1.5rem;
+  border-left: 4px solid var(--blood);
+  padding-left: 0.6em;
+}
+
+h3 { font-size: 1.2rem; }
+h4 { font-size: 1.05rem; color: var(--ink); }
+
+/* The floor banner — the dramatic intro on each floor page */
+.floor-banner {
+  margin: -3rem -3.5rem 2rem -3.5rem;
+  padding: 2rem 3.5rem 1.5rem;
+  background: linear-gradient(180deg, var(--stone-mid) 0%, #3a1a1a 100%);
+  color: var(--parchment);
+  text-align: center;
+  border-bottom: 3px double var(--gold-dark);
+}
+
+.floor-banner .floor-number {
+  font-family: 'UnifrakturMaguntia', serif;
+  font-size: 1.4rem;
+  color: var(--gold);
+  letter-spacing: 0.15em;
+}
+
+.floor-banner h1 {
+  color: var(--parchment);
+  border-bottom: none;
+  margin: 0.3em 0;
+  text-shadow: 0 0 12px rgba(139, 15, 15, 0.6);
+}
+
+.floor-banner .flavor-quote {
+  font-style: italic;
+  color: var(--parchment-dark);
+  font-size: 1.05rem;
+  max-width: 600px;
+  margin: 0.8em auto 0;
+}
+
+/* Links */
+a {
+  color: var(--gold-dark);
+  text-decoration: underline;
+  text-decoration-color: rgba(139, 90, 0, 0.4);
+  text-underline-offset: 2px;
+}
+
+a:hover {
+  color: var(--blood);
+  text-decoration-color: var(--blood);
+}
+
+/* Code */
+code, pre, kbd {
+  font-family: 'Fira Code', 'Consolas', monospace;
+  font-size: 0.92em;
+}
+
+code {
+  background: rgba(42, 26, 10, 0.08);
+  padding: 0.1em 0.35em;
+  border-radius: 2px;
+  color: var(--blood);
+}
+
+pre {
+  background: var(--stone-mid);
+  color: var(--parchment-dark);
+  padding: 1rem 1.2rem;
+  border-left: 3px solid var(--gold);
+  border-radius: 2px;
+  overflow-x: auto;
+  line-height: 1.5;
+}
+
+pre code {
+  background: transparent;
+  color: inherit;
+  padding: 0;
+}
+
+/* Tables — bestiary / feature grids */
+table {
+  border-collapse: collapse;
+  margin: 1.2em 0;
+  width: 100%;
+  font-size: 0.95em;
+}
+
+th, td {
+  border: 1px solid var(--ink-soft);
+  padding: 0.6em 0.9em;
+  text-align: left;
+}
+
+th {
+  background: var(--stone-mid);
+  color: var(--gold);
+  font-family: 'Cinzel', serif;
+  text-transform: uppercase;
+  font-size: 0.82em;
+  letter-spacing: 0.08em;
+}
+
+tr:nth-child(even) td {
+  background: rgba(139, 90, 0, 0.06);
+}
+
+/* Blockquotes — scroll fragments */
+blockquote {
+  border-left: 4px solid var(--gold);
+  background: rgba(139, 90, 0, 0.07);
+  margin: 1.2em 0;
+  padding: 0.8em 1.4em;
+  font-style: italic;
+  color: var(--ink-soft);
+}
+
+/* Callout boxes for "Bestiary", "Lore", "Check-for-understanding" */
+.callout {
+  margin: 1.5em 0;
+  padding: 1em 1.4em;
+  border: 1px solid var(--gold-dark);
+  border-left: 5px solid var(--gold-dark);
+  background: rgba(139, 90, 0, 0.08);
+  border-radius: 2px;
+}
+
+.callout-title {
+  font-family: 'Cinzel', serif;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  font-size: 0.9rem;
+  color: var(--blood);
+  margin: 0 0 0.4em 0;
+}
+
+.callout.bestiary {
+  border-color: var(--blood-bright);
+  background: rgba(139, 0, 0, 0.06);
+}
+.callout.bestiary .callout-title { color: var(--blood-bright); }
+
+.callout.lore {
+  border-color: var(--gold);
+  background: rgba(201, 162, 39, 0.08);
+}
+
+.callout.check {
+  border-color: var(--ember);
+  background: rgba(217, 119, 6, 0.06);
+}
+.callout.check .callout-title { color: var(--ember); }
+
+/* Footer */
+.site-footer {
+  text-align: center;
+  padding: 2rem 1rem;
+  color: var(--parchment-dark);
+  font-size: 0.85rem;
+  opacity: 0.6;
+}
+
+/* Responsive */
+@media (max-width: 720px) {
+  main { margin: 1rem; padding: 1.5rem; }
+  .floor-banner { margin: -1.5rem -1.5rem 1.5rem; padding: 1.5rem; }
+  h1 { font-size: 1.6rem; }
+  body { font-size: 17px; }
+}

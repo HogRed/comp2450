@@ -1,0 +1,30 @@
+# Jekyll build artifacts
+_site/
+.jekyll-cache/
+.sass-cache/
+Gemfile.lock
+
+# C++ build artifacts
+*.o
+*.obj
+*.exe
+*.out
+a.out
+build/
+
+# Editor / tooling
+.vscode/
+.idea/
+*.swp
+.claude/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Source materials — keep local only, do NOT publish
+comp2450_zyBooks.pdf
+2450-schedule.xlsx
+
+# Instructor-only materials — never commit to the public repo
+instructor/
