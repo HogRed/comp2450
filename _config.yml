@@ -1,7 +1,7 @@
 title: "COMP 2450 — The Descent"
 description: "Data Structures & Algorithms in C++. Harding University."
-baseurl: ""
-url: ""
+baseurl: "/comp2450"
+url: "https://hogred.github.io"
 
 markdown: kramdown
 highlighter: rouge
