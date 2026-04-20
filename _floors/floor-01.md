@@ -45,13 +45,7 @@ Yes, that's a lot. The §2.4–2.6 material on Big-O is short and largely redund
 
 Work the Question Sets and Animations inside the ZyBook — they count toward your participation grade.
 
-### Videos (watch before the matching class)
-
-| # | For | Length | Title |
-|---|-----|--------|-------|
-| 1.1 | Monday    | ~10 min | *Linear search — checking every door* |
-| 1.2 | Wednesday | ~12 min | *Binary search — halving the dungeon, plus a first look at Big-O* |
-| 1.3 | Friday    | ~12 min | *Recursion as a thinking tool — and why we measure* |
+There are no pre-class videos. Class time is for live coding and discussion together — your reading is the prep.
 
 ## In-class (MWF)
 

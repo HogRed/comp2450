@@ -38,29 +38,21 @@ Before **Friday**: §1.6 Algorithm efficiency
 
 Work the Question Sets and Animations inside the ZyBook — they count toward your participation grade.
 
-### Videos (watch before the matching class)
-
-| # | For | Length | Title |
-|---|-----|--------|-------|
-| 0.1 | Monday    | ~10 min | *What is a data structure, really?* |
-| 0.2 | Wednesday | ~12 min | *The adventurer's pack: a tour of ADTs* |
-| 0.3 | Friday    | ~10 min | *Does it grow fast or slow? A first look at efficiency* |
-
 ## In-class (MWF)
 
 | Day | Focus | Activity |
 |-----|-------|----------|
-| **M** | Course entry, what is a DS?          | Syllabus & dungeon tour; *Unplugged ADT* card activity (see below) |
-| **W** | Common ADTs; abstraction             | *ADT Triage* — match scenarios to ADTs in pairs; quick-write: "Encapsulation in one sentence" |
-| **F** | Algorithm efficiency, intuition      | *Race the dungeon*: hand-trace two algorithms on inputs of size 10, 100, 1000; predict who wins, then measure |
+| **M** | Course entry, what is a DS?     | Syllabus & dungeon tour; *Unplugged ADT* card activity; **start dev environment setup** (g++, editor, git) — finish before Wednesday |
+| **W** | Common ADTs; first C++ syntax   | *ADT Triage* — match scenarios to ADTs in pairs; live-code two tiny C++ scripts together (`hello.cpp`, `vector_demo.cpp`) so everyone has touched the compiler at least once |
+| **F** | Algorithm efficiency, intuition | *Race the dungeon* — hand-trace two algorithms on inputs of size 10, 100, 1000; predict; then run a small `growth.cpp` sample together to see the numbers |
 
-## Lab (Friday, in-class or open-lab)
+There are no pre-class videos this week. Class time is for setup, discussion, and live coding together.
 
-**Lab 0 — "First light."** Set up your dev environment, clone the project starter, compile and run the Antechamber program, and commit your first change.
+## Lab — folded into the project
 
-Deliverable: a screenshot or terminal paste showing the program running on your machine, plus one commit pushed to your project repo with your hero's name set.
+**Lab 0 — "First light."** No separate handout. The project task below *is* the lab: build, run, change one string, commit. By Friday you should have a working compiler, a clean clone, and one commit pushed.
 
-Full handout: [`project/floor-00-starter/README.md`](https://github.com/YOUR-USERNAME/comp2450/tree/main/project/floor-00-starter)
+Deliverable: a commit pushed to your project repo with your hero's name set in `main.cpp`.
 
 ## The project — Floor 0
 
