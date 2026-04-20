@@ -13,7 +13,7 @@ Welcome, adventurer, to **COMP 2450 — Data Structures & Algorithms**. This sem
 | Wk | Floor | Name | What you gain |
 |----|-------|------|---------------|
 | 1  | 0  | [The Antechamber](/floors/floor-00/)         | ADTs, abstraction, the adventurer's vocabulary |
-| 2  | 1  | The Scrying Well                              | Searching & Big-O intuition |
+| 2  | 1  | [The Scrying Well](/floors/floor-01/)         | Searching & Big-O intuition |
 | 3  | 2  | The Sorting Crucible                          | Merge sort, quicksort, divide-and-conquer |
 | 4  | 3  | The Forgemaster's Vault                       | Templates, memory management, exceptions |
 | 5  | 4  | The Chain Vault                               | Singly-linked lists |
