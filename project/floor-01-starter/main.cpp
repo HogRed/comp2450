@@ -10,6 +10,7 @@
 #include <iostream>
 #include <string>
 
+#include "bestiary/Bench.h"
 #include "bestiary/Bestiary.h"
 #include "bestiary/Search.h"
 
@@ -25,7 +26,7 @@ int main() {
 
     std::cout << "\nWelcome back, " << hero_name << ".\n";
     std::cout << "The water is black. It shows what you name aloud.\n";
-    std::cout << "(commands: search <name>, list, quit)\n\n";
+    std::cout << "(commands: search <name>, list, benchmark [N], quit)\n\n";
 
     auto bestiary = loadBestiary("data/monsters.txt");
     if (bestiary.empty()) {
@@ -59,6 +60,17 @@ int main() {
             const Monster* m = findMonster(bestiary, arg);
             if (m) printMonster(*m);
             else   std::cout << "No such creature stalks this Keep.\n";
+        }
+        else if (cmd == "benchmark") {
+            if (arg.empty()) {
+                runBenchmarkSweep();
+            } else {
+                try {
+                    runBenchmark(std::stoull(arg));
+                } catch (const std::exception&) {
+                    std::cout << "Usage: benchmark [N]   where N is a positive integer\n";
+                }
+            }
         }
         else {
             std::cout << "The Well does not understand '" << cmd << "'.\n";
