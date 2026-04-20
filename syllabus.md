@@ -43,7 +43,7 @@ By the end of this course, students will be able to:
 
 ## Schedule
 
-See [the dungeon map](/) for the week-by-week floor plan.
+See [the dungeon map]({{ site.baseurl }}/) for the week-by-week floor plan.
 
 ## Meeting pattern
 

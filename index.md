@@ -12,8 +12,8 @@ Welcome, adventurer, to **COMP 2450 — Data Structures & Algorithms**. This sem
 
 | Wk | Floor | Name | What you gain |
 |----|-------|------|---------------|
-| 1  | 0  | [The Antechamber](/floors/floor-00/)         | ADTs, abstraction, the adventurer's vocabulary |
-| 2  | 1  | [The Scrying Well](/floors/floor-01/)         | Searching & Big-O intuition |
+| 1  | 0  | [The Antechamber]({{ site.baseurl }}/floors/floor-00/)         | ADTs, abstraction, the adventurer's vocabulary |
+| 2  | 1  | [The Scrying Well]({{ site.baseurl }}/floors/floor-01/)         | Searching & Big-O intuition |
 | 3  | 2  | The Sorting Crucible                          | Merge sort, quicksort, divide-and-conquer |
 | 4  | 3  | The Forgemaster's Vault                       | Templates, memory management, exceptions |
 | 5  | 4  | The Chain Vault                               | Singly-linked lists |
@@ -40,7 +40,7 @@ Welcome, adventurer, to **COMP 2450 — Data Structures & Algorithms**. This sem
 
 1. Install a C++ compiler (`g++` or MSVC). See the syllabus for platform notes.
 2. Install a text editor or IDE. VS Code with the C/C++ extension is a good default.
-3. Read [the syllabus](/syllabus/).
+3. Read [the syllabus]({{ site.baseurl }}/syllabus/).
 4. Arrive to the first class ready to discuss: *what is a data structure, and why should you care?*
 
 *The gate creaks open. Floor 0 awaits.*
