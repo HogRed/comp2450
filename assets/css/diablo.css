@@ -145,6 +145,21 @@ h4 { font-size: 1.05rem; color: var(--ink); }
   margin: 0.8em auto 0;
 }
 
+/* The descent banner — the stylized SVG hero on the landing page */
+.descent-banner {
+  margin: -3rem -3.5rem 2.2rem -3.5rem;
+  padding: 0;
+  background: #0a0504;
+  border-bottom: 3px double var(--gold-dark);
+  line-height: 0;
+}
+
+.descent-banner img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
 /* Links */
 a {
   color: var(--gold-dark);
@@ -299,6 +314,7 @@ figure.diagram figcaption {
 @media (max-width: 720px) {
   main { margin: 1rem; padding: 1.5rem; }
   .floor-banner { margin: -1.5rem -1.5rem 1.5rem; padding: 1.5rem; }
+  .descent-banner { margin: -1.5rem -1.5rem 1.5rem; }
   h1 { font-size: 1.6rem; }
   body { font-size: 17px; }
 }

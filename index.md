@@ -2,7 +2,9 @@
 title: The Dungeon Entrance
 ---
 
-# The Descent
+<div class="descent-banner">
+  <img src="{{ '/assets/diagrams/descent-banner.svg' | relative_url }}" alt="A stone archway lit by a single torch opens onto a dark staircase descending toward distant glowing eyes. A skeleton hangs in chains from the right column. Title: COMP 2450 — Data Structures & Algorithms — The Descent."/>
+</div>
 
 > *Thirteen floors lie between you and mastery. Few who enter leave unchanged.*
 
