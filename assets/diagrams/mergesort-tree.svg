@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 480 395" role="img" aria-labelledby="msort-title msort-desc">
+  <title id="msort-title">Merge sort: split and merge tree</title>
+  <desc id="msort-desc">Eight items (8 3 5 1 7 2 6 4) are split recursively into halves until each subarray holds one item, then merged back up pairwise in sorted order to produce 1 2 3 4 5 6 7 8.</desc>
+  <style>
+    .cell { fill: #f2e4bc; stroke: #8b5a00; stroke-width: 1.2; }
+    .cell-sorted { fill: #eacf85; stroke: #6b0f0f; stroke-width: 1.2; }
+    .num { font-family: Consolas, 'Courier New', monospace; font-size: 13px; fill: #2a1a0a; text-anchor: middle; dominant-baseline: central; font-weight: 700; }
+    .split-line { stroke: #8b5a00; stroke-width: 1; fill: none; opacity: 0.55; }
+    .merge-line { stroke: #6b0f0f; stroke-width: 1.1; fill: none; opacity: 0.6; }
+    .phase { font-family: Georgia, serif; font-size: 11px; fill: #6b0f0f; text-transform: uppercase; letter-spacing: 0.12em; text-anchor: middle; font-weight: 700; }
+    .caption { font-family: Georgia, serif; font-size: 11px; fill: #4a3a2a; font-style: italic; text-anchor: middle; }
+  </style>
+
+  <g transform="translate(40, 10)">
+    <text class="phase" x="200" y="11">split  ↓</text>
+    <text class="phase" x="200" y="215">merge  ↓</text>
+
+    <!-- split edges: row 0 -> 1 -> 2 -> 3 -->
+    <line class="split-line" x1="200" y1="42"  x2="100" y2="68"/>
+    <line class="split-line" x1="200" y1="42"  x2="300" y2="68"/>
+    <line class="split-line" x1="100" y1="92"  x2="50"  y2="118"/>
+    <line class="split-line" x1="100" y1="92"  x2="150" y2="118"/>
+    <line class="split-line" x1="300" y1="92"  x2="250" y2="118"/>
+    <line class="split-line" x1="300" y1="92"  x2="350" y2="118"/>
+    <line class="split-line" x1="50"  y1="142" x2="25"  y2="168"/>
+    <line class="split-line" x1="50"  y1="142" x2="75"  y2="168"/>
+    <line class="split-line" x1="150" y1="142" x2="125" y2="168"/>
+    <line class="split-line" x1="150" y1="142" x2="175" y2="168"/>
+    <line class="split-line" x1="250" y1="142" x2="225" y2="168"/>
+    <line class="split-line" x1="250" y1="142" x2="275" y2="168"/>
+    <line class="split-line" x1="350" y1="142" x2="325" y2="168"/>
+    <line class="split-line" x1="350" y1="142" x2="375" y2="168"/>
+
+    <!-- merge edges: row 3 -> 4 -> 5 -> 6 (pairs feed into parent center) -->
+    <line class="merge-line" x1="25"  y1="228" x2="50"  y2="252"/>
+    <line class="merge-line" x1="75"  y1="228" x2="50"  y2="252"/>
+    <line class="merge-line" x1="125" y1="228" x2="150" y2="252"/>
+    <line class="merge-line" x1="175" y1="228" x2="150" y2="252"/>
+    <line class="merge-line" x1="225" y1="228" x2="250" y2="252"/>
+    <line class="merge-line" x1="275" y1="228" x2="250" y2="252"/>
+    <line class="merge-line" x1="325" y1="228" x2="350" y2="252"/>
+    <line class="merge-line" x1="375" y1="228" x2="350" y2="252"/>
+    <line class="merge-line" x1="50"  y1="278" x2="100" y2="302"/>
+    <line class="merge-line" x1="150" y1="278" x2="100" y2="302"/>
+    <line class="merge-line" x1="250" y1="278" x2="300" y2="302"/>
+    <line class="merge-line" x1="350" y1="278" x2="300" y2="302"/>
+    <line class="merge-line" x1="100" y1="328" x2="200" y2="352"/>
+    <line class="merge-line" x1="300" y1="328" x2="200" y2="352"/>
+
+    <!-- row 0: unsorted, 1 group of 8, centers 95..305 @ y=30 -->
+    <rect class="cell" x="82"  y="18" width="26" height="24" rx="2"/><text class="num" x="95"  y="30">8</text>
+    <rect class="cell" x="112" y="18" width="26" height="24" rx="2"/><text class="num" x="125" y="30">3</text>
+    <rect class="cell" x="142" y="18" width="26" height="24" rx="2"/><text class="num" x="155" y="30">5</text>
+    <rect class="cell" x="172" y="18" width="26" height="24" rx="2"/><text class="num" x="185" y="30">1</text>
+    <rect class="cell" x="202" y="18" width="26" height="24" rx="2"/><text class="num" x="215" y="30">7</text>
+    <rect class="cell" x="232" y="18" width="26" height="24" rx="2"/><text class="num" x="245" y="30">2</text>
+    <rect class="cell" x="262" y="18" width="26" height="24" rx="2"/><text class="num" x="275" y="30">6</text>
+    <rect class="cell" x="292" y="18" width="26" height="24" rx="2"/><text class="num" x="305" y="30">4</text>
+
+    <!-- row 1: 2 groups of 4 @ y=80 -->
+    <rect class="cell" x="42"  y="68" width="26" height="24" rx="2"/><text class="num" x="55"  y="80">8</text>
+    <rect class="cell" x="72"  y="68" width="26" height="24" rx="2"/><text class="num" x="85"  y="80">3</text>
+    <rect class="cell" x="102" y="68" width="26" height="24" rx="2"/><text class="num" x="115" y="80">5</text>
+    <rect class="cell" x="132" y="68" width="26" height="24" rx="2"/><text class="num" x="145" y="80">1</text>
+    <rect class="cell" x="242" y="68" width="26" height="24" rx="2"/><text class="num" x="255" y="80">7</text>
+    <rect class="cell" x="272" y="68" width="26" height="24" rx="2"/><text class="num" x="285" y="80">2</text>
+    <rect class="cell" x="302" y="68" width="26" height="24" rx="2"/><text class="num" x="315" y="80">6</text>
+    <rect class="cell" x="332" y="68" width="26" height="24" rx="2"/><text class="num" x="345" y="80">4</text>
+
+    <!-- row 2: 4 pairs @ y=130 -->
+    <rect class="cell" x="22"  y="118" width="26" height="24" rx="2"/><text class="num" x="35"  y="130">8</text>
+    <rect class="cell" x="52"  y="118" width="26" height="24" rx="2"/><text class="num" x="65"  y="130">3</text>
+    <rect class="cell" x="122" y="118" width="26" height="24" rx="2"/><text class="num" x="135" y="130">5</text>
+    <rect class="cell" x="152" y="118" width="26" height="24" rx="2"/><text class="num" x="165" y="130">1</text>
+    <rect class="cell" x="222" y="118" width="26" height="24" rx="2"/><text class="num" x="235" y="130">7</text>
+    <rect class="cell" x="252" y="118" width="26" height="24" rx="2"/><text class="num" x="265" y="130">2</text>
+    <rect class="cell" x="322" y="118" width="26" height="24" rx="2"/><text class="num" x="335" y="130">6</text>
+    <rect class="cell" x="352" y="118" width="26" height="24" rx="2"/><text class="num" x="365" y="130">4</text>
+
+    <!-- row 3: singletons (base case) @ y=180 -->
+    <rect class="cell" x="12"  y="168" width="26" height="24" rx="2"/><text class="num" x="25"  y="180">8</text>
+    <rect class="cell" x="62"  y="168" width="26" height="24" rx="2"/><text class="num" x="75"  y="180">3</text>
+    <rect class="cell" x="112" y="168" width="26" height="24" rx="2"/><text class="num" x="125" y="180">5</text>
+    <rect class="cell" x="162" y="168" width="26" height="24" rx="2"/><text class="num" x="175" y="180">1</text>
+    <rect class="cell" x="212" y="168" width="26" height="24" rx="2"/><text class="num" x="225" y="180">7</text>
+    <rect class="cell" x="262" y="168" width="26" height="24" rx="2"/><text class="num" x="275" y="180">2</text>
+    <rect class="cell" x="312" y="168" width="26" height="24" rx="2"/><text class="num" x="325" y="180">6</text>
+    <rect class="cell" x="362" y="168" width="26" height="24" rx="2"/><text class="num" x="375" y="180">4</text>
+
+    <!-- row 4: 4 sorted pairs @ y=240 -->
+    <rect class="cell-sorted" x="22"  y="228" width="26" height="24" rx="2"/><text class="num" x="35"  y="240">3</text>
+    <rect class="cell-sorted" x="52"  y="228" width="26" height="24" rx="2"/><text class="num" x="65"  y="240">8</text>
+    <rect class="cell-sorted" x="122" y="228" width="26" height="24" rx="2"/><text class="num" x="135" y="240">1</text>
+    <rect class="cell-sorted" x="152" y="228" width="26" height="24" rx="2"/><text class="num" x="165" y="240">5</text>
+    <rect class="cell-sorted" x="222" y="228" width="26" height="24" rx="2"/><text class="num" x="235" y="240">2</text>
+    <rect class="cell-sorted" x="252" y="228" width="26" height="24" rx="2"/><text class="num" x="265" y="240">7</text>
+    <rect class="cell-sorted" x="322" y="228" width="26" height="24" rx="2"/><text class="num" x="335" y="240">4</text>
+    <rect class="cell-sorted" x="352" y="228" width="26" height="24" rx="2"/><text class="num" x="365" y="240">6</text>
+
+    <!-- row 5: 2 sorted quads @ y=290 -->
+    <rect class="cell-sorted" x="42"  y="278" width="26" height="24" rx="2"/><text class="num" x="55"  y="290">1</text>
+    <rect class="cell-sorted" x="72"  y="278" width="26" height="24" rx="2"/><text class="num" x="85"  y="290">3</text>
+    <rect class="cell-sorted" x="102" y="278" width="26" height="24" rx="2"/><text class="num" x="115" y="290">5</text>
+    <rect class="cell-sorted" x="132" y="278" width="26" height="24" rx="2"/><text class="num" x="145" y="290">8</text>
+    <rect class="cell-sorted" x="242" y="278" width="26" height="24" rx="2"/><text class="num" x="255" y="290">2</text>
+    <rect class="cell-sorted" x="272" y="278" width="26" height="24" rx="2"/><text class="num" x="285" y="290">4</text>
+    <rect class="cell-sorted" x="302" y="278" width="26" height="24" rx="2"/><text class="num" x="315" y="290">6</text>
+    <rect class="cell-sorted" x="332" y="278" width="26" height="24" rx="2"/><text class="num" x="345" y="290">7</text>
+
+    <!-- row 6: fully sorted @ y=340 -->
+    <rect class="cell-sorted" x="82"  y="328" width="26" height="24" rx="2"/><text class="num" x="95"  y="340">1</text>
+    <rect class="cell-sorted" x="112" y="328" width="26" height="24" rx="2"/><text class="num" x="125" y="340">2</text>
+    <rect class="cell-sorted" x="142" y="328" width="26" height="24" rx="2"/><text class="num" x="155" y="340">3</text>
+    <rect class="cell-sorted" x="172" y="328" width="26" height="24" rx="2"/><text class="num" x="185" y="340">4</text>
+    <rect class="cell-sorted" x="202" y="328" width="26" height="24" rx="2"/><text class="num" x="215" y="340">5</text>
+    <rect class="cell-sorted" x="232" y="328" width="26" height="24" rx="2"/><text class="num" x="245" y="340">6</text>
+    <rect class="cell-sorted" x="262" y="328" width="26" height="24" rx="2"/><text class="num" x="275" y="340">7</text>
+    <rect class="cell-sorted" x="292" y="328" width="26" height="24" rx="2"/><text class="num" x="305" y="340">8</text>
+
+    <text class="caption" x="200" y="375">log₂ 8 = 3 split levels · 3 merge levels · O(n) work per level → O(n log n) total</text>
+  </g>
+</svg>

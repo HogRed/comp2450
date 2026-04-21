@@ -20,6 +20,16 @@ You will learn three sorts:
 2. **Quicksort** — also divide-and-conquer, but the work is in the *split*, not the merge. Pick a **pivot**, partition into "less than pivot" and "greater than pivot," recurse on each side. Average `O(n log n)`, in-place, ferociously fast in practice — but a *bad pivot* can degrade it to `O(n²)`.
 3. **`std::sort`** — what production C++ actually reaches for. Not a single algorithm: it's a hybrid (introsort) tuned by people who think about cache lines for a living. You don't write it; you learn to *aim* it with a comparator.
 
+<figure class="diagram">
+  <img src="{{ '/assets/diagrams/mergesort-tree.svg' | relative_url }}" alt="Merge sort split-and-merge tree on eight items"/>
+  <figcaption>Merge sort. Split until each piece holds one item; merge pairs back in sorted order. Three levels of split, three of merge — each doing O(n) work — gives O(n log n).</figcaption>
+</figure>
+
+<figure class="diagram">
+  <img src="{{ '/assets/diagrams/quicksort-partition.svg' | relative_url }}" alt="Quicksort partition: pivot separates values less than it from values greater than it"/>
+  <figcaption>Quicksort's core move. Pick a pivot, shuffle so everything smaller sits left and everything larger sits right — then recurse on each side. All the work is in the partition.</figcaption>
+</figure>
+
 Then you race them. The benchmark from Floor 1 grows a sorting harness, and you watch the three curves on real data.
 
 ## Objectives
@@ -119,6 +129,11 @@ Your commit history this week should show at least three commits — Mon (merge)
 
 **The Pivot Wraith** — *HP: situational. Damage: silent and slow.*
 Strikes when you call `quicksort` with a fixed-position pivot (always-first, always-last) on data that is already nearly sorted. Your `O(n log n)` average case becomes `O(n²)` worst case — no crash, no error, just a sort that takes a thousand times longer than it should and a benchmark you can't explain.
+
+<figure class="diagram">
+  <img src="{{ '/assets/diagrams/quicksort-pivot.svg' | relative_url }}" alt="Two recursion trees: a balanced tree of depth log n, and a skewed tree of depth n"/>
+  <figcaption>Quicksort's cost lives in the tree's depth. Each level touches n items. A balanced split gives log n levels; a skewed split gives n — the same algorithm, but a hundred times slower.</figcaption>
+</figure>
 
 Counter by:
 

@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 520 290" role="img" aria-labelledby="qp-title qp-desc">
+  <title id="qp-title">Quicksort: partition around a pivot</title>
+  <desc id="qp-desc">Step one picks a pivot element (here, the value 5). Step two rearranges the array so every value smaller than the pivot lies to its left and every larger value to its right. Quicksort is then called recursively on each sub-array.</desc>
+  <style>
+    .cell { fill: #f2e4bc; stroke: #8b5a00; stroke-width: 1.2; }
+    .cell-pivot { fill: #c9a227; stroke: #6b0f0f; stroke-width: 1.6; }
+    .cell-low { fill: #eadcb0; stroke: #8b5a00; stroke-width: 1.2; }
+    .cell-high { fill: #e7cf99; stroke: #8b5a00; stroke-width: 1.2; }
+    .num { font-family: Consolas, 'Courier New', monospace; font-size: 15px; fill: #2a1a0a; text-anchor: middle; dominant-baseline: central; font-weight: 700; }
+    .pivot-num { fill: #fdf4d3; }
+    .step { font-family: Georgia, serif; font-size: 13px; fill: #6b0f0f; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; }
+    .label { font-family: Georgia, serif; font-size: 12px; fill: #4a3a2a; text-anchor: middle; }
+    .label-pivot { font-family: Georgia, serif; font-size: 11px; fill: #6b0f0f; text-anchor: middle; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; }
+    .bracket { stroke: #8b5a00; stroke-width: 1.3; fill: none; }
+    .arrow-fill { fill: #6b0f0f; opacity: 0.8; }
+    .arrow-line { stroke: #6b0f0f; stroke-width: 1.2; opacity: 0.6; fill: none; }
+    .arrow-label { font-family: Georgia, serif; font-size: 11px; fill: #6b0f0f; font-style: italic; }
+    .note { font-family: Georgia, serif; font-size: 11.5px; fill: #4a3a2a; font-style: italic; text-anchor: middle; }
+  </style>
+
+  <!-- Frame 1: Before -->
+  <text class="step" x="60" y="28">1 · pick a pivot</text>
+  <rect class="cell"       x="122" y="42" width="36" height="32" rx="3"/><text class="num" x="140" y="58">8</text>
+  <rect class="cell"       x="162" y="42" width="36" height="32" rx="3"/><text class="num" x="180" y="58">3</text>
+  <rect class="cell"       x="202" y="42" width="36" height="32" rx="3"/><text class="num" x="220" y="58">1</text>
+  <rect class="cell-pivot" x="242" y="42" width="36" height="32" rx="3"/><text class="num pivot-num" x="260" y="58">5</text>
+  <rect class="cell"       x="282" y="42" width="36" height="32" rx="3"/><text class="num" x="300" y="58">7</text>
+  <rect class="cell"       x="322" y="42" width="36" height="32" rx="3"/><text class="num" x="340" y="58">2</text>
+  <rect class="cell"       x="362" y="42" width="36" height="32" rx="3"/><text class="num" x="380" y="58">6</text>
+
+  <polygon class="arrow-fill" points="254,82 266,82 260,75"/>
+  <text class="label-pivot" x="260" y="97">pivot</text>
+
+  <!-- transition arrow between frames -->
+  <line class="arrow-line" x1="260" y1="115" x2="260" y2="148"/>
+  <polygon class="arrow-fill" points="255,148 265,148 260,156"/>
+  <text class="arrow-label" x="275" y="136">partition in place</text>
+
+  <!-- Frame 2: After -->
+  <text class="step" x="60" y="180">2 · smaller left, larger right</text>
+  <rect class="cell-low"   x="122" y="194" width="36" height="32" rx="3"/><text class="num" x="140" y="210">3</text>
+  <rect class="cell-low"   x="162" y="194" width="36" height="32" rx="3"/><text class="num" x="180" y="210">1</text>
+  <rect class="cell-low"   x="202" y="194" width="36" height="32" rx="3"/><text class="num" x="220" y="210">2</text>
+  <rect class="cell-pivot" x="242" y="194" width="36" height="32" rx="3"/><text class="num pivot-num" x="260" y="210">5</text>
+  <rect class="cell-high"  x="282" y="194" width="36" height="32" rx="3"/><text class="num" x="300" y="210">8</text>
+  <rect class="cell-high"  x="322" y="194" width="36" height="32" rx="3"/><text class="num" x="340" y="210">7</text>
+  <rect class="cell-high"  x="362" y="194" width="36" height="32" rx="3"/><text class="num" x="380" y="210">6</text>
+
+  <!-- brackets grouping three regions -->
+  <path class="bracket" d="M 122 234 L 122 240 L 238 240 L 238 234"/>
+  <path class="bracket" d="M 260 234 L 260 240"/>
+  <path class="bracket" d="M 282 234 L 282 240 L 398 240 L 398 234"/>
+
+  <text class="label"       x="180" y="256">&lt; pivot</text>
+  <text class="label-pivot" x="260" y="256">P</text>
+  <text class="label"       x="340" y="256">&gt; pivot</text>
+
+  <text class="note" x="260" y="278">recurse quicksort on each side · pivot is already in its final place</text>
+</svg>
