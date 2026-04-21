@@ -20,7 +20,17 @@ You will learn three ways to search:
 2. **Binary search (iterative)** — keep cutting the remaining list in half. Blazingly fast. *Only works on a sorted list*, and the silent failure mode when the list isn't sorted is one of the most dangerous bugs in this course.
 3. **Binary search (recursive)** — the same algorithm, expressed as a function that calls itself. Your first taste of the **recursive thinking** that will dominate the second half of the semester.
 
+<figure class="diagram">
+  <img src="{{ '/assets/diagrams/linear-vs-binary.svg' | relative_url }}" alt="Linear search takes seven probes to find 7 in a sorted array of eight cells, walking left to right. Binary search finds it in three probes by halving the remaining range each step."/>
+  <figcaption>The same sorted array, the same target. Linear walks every cell until the target appears. Binary halves the remaining range each step — three probes instead of seven on a list of eight; twenty probes instead of a million on a list of a million.</figcaption>
+</figure>
+
 Then you learn to talk about how *fast* each one is — your first real encounter with **Big-O notation** — and you measure them yourself with a built-in benchmark.
+
+<figure class="diagram">
+  <img src="{{ '/assets/diagrams/big-o-growth.svg' | relative_url }}" alt="Growth curves for five complexity classes. O(1) and O(log n) stay almost flat. O(n) rises as a diagonal line. O(n log n) curves gently above it. O(n squared) launches off the top of the chart before n reaches 12."/>
+  <figcaption>Big-O, visualized. Cheap algorithms hug the floor; expensive ones punch through the ceiling. The y-axis is schematic — what matters is the <em>shape</em>. Linear search is the orange line; binary search is the gold one just above flat.</figcaption>
+</figure>
 
 ## Objectives
 
@@ -107,6 +117,11 @@ Your commit history this week should show at least three commits — Mon (linear
 
 **The Unsorted Lich** — *HP: invisible. Damage: silent.*
 Strikes when you call `binarySearch` (or `binarySearchRecursive`) on a list that is not sorted. Returns `nullptr` for things that *are* in the bestiary. Returns a wrong-but-plausible monster for things that aren't. Never crashes. Never errors. Just lies.
+
+<figure class="diagram">
+  <img src="{{ '/assets/diagrams/unsorted-lich.svg' | relative_url }}" alt="Binary search on an unsorted eight-monster array, looking for Goblin. It probes Lich at index 3, then Troll at index 1, then Ogre at index 0, then returns null. Meanwhile Goblin sits at index 4 — one cell to the right of the very first probe — but the algorithm's left-half decisions never look there."/>
+  <figcaption>The silent failure. Probe 1 lands on Lich, decides Goblin must be to the left, and throws away the half of the array where Goblin actually lives. No crash. No error. Just <code>nullptr</code>.</figcaption>
+</figure>
 
 Counter by:
 

@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 520 320" role="img" aria-labelledby="ul-title ul-desc">
+  <title id="ul-title">The Unsorted Lich: binary search's silent failure on unsorted data</title>
+  <desc id="ul-desc">An unsorted array of eight monster names — Ogre, Troll, Banshee, Lich, Goblin, Dragon, Elf, Kobold — is searched for "Goblin" using binary search. The algorithm probes index 3 (Lich), then index 1 (Troll), then index 0 (Ogre), then returns null. Meanwhile "Goblin" sits at index 4, one cell right of the very first probe, but the algorithm's left-half decisions never look there. Binary search's precondition — a sorted array — has been silently violated.</desc>
+  <style>
+    .cell         { fill: #f2e4bc; stroke: #8b5a00; stroke-width: 1.2; }
+    .cell-probed  { fill: #e7cf99; stroke: #6b0f0f; stroke-width: 1.4; }
+    .cell-target  { fill: #c9a227; stroke: #6b0f0f; stroke-width: 1.8; }
+    .name         { font-family: Georgia, serif; font-size: 13px; fill: #2a1a0a; text-anchor: middle; dominant-baseline: central; font-weight: 700; }
+    .idx          { font-family: Consolas, 'Courier New', monospace; font-size: 10.5px; fill: #6b5020; text-anchor: middle; }
+    .header       { font-family: Georgia, serif; font-size: 13px; fill: #6b0f0f; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; text-anchor: middle; }
+    .subhead      { font-family: Georgia, serif; font-size: 11.5px; fill: #4a3a2a; text-anchor: middle; font-style: italic; }
+    .probe-circle { fill: #8b0000; stroke: #3d0606; stroke-width: 0.9; }
+    .probe-num    { font-family: Consolas, 'Courier New', monospace; font-size: 11px; fill: #fdf4d3; text-anchor: middle; font-weight: 700; dominant-baseline: central; }
+    .probe-arrow  { stroke: #8b0000; stroke-width: 1.2; fill: none; opacity: 0.7; stroke-linecap: round; }
+    .probe-head   { fill: #8b0000; opacity: 0.8; }
+    .target-arrow { stroke: #8b5a00; stroke-width: 1.5; fill: none; }
+    .target-head  { fill: #c9a227; stroke: #6b0f0f; stroke-width: 0.9; }
+    .target-label { font-family: Georgia, serif; font-size: 11.5px; fill: #6b5020; font-weight: 700; text-anchor: middle; font-style: italic; }
+    .verdict-box  { fill: #f2e4bc; stroke: #8b0000; stroke-width: 1.3; }
+    .verdict-head { font-family: Consolas, 'Courier New', monospace; font-size: 13px; fill: #3d0606; font-weight: 700; }
+    .verdict-body { font-family: Georgia, serif; font-size: 11.5px; fill: #4a3a2a; font-style: italic; }
+  </style>
+
+  <text class="header"  x="260" y="22">The Unsorted Lich · binary search on unsorted data</text>
+  <text class="subhead" x="260" y="40">find "Goblin"</text>
+
+  <!-- Probe path: algorithm enters above idx 3, then hops to idx 1, then idx 0, then exits null to the left -->
+  <path class="probe-arrow" d="M 230 55 L 230 72"/>
+  <path class="probe-arrow" d="M 221 85 Q 165 58 119 80"/>
+  <path class="probe-arrow" d="M 101 85 Q 75 58 59 80"/>
+  <path class="probe-arrow" d="M 41 85 Q 20 78 10 82"/>
+  <polygon class="probe-head" points="10,82 16,78 16,86"/>
+  <text x="8" y="70" font-family="Consolas, 'Courier New', monospace" font-size="10" fill="#8b0000" font-weight="700" text-anchor="start">→ null</text>
+
+  <!-- Probe order badges above probed cells -->
+  <circle class="probe-circle" cx="230" cy="85" r="10"/>
+  <text class="probe-num" x="230" y="86">1</text>
+  <circle class="probe-circle" cx="110" cy="85" r="10"/>
+  <text class="probe-num" x="110" y="86">2</text>
+  <circle class="probe-circle" cx="50"  cy="85" r="10"/>
+  <text class="probe-num" x="50"  y="86">3</text>
+
+  <!-- Array cells — names -->
+  <rect class="cell-probed" x="20"  y="110" width="60" height="38" rx="3"/><text class="name" x="50"  y="130">Ogre</text>
+  <rect class="cell-probed" x="80"  y="110" width="60" height="38" rx="3"/><text class="name" x="110" y="130">Troll</text>
+  <rect class="cell"        x="140" y="110" width="60" height="38" rx="3"/><text class="name" x="170" y="130">Banshee</text>
+  <rect class="cell-probed" x="200" y="110" width="60" height="38" rx="3"/><text class="name" x="230" y="130">Lich</text>
+  <rect class="cell-target" x="260" y="110" width="60" height="38" rx="3"/><text class="name" x="290" y="130">Goblin</text>
+  <rect class="cell"        x="320" y="110" width="60" height="38" rx="3"/><text class="name" x="350" y="130">Dragon</text>
+  <rect class="cell"        x="380" y="110" width="60" height="38" rx="3"/><text class="name" x="410" y="130">Elf</text>
+  <rect class="cell"        x="440" y="110" width="60" height="38" rx="3"/><text class="name" x="470" y="130">Kobold</text>
+
+  <!-- Index row -->
+  <text class="idx" x="50"  y="162">0</text>
+  <text class="idx" x="110" y="162">1</text>
+  <text class="idx" x="170" y="162">2</text>
+  <text class="idx" x="230" y="162">3</text>
+  <text class="idx" x="290" y="162">4</text>
+  <text class="idx" x="350" y="162">5</text>
+  <text class="idx" x="410" y="162">6</text>
+  <text class="idx" x="470" y="162">7</text>
+
+  <!-- Target pointer from below -->
+  <path class="target-arrow" d="M 290 200 L 290 180"/>
+  <polygon class="target-head" points="285,180 295,180 290,172"/>
+  <text class="target-label" x="290" y="214">actually here</text>
+
+  <!-- Verdict banner -->
+  <rect class="verdict-box" x="40" y="240" width="440" height="62" rx="3"/>
+  <text class="verdict-head" x="58" y="263">returned: nullptr</text>
+  <text class="verdict-body" x="58" y="282">the algorithm eliminated the right half at probe 1 and never looked back.</text>
+  <text class="verdict-body" x="58" y="296">binary search's precondition — a sorted array — was silently violated.</text>
+</svg>

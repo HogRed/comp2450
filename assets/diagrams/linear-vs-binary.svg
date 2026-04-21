@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 520 410" role="img" aria-labelledby="lb-title lb-desc">
+  <title id="lb-title">Linear search versus binary search on the same sorted data</title>
+  <desc id="lb-desc">Both algorithms search the sorted array 1, 2, 3, 4, 5, 6, 7, 8 for the value 7. Linear search visits cells 1 through 7 in order, taking seven probes. Binary search halves the remaining range each step, reaching the target in three probes: mid=4, then mid=6, then mid=7.</desc>
+  <style>
+    .cell       { fill: #f2e4bc; stroke: #8b5a00; stroke-width: 1.2; }
+    .cell-hit   { fill: #c9a227; stroke: #6b0f0f; stroke-width: 1.6; }
+    .cell-probe { fill: #e7cf99; stroke: #6b0f0f; stroke-width: 1.4; }
+    .cell-ruled { fill: #d4b98c; stroke: #8b5a00; stroke-width: 0.9; opacity: 0.45; }
+    .num        { font-family: Consolas, 'Courier New', monospace; font-size: 15px; fill: #2a1a0a; text-anchor: middle; dominant-baseline: central; font-weight: 700; }
+    .num-hit    { fill: #fdf4d3; }
+    .num-ruled  { opacity: 0.5; }
+    .panel-title{ font-family: Georgia, serif; font-size: 13px; fill: #6b0f0f; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; }
+    .big-o      { font-family: Georgia, serif; font-size: 12.5px; fill: #8b5a00; font-weight: 700; text-anchor: end; letter-spacing: 0.04em; }
+    .probe-num  { font-family: Georgia, serif; font-size: 11px; fill: #6b0f0f; text-anchor: middle; font-style: italic; }
+    .ptr        { font-family: Consolas, 'Courier New', monospace; font-size: 10.5px; fill: #6b0f0f; text-anchor: middle; font-weight: 700; }
+    .note       { font-family: Georgia, serif; font-size: 11px; fill: #4a3a2a; text-anchor: middle; font-style: italic; }
+    .arrow      { stroke: #6b0f0f; stroke-width: 1; fill: none; opacity: 0.55; }
+    .arrow-head { fill: #6b0f0f; opacity: 0.7; }
+  </style>
+
+  <!-- ============ LINEAR PANEL ============ -->
+  <text class="panel-title" x="40" y="22">Linear search · target = 7</text>
+  <text class="big-o"       x="480" y="22">7 probes · O(n)</text>
+
+  <text class="probe-num" x="152" y="46">1</text>
+  <text class="probe-num" x="188" y="46">2</text>
+  <text class="probe-num" x="224" y="46">3</text>
+  <text class="probe-num" x="260" y="46">4</text>
+  <text class="probe-num" x="296" y="46">5</text>
+  <text class="probe-num" x="332" y="46">6</text>
+  <text class="probe-num" x="368" y="46">7</text>
+
+  <rect class="cell-probe" x="134" y="55" width="36" height="32" rx="3"/><text class="num"         x="152" y="71">1</text>
+  <rect class="cell-probe" x="170" y="55" width="36" height="32" rx="3"/><text class="num"         x="188" y="71">2</text>
+  <rect class="cell-probe" x="206" y="55" width="36" height="32" rx="3"/><text class="num"         x="224" y="71">3</text>
+  <rect class="cell-probe" x="242" y="55" width="36" height="32" rx="3"/><text class="num"         x="260" y="71">4</text>
+  <rect class="cell-probe" x="278" y="55" width="36" height="32" rx="3"/><text class="num"         x="296" y="71">5</text>
+  <rect class="cell-probe" x="314" y="55" width="36" height="32" rx="3"/><text class="num"         x="332" y="71">6</text>
+  <rect class="cell-hit"   x="350" y="55" width="36" height="32" rx="3"/><text class="num num-hit" x="368" y="71">7</text>
+  <rect class="cell"       x="386" y="55" width="36" height="32" rx="3"/><text class="num"         x="404" y="71">8</text>
+
+  <path class="arrow"      d="M 146 102 L 370 102"/>
+  <polygon class="arrow-head" points="370,98 376,102 370,106"/>
+  <text class="note" x="260" y="120">check every cell, left to right, until the target appears</text>
+
+  <!-- divider -->
+  <line x1="40" y1="142" x2="480" y2="142" stroke="#8b5a00" stroke-width="0.4" opacity="0.35" stroke-dasharray="3,3"/>
+
+  <!-- ============ BINARY PANEL ============ -->
+  <text class="panel-title" x="40"  y="164">Binary search · target = 7</text>
+  <text class="big-o"       x="480" y="164">3 probes · O(log n)</text>
+
+  <!-- Row 1: lo=0, mid=3, hi=7 -->
+  <text class="ptr" x="152" y="188">lo</text>
+  <text class="ptr" x="260" y="188">mid</text>
+  <text class="ptr" x="404" y="188">hi</text>
+
+  <rect class="cell"       x="134" y="196" width="36" height="28" rx="3"/><text class="num" x="152" y="210">1</text>
+  <rect class="cell"       x="170" y="196" width="36" height="28" rx="3"/><text class="num" x="188" y="210">2</text>
+  <rect class="cell"       x="206" y="196" width="36" height="28" rx="3"/><text class="num" x="224" y="210">3</text>
+  <rect class="cell-probe" x="242" y="196" width="36" height="28" rx="3"/><text class="num" x="260" y="210">4</text>
+  <rect class="cell"       x="278" y="196" width="36" height="28" rx="3"/><text class="num" x="296" y="210">5</text>
+  <rect class="cell"       x="314" y="196" width="36" height="28" rx="3"/><text class="num" x="332" y="210">6</text>
+  <rect class="cell"       x="350" y="196" width="36" height="28" rx="3"/><text class="num" x="368" y="210">7</text>
+  <rect class="cell"       x="386" y="196" width="36" height="28" rx="3"/><text class="num" x="404" y="210">8</text>
+
+  <text class="note" x="260" y="240">probe 1 · arr[3] = 4 &lt; 7 → search right half</text>
+
+  <!-- Row 2: lo=4, mid=5, hi=7 -->
+  <text class="ptr" x="296" y="262">lo</text>
+  <text class="ptr" x="332" y="262">mid</text>
+  <text class="ptr" x="404" y="262">hi</text>
+
+  <rect class="cell-ruled" x="134" y="270" width="36" height="28" rx="3"/><text class="num num-ruled" x="152" y="284">1</text>
+  <rect class="cell-ruled" x="170" y="270" width="36" height="28" rx="3"/><text class="num num-ruled" x="188" y="284">2</text>
+  <rect class="cell-ruled" x="206" y="270" width="36" height="28" rx="3"/><text class="num num-ruled" x="224" y="284">3</text>
+  <rect class="cell-ruled" x="242" y="270" width="36" height="28" rx="3"/><text class="num num-ruled" x="260" y="284">4</text>
+  <rect class="cell"       x="278" y="270" width="36" height="28" rx="3"/><text class="num"           x="296" y="284">5</text>
+  <rect class="cell-probe" x="314" y="270" width="36" height="28" rx="3"/><text class="num"           x="332" y="284">6</text>
+  <rect class="cell"       x="350" y="270" width="36" height="28" rx="3"/><text class="num"           x="368" y="284">7</text>
+  <rect class="cell"       x="386" y="270" width="36" height="28" rx="3"/><text class="num"           x="404" y="284">8</text>
+
+  <text class="note" x="260" y="314">probe 2 · arr[5] = 6 &lt; 7 → search right half</text>
+
+  <!-- Row 3: lo=6, mid=6, hi=7 -->
+  <text class="ptr" x="368" y="336">lo,mid</text>
+  <text class="ptr" x="404" y="336">hi</text>
+
+  <rect class="cell-ruled" x="134" y="344" width="36" height="28" rx="3"/><text class="num num-ruled" x="152" y="358">1</text>
+  <rect class="cell-ruled" x="170" y="344" width="36" height="28" rx="3"/><text class="num num-ruled" x="188" y="358">2</text>
+  <rect class="cell-ruled" x="206" y="344" width="36" height="28" rx="3"/><text class="num num-ruled" x="224" y="358">3</text>
+  <rect class="cell-ruled" x="242" y="344" width="36" height="28" rx="3"/><text class="num num-ruled" x="260" y="358">4</text>
+  <rect class="cell-ruled" x="278" y="344" width="36" height="28" rx="3"/><text class="num num-ruled" x="296" y="358">5</text>
+  <rect class="cell-ruled" x="314" y="344" width="36" height="28" rx="3"/><text class="num num-ruled" x="332" y="358">6</text>
+  <rect class="cell-hit"   x="350" y="344" width="36" height="28" rx="3"/><text class="num num-hit"   x="368" y="358">7</text>
+  <rect class="cell"       x="386" y="344" width="36" height="28" rx="3"/><text class="num"           x="404" y="358">8</text>
+
+  <text class="note" x="260" y="388">probe 3 · arr[6] = 7 = target · found</text>
+</svg>

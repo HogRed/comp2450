@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 520 340" role="img" aria-labelledby="bo-title bo-desc">
+  <title id="bo-title">Big-O growth curves: how work grows with input size</title>
+  <desc id="bo-desc">Five complexity classes plotted against input size n. O(1) stays flat near zero. O(log n) crawls upward almost imperceptibly. O(n) rises as a straight diagonal. O(n log n) curves gently above O(n). O(n squared) launches off the top of the chart before n reaches 12, exiting as a vertical climb.</desc>
+  <style>
+    .axis       { stroke: #4a3a2a; stroke-width: 1; fill: none; }
+    .axis-head  { fill: #4a3a2a; }
+    .grid       { stroke: #8b5a00; stroke-width: 0.3; fill: none; opacity: 0.25; stroke-dasharray: 2,3; }
+    .axis-label { font-family: Georgia, serif; font-size: 11.5px; fill: #4a3a2a; font-style: italic; }
+    .curve-1    { stroke: #4a3a2a; stroke-width: 2.1; fill: none; stroke-linecap: round; }
+    .curve-log  { stroke: #8b5a00; stroke-width: 2.2; fill: none; stroke-linecap: round; }
+    .curve-n    { stroke: #d97706; stroke-width: 2.2; fill: none; stroke-linecap: round; }
+    .curve-nlog { stroke: #8b0000; stroke-width: 2.2; fill: none; stroke-linecap: round; }
+    .curve-n2   { stroke: #3d0606; stroke-width: 2.6; fill: none; stroke-linecap: round; }
+    .tag-1      { font-family: Georgia, serif; font-size: 12px; font-weight: 700; fill: #4a3a2a; }
+    .tag-log    { font-family: Georgia, serif; font-size: 12px; font-weight: 700; fill: #8b5a00; }
+    .tag-n      { font-family: Georgia, serif; font-size: 12px; font-weight: 700; fill: #d97706; }
+    .tag-nlog   { font-family: Georgia, serif; font-size: 12px; font-weight: 700; fill: #8b0000; }
+    .tag-n2     { font-family: Georgia, serif; font-size: 12px; font-weight: 700; fill: #3d0606; }
+    .header     { font-family: Georgia, serif; font-size: 13px; fill: #6b0f0f; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; text-anchor: middle; }
+    .note       { font-family: Georgia, serif; font-size: 11px; fill: #4a3a2a; font-style: italic; text-anchor: middle; }
+  </style>
+
+  <text class="header" x="260" y="22">How work grows with input size</text>
+
+  <!-- Plot area: (70, 45) to (445, 285). x: n in [0,25], y: ops in [0,120].
+       x(n) = 70 + n*15;  y(v) = 285 - v*2. -->
+
+  <!-- gridlines -->
+  <line class="grid" x1="70" y1="245" x2="445" y2="245"/>
+  <line class="grid" x1="70" y1="205" x2="445" y2="205"/>
+  <line class="grid" x1="70" y1="165" x2="445" y2="165"/>
+  <line class="grid" x1="70" y1="125" x2="445" y2="125"/>
+  <line class="grid" x1="70" y1="85"  x2="445" y2="85"/>
+
+  <!-- axes -->
+  <line class="axis" x1="70" y1="40"  x2="70"  y2="285"/>
+  <line class="axis" x1="70" y1="285" x2="450" y2="285"/>
+  <polygon class="axis-head" points="70,34 66,44 74,44"/>
+  <polygon class="axis-head" points="456,285 446,281 446,289"/>
+
+  <text class="axis-label" x="260" y="307" text-anchor="middle">input size  n  →</text>
+  <text class="axis-label" transform="translate(50, 165) rotate(-90)" text-anchor="middle">operations  →</text>
+
+  <!-- O(1) : flat near y=283 -->
+  <line class="curve-1" x1="70" y1="283" x2="445" y2="283"/>
+
+  <!-- O(log n) : y = 285 - 2*log2(n+1) — gentle climb -->
+  <polyline class="curve-log" points="70,285 85,283 115,281 146,279.3 207,277.1 298,275.4 445,273.6"/>
+
+  <!-- O(n) : linear -->
+  <line class="curve-n" x1="70" y1="285" x2="445" y2="235"/>
+
+  <!-- O(n log n) : sampled -->
+  <polyline class="curve-nlog" points="70,285 145,261.8 220,218.6 295,167.8 370,112.2 445,52.8"/>
+
+  <!-- O(n^2) : quadratic, exits the top near n=10.95 -->
+  <path class="curve-n2" d="M 70,285 Q 115,280 145,253 Q 175,220 190,180 Q 210,120 225,68 L 233,40"/>
+  <polygon fill="#3d0606" points="233,32 229,42 238,40"/>
+
+  <!-- curve labels -->
+  <text class="tag-1"    x="452" y="286">O(1)</text>
+  <text class="tag-log"  x="452" y="271">O(log n)</text>
+  <text class="tag-n"    x="452" y="237">O(n)</text>
+  <text class="tag-nlog" x="452" y="55">O(n log n)</text>
+  <text class="tag-n2"   x="200" y="55">O(n²)</text>
+
+  <!-- footer note -->
+  <text class="note" x="260" y="325">axes are schematic — shapes matter, not the exact values</text>
+</svg>
