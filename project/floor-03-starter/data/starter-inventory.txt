@@ -1,0 +1,15 @@
+# COMP 2450 — Floor 2 starting inventory
+# Format per line:  name|weight|value
+# Lines starting with '#' and blank lines are ignored.
+#
+# NOTE: Iron key and Loaf of bread are both at weight 0.1 — equal weights,
+#       on purpose. The Friday "stability" discussion and Check-for-
+#       understanding #3 both depend on there being a tie to observe.
+#       Iron key is listed BEFORE Loaf of bread so a stable sort keeps
+#       that order after `sort by weight`.
+
+Rusty sword|4.0|5
+Healing potion|0.5|12
+Iron key|0.1|0
+Loaf of bread|0.1|1
+Cloak of shadows|1.5|80

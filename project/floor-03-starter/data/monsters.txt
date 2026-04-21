@@ -1,0 +1,21 @@
+# COMP 2450 — Floor 1 bestiary
+# Format per line:  name|hp|attack|weakness
+# Lines starting with '#' and blank lines are ignored.
+# NOTE: the entries below are intentionally NOT in alphabetical order.
+#       main.cpp calls sortBestiary() before any binarySearch is made.
+
+Goblin|8|2|fire
+Wraith|14|4|holy
+Skeleton|10|3|blunt
+Bone Spider|6|2|fire
+Shadow Hound|12|4|light
+Cinder Bat|4|1|water
+Marsh Lurker|18|3|fire
+Stone Sentinel|30|5|blunt
+Frostmaw|22|6|fire
+Ratking|9|2|fire
+Cave Troll|28|7|fire
+Lich|35|6|holy
+Wisp|3|1|holy
+Necrothrall|16|4|light
+Ironclaw Bear|24|5|slashing

@@ -70,7 +70,7 @@ You will receive (in your starter drop):
 You will write:
 
 1. **Monday:** `findByName<T>` in `hero/Search.h` (templates live in headers). Rewire `main.cpp`'s `search` command to call the template. Demonstrate calling it on both `Bag<Monster>` and `Bag<Item>` from different commands.
-2. **Wednesday:** `Bag<T>` — `add`, `size`, `empty`, `operator[]`, `begin`/`end` (delegate to the underlying `std::vector`), `clear`. When this is done, `inventory`, `sort inventory`, and `search` all run through it.
+2. **Wednesday:** `Bag<T>` — `push_back`, `size`, `empty`, `operator[]`, `begin`/`end` (delegate to the underlying `std::vector`), `clear`. When this is done, `inventory`, `sort inventory`, and `search` all run through it.
 3. **Friday:** `BagException`, `Bag<T>::at()` that throws on bad index, and a `try`/`catch` around the main command dispatch in `main.cpp`. A bad `inspect 99` must print a clean error and return to the prompt.
 
 Demo target (Friday):
