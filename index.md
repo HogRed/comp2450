@@ -17,7 +17,7 @@ Welcome, adventurer, to **COMP 2450 — Data Structures & Algorithms**. This sem
 | 1  | 0  | [The Antechamber]({{ site.baseurl }}/floors/floor-00/)         | ADTs, abstraction, the adventurer's vocabulary |
 | 2  | 1  | [The Scrying Well]({{ site.baseurl }}/floors/floor-01/)         | Searching & Big-O intuition |
 | 3  | 2  | [The Sorting Crucible]({{ site.baseurl }}/floors/floor-02/)     | Merge sort, quicksort, divide-and-conquer |
-| 4  | 3  | The Forgemaster's Vault                       | Templates, memory management, exceptions |
+| 4  | 3  | [The Forgemaster's Vault]({{ site.baseurl }}/floors/floor-03/) | Templates & exceptions |
 | 5  | 4  | The Chain Vault                               | Singly-linked lists |
 | 6  | 4½ | The Chain Vault, Deeper                       | Doubly-linked lists, sorted insert |
 | 7  | 5  | The Eye of Scrying                            | Iterators — one spell to walk any container |
