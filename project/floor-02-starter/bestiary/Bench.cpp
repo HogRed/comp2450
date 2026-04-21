@@ -29,14 +29,17 @@ std::vector<Monster> makeSynthetic(std::size_t n) {
     return v;
 }
 
+// A volatile sink the compiler cannot prove unused. We write every
+// benchmarked result into it so the timing loop doesn't get eliminated
+// by dead-code optimization. Portable across GCC, Clang, and MSVC;
+// no inline assembly needed.
+static volatile const void* g_benchSink = nullptr;
+
 template <typename F>
 double avgMicros(F fn, std::size_t iterations) {
     auto t0 = std::chrono::high_resolution_clock::now();
     for (std::size_t i = 0; i < iterations; ++i) {
-        auto r = fn();
-        // Defeat over-aggressive optimization: store the pointer somewhere
-        // observable. (Compiler can't prove the loop is dead now.)
-        asm volatile("" : : "r"(r) : "memory");
+        g_benchSink = fn();
     }
     auto t1 = std::chrono::high_resolution_clock::now();
     double total = std::chrono::duration<double, std::micro>(t1 - t0).count();

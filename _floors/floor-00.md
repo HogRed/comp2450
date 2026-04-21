@@ -59,7 +59,7 @@ Deliverable: a commit pushed to your project repo with your hero's name set in `
 This week's project increment is **environment-only**. You will not implement any data structures yet. What you will do:
 
 1. Clone the starter.
-2. Build it (`make` or equivalent).
+2. Build it with CMake (`cmake -B build && cmake --build build`).
 3. Run it. It prompts for your hero's name and echoes a single line of dungeon flavor text.
 4. Change one string constant so the flavor text is yours.
 5. Commit and push.

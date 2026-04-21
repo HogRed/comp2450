@@ -9,22 +9,24 @@ Prompts for your hero's name, then prints one line of dungeon flavor text. That'
 ## What you need to do
 
 1. **Install a C++ compiler** if you haven't already.
-   - Windows: install MSYS2/MinGW-w64 (so `g++` is on your `PATH`), or use WSL.
+   - Windows: install Visual Studio Build Tools (which ships MSVC), MSYS2/MinGW-w64, or WSL.
    - macOS: `xcode-select --install` gets you `clang++`.
    - Linux: `sudo apt install g++` or equivalent.
-2. **Build the program:**
+2. **Install CMake** (version 3.15 or newer) if you haven't already.
+   - Windows: `winget install Kitware.CMake`, or get it from [cmake.org](https://cmake.org/download/).
+   - macOS: `brew install cmake`.
+   - Linux: `sudo apt install cmake` or equivalent.
+3. **Configure and build:**
    ```
-   g++ -std=c++17 -Wall -o antechamber main.cpp
+   cmake -B build
+   cmake --build build
    ```
-   Or, if you have `make`:
+   The first command creates a `build/` folder and picks a sensible build system for your platform (Visual Studio on Windows-with-VS, Unix Makefiles on macOS/Linux, Ninja if installed). The second command does the actual compile.
+4. **Run it:**
    ```
-   make
+   ./build/antechamber           # macOS / Linux
+   build\antechamber.exe         # Windows (cmd.exe)
    ```
-3. **Run it:**
-   ```
-   ./antechamber
-   ```
-   (On Windows: `antechamber.exe`.)
 4. **Edit `main.cpp`.** Find the line marked `// TODO Floor 0:` and replace the placeholder `"Change me, adventurer."` string with your own flavor line.
 5. **Commit and push** your change to your project repo. Your commit message should start with `Floor 0: `.
 
@@ -36,8 +38,9 @@ A terminal screenshot (or pasted output) showing your program running with *your
 
 The **Compile Demon** is waiting. Common fixes:
 
-- `g++: command not found` — your compiler isn't on `PATH`. Re-check your install.
+- `cmake: command not found` — CMake isn't installed or isn't on `PATH`. Re-check your install.
+- `No CMAKE_CXX_COMPILER could be found` — you have CMake but no C++ compiler. See step 1.
 - `'cout' was not declared` — you're missing `#include <iostream>` or `using namespace std;`.
-- Mysterious linker errors — delete any old `.o` files and rebuild from scratch (`make clean && make`).
+- Mysterious linker errors or stale build — wipe the build dir and reconfigure: `rm -rf build && cmake -B build && cmake --build build`.
 
 Bring any error you can't defeat to Monday's class. We'll fight it together.

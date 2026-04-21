@@ -76,22 +76,15 @@ That is all the code you write this week. The rest of the game calls only throug
 ## Build & run
 
 ```
-make           # produces ./the_descent
-make run       # builds and runs
-make clean
+cmake -B build            # configure once (and any time CMakeLists.txt changes)
+cmake --build build       # compile
+./build/the_descent       # run (macOS / Linux)
+build\the_descent.exe     # run (Windows cmd.exe)
 ```
 
-If `make` is unavailable (Windows without MSYS2):
+The CMake build automatically copies `data/monsters.txt` and `data/starter-inventory.txt` next to the binary, so you can launch from either `build/` or the project root.
 
-```
-g++ -std=c++17 -Wall -Wextra -O2 -o the_descent ^
-    main.cpp ^
-    bestiary/Bestiary.cpp bestiary/Search.cpp bestiary/Bench.cpp ^
-    hero/Hero.cpp hero/Sort.cpp hero/Bench.cpp
-the_descent.exe
-```
-
-The program expects `data/monsters.txt` and `data/starter-inventory.txt` to be in the working directory you launch from.
+To wipe the build and start clean: `rm -rf build` (or delete the `build/` folder from your file manager) and re-run the two commands above.
 
 ## Demo target (Friday)
 

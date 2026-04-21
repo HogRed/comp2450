@@ -70,6 +70,12 @@ void badQuicksort(std::vector<Item>& v, const Comparator& cmp) {
     badQuicksortImpl(v, 0, v.size() - 1, cmp);
 }
 
+// A volatile sink the compiler cannot prove unused. We write the sorted
+// vector's data pointer into it so the timing loop doesn't get eliminated
+// by dead-store optimization. Portable across GCC, Clang, and MSVC;
+// no inline assembly needed.
+static volatile const void* g_benchSink = nullptr;
+
 // Time a sort callable (which receives a fresh copy of `base` each run)
 // across `iterations` iterations and return the average wall-clock ms.
 double avgMillis(const std::vector<Item>& base,
@@ -82,8 +88,7 @@ double avgMillis(const std::vector<Item>& base,
         sortFn(v);
         auto t1 = std::chrono::high_resolution_clock::now();
         totalMs += std::chrono::duration<double, std::milli>(t1 - t0).count();
-        // Defeat dead-store elimination: touch the sorted vector.
-        asm volatile("" : : "r"(v.data()) : "memory");
+        g_benchSink = v.data();
     }
     return totalMs / static_cast<double>(iterations);
 }

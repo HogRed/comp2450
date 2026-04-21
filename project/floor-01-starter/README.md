@@ -54,19 +54,15 @@ That is all the code you write this week. The discipline you practice is *interf
 ## Build & run
 
 ```
-make           # produces ./scrying_well
-make run       # builds and runs
-make clean
+cmake -B build            # configure once (and any time CMakeLists.txt changes)
+cmake --build build       # compile
+./build/scrying_well      # run (macOS / Linux)
+build\scrying_well.exe    # run (Windows cmd.exe)
 ```
 
-If `make` is unavailable (Windows without MSYS2):
+The CMake build automatically copies `data/monsters.txt` next to the binary, so you can launch from either `build/` or the project root.
 
-```
-g++ -std=c++17 -Wall -Wextra -O2 -o scrying_well main.cpp bestiary/Bestiary.cpp bestiary/Search.cpp bestiary/Bench.cpp
-./scrying_well        # Windows: scrying_well.exe
-```
-
-The program expects `data/monsters.txt` to be in the working directory you launch from.
+To wipe the build and start clean: `rm -rf build` (or delete the `build/` folder from your file manager) and re-run the two commands above.
 
 ## Demo target (Friday)
 
