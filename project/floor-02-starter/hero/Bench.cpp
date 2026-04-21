@@ -1,5 +1,19 @@
 // COMP 2450 — Floor 2 starter
 // hero/Bench.cpp — provided by the framework. Do not edit.
+//
+// The sort benchmark. Mirrors bestiary/Bench.cpp in shape: build a
+// synthetic dataset, time three implementations, report averages.
+//
+// Two things this harness does that the Floor 1 one did not:
+//   1. Fresh copy per iteration. Sorting is destructive — sorting an
+//      already-sorted vector would measure "detect already-sorted" on
+//      the second run, not the actual algorithm. We copy `base` into
+//      a new vector inside each timed iteration.
+//   2. First-element-pivot quicksort, baked in. The --bad-pivot flag
+//      swaps out YOUR (middle-pivot) quicksort for this one, so you
+//      can see the Pivot Wraith without having to go break your own
+//      code. Do not imitate this. Its ONLY job is to be slow.
+
 #include "Bench.h"
 #include "Sort.h"
 
@@ -19,9 +33,12 @@ namespace dungeon {
 namespace {
 
 // Build a synthetic inventory of N items with reproducible pseudo-random
-// names, weights, and values. Deterministic across runs (fixed seed).
+// names, weights, and values. Deterministic across runs because we seed
+// the RNG with a FIXED value (0xC0FFEE). Determinism matters in a
+// benchmark — students on different machines should be comparing runs
+// on the SAME data, not on different random draws.
 std::vector<Item> makeSynthetic(std::size_t n) {
-    std::mt19937_64 rng(0xC0FFEE);
+    std::mt19937_64 rng(0xC0FFEE);  // 64-bit Mersenne Twister, fixed seed
     std::uniform_real_distribution<double> weightDist(0.1, 50.0);
     std::uniform_int_distribution<int>     valueDist(0, 1000);
 
@@ -43,12 +60,19 @@ const Comparator kCmpWeight = [](const Item& a, const Item& b) {
 // A first-element-pivot quicksort that lives ONLY inside the benchmark
 // harness, so we can demonstrate the Pivot Wraith without relying on
 // the student's own (middle-pivot) implementation. Lomuto partition.
+//
+// Why first-element pivot is pathological: on already-sorted input, the
+// smallest element IS the first element. Lomuto partitions everything
+// else onto the right side, recursion depth becomes N, and total work
+// degenerates from O(n log n) to O(n^2). Try `benchmark sort --sorted
+// --bad-pivot` at N=10000 to feel it.
 void badQuicksortImpl(std::vector<Item>& v,
                       std::size_t lo, std::size_t hi,
                       const Comparator& cmp) {
     if (lo >= hi) return;
     // Always pick the FIRST element as pivot (the pathology). Swap it
-    // to the end so the standard Lomuto scan still works.
+    // to the end so the standard Lomuto scan — which assumes the pivot
+    // is at v[hi] — still works.
     std::swap(v[lo], v[hi]);
     const Item pivot = v[hi];
     std::size_t store = lo;
@@ -61,6 +85,8 @@ void badQuicksortImpl(std::vector<Item>& v,
     std::swap(v[store], v[hi]);
 
     std::size_t p = store;
+    // `p - 1` with std::size_t underflows when p == 0. Guard it, same
+    // trap your own quicksort has to navigate.
     if (p > lo) badQuicksortImpl(v, lo, p - 1, cmp);
     badQuicksortImpl(v, p + 1, hi, cmp);
 }
@@ -78,17 +104,25 @@ static volatile const void* g_benchSink = nullptr;
 
 // Time a sort callable (which receives a fresh copy of `base` each run)
 // across `iterations` iterations and return the average wall-clock ms.
+//
+// Notice the copy INSIDE the loop: `std::vector<Item> v = base;`. This
+// is deliberate. If we sorted `base` once and reused it, the second
+// iteration would already be sorted — we'd be timing "detect sorted,"
+// not "perform sort." Every timed run starts from identical state.
+//
+// Notice also that the copy itself is OUTSIDE the timed region
+// (before `t0`). We are measuring the sort, not the memcpy.
 double avgMillis(const std::vector<Item>& base,
                  const std::function<void(std::vector<Item>&)>& sortFn,
                  std::size_t iterations) {
     double totalMs = 0.0;
     for (std::size_t i = 0; i < iterations; ++i) {
-        std::vector<Item> v = base;      // fresh unsorted copy per run
+        std::vector<Item> v = base;      // fresh unsorted copy per run (untimed)
         auto t0 = std::chrono::high_resolution_clock::now();
         sortFn(v);
         auto t1 = std::chrono::high_resolution_clock::now();
         totalMs += std::chrono::duration<double, std::milli>(t1 - t0).count();
-        g_benchSink = v.data();
+        g_benchSink = v.data();          // defeat dead-store elimination
     }
     return totalMs / static_cast<double>(iterations);
 }

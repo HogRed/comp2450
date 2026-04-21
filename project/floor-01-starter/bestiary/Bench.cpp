@@ -1,5 +1,21 @@
 // COMP 2450 — Floor 1 starter
 // bestiary/Bench.cpp — provided by the framework. Do not edit.
+//
+// The benchmark harness. This is where Big-O stops being abstract.
+//
+// It builds a synthetic bestiary at a chosen size N, sorts it, then times
+// all three search functions against two worst-case queries: the LAST
+// element (forces linear to scan everything) and an ABSENT name (forces
+// every algorithm to confirm "not here"). Each query runs many iterations
+// so the per-call average is larger than the clock's resolution.
+//
+// Three things to pay attention to when you read a benchmark:
+//   1. What's being measured? (Per-call microseconds.)
+//   2. What's NOT being measured? (The sort. We amortize that by running
+//      it once, outside the timed region.)
+//   3. Can the optimizer cheat? (Yes — it'll delete work whose result
+//      isn't used. The `g_benchSink` below is how we stop it.)
+
 #include "Bench.h"
 #include "Bestiary.h"
 #include "Search.h"
@@ -29,17 +45,24 @@ std::vector<Monster> makeSynthetic(std::size_t n) {
     return v;
 }
 
-// A volatile sink the compiler cannot prove unused. We write every
-// benchmarked result into it so the timing loop doesn't get eliminated
-// by dead-code optimization. Portable across GCC, Clang, and MSVC;
-// no inline assembly needed.
+// A volatile sink the compiler cannot prove unused. WHY we need this:
+// modern compilers aggressively delete work whose result is never
+// observed. A loop like `for (i...) search(bestiary, name);` looks
+// dead if the caller ignores the return value — the whole loop might
+// disappear, and the benchmark reports 0.000 microseconds. Writing the
+// return into a `volatile` location forces the compiler to keep the
+// work. Portable across GCC, Clang, and MSVC; no inline assembly needed.
 static volatile const void* g_benchSink = nullptr;
 
+// Time `fn` across `iterations` calls, return the per-call average in
+// microseconds. `template <typename F>` lets us accept any callable
+// (a lambda, a function pointer, ...). The high_resolution_clock is
+// usually nanosecond-resolution on modern machines — plenty for this.
 template <typename F>
 double avgMicros(F fn, std::size_t iterations) {
     auto t0 = std::chrono::high_resolution_clock::now();
     for (std::size_t i = 0; i < iterations; ++i) {
-        g_benchSink = fn();
+        g_benchSink = fn();  // result parked in the sink; compiler can't delete
     }
     auto t1 = std::chrono::high_resolution_clock::now();
     double total = std::chrono::duration<double, std::micro>(t1 - t0).count();
@@ -60,8 +83,14 @@ void printRow(std::size_t n, const std::string& which,
 
 void runBenchmark(std::size_t n, std::size_t iterations) {
     auto bestiary = makeSynthetic(n);
-    sortBestiary(bestiary);
+    sortBestiary(bestiary);  // sort ONCE, outside the timed region
 
+    // Two worst-case queries for the comparison:
+    //   - "last" forces linearSearch to walk the entire vector
+    //   - "absent" forces every algorithm to confirm the miss
+    // Best case ("first element") would mislead you — linearSearch wins
+    // in one step. We want the shape of the growth curve, which shows up
+    // in worst-case comparisons.
     const std::string last_name   = bestiary.back().name;
     const std::string absent_name = "ZZZZZ_NO_SUCH_MONSTER";
 
@@ -72,6 +101,8 @@ void runBenchmark(std::size_t n, std::size_t iterations) {
         return std::tuple<double,double,double>{l, b, r};
     };
 
+    // C++17 structured bindings: `auto [a, b, c] = tuple` unpacks in one
+    // line what used to take three std::get<> calls.
     auto [l1, b1, r1] = runOnce(last_name);
     printRow(n, "last",   l1, b1, r1);
 

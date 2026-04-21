@@ -6,9 +6,12 @@
 // week you add sorting. The Bestiary is still here; the search command
 // you wrote (or the reference version we ship) is still here.
 //
-// The CLI is wired for you. The thing the game CANNOT do until you
-// finish your work this week is sort the inventory. That is
-// `hero/Sort.cpp`.
+// Read this file. You will not edit it. Its job is the same as Floor 1's
+// main.cpp — parse commands, dispatch to functions in other .cpp files.
+// Notice the pattern: we keep adding commands, but the CORE of this
+// file (the REPL loop) looks identical to Floor 1. That is the payoff
+// of the seam discipline. New features arrive as new dispatch branches;
+// old features don't break.
 
 #include <iostream>
 #include <sstream>
@@ -112,6 +115,11 @@ int main() {
         }
         else if (cmd == "sort") {
             // Expect: "inventory by <key> [asc|desc]"
+            // Re-parse the rest of the line with an istringstream so we
+            // can extract tokens by whitespace — simpler than substring
+            // arithmetic. `in >> tok` returns false (sets failbit) when
+            // the stream runs out, which naturally leaves `dir` empty
+            // for the two-word form "sort inventory by weight".
             std::istringstream in(rest);
             std::string what, by, key, dir;
             in >> what >> by >> key >> dir;
@@ -119,6 +127,9 @@ int main() {
                 std::cout << "Usage: sort inventory by <name|weight|value> [asc|desc]\n";
                 continue;
             }
+            // Glue key and direction back into one string so sortInventory
+            // (which is YOUR code) only has to parse one argument shape.
+            // This file stays stable; the parsing details belong to Sort.cpp.
             std::string criterion = key;
             if (!dir.empty()) criterion += " " + dir;
             if (!sortInventory(hero, criterion)) {
@@ -131,17 +142,26 @@ int main() {
             // Two forms:
             //   benchmark [N]               — Floor 1 search benchmark
             //   benchmark sort [N] [flags]  — Floor 2 sort benchmark
+            //
+            // We dispatch on whether the first word is literally "sort".
+            // The sort-flag parser accepts flags in any order (N before
+            // or after --sorted) because students WILL type them in both
+            // orders, and correcting them is friction we don't need.
             std::istringstream in(rest);
             std::string first;
             in >> first;
             if (first == "sort") {
                 SortBenchOptions opts;
-                std::size_t n = 0;
+                std::size_t n = 0;  // 0 = "no N given" → run the full sweep
                 std::string tok;
                 while (in >> tok) {
                     if      (tok == "--sorted")    opts.presorted = true;
                     else if (tok == "--bad-pivot") opts.badPivot  = true;
                     else {
+                        // Not a flag and not a number? That's user error.
+                        // Sentinel value (size_t max) signals "abort" to
+                        // the branch below; we can't just `break` because
+                        // we still need to skip the run.
                         try { n = std::stoull(tok); }
                         catch (...) {
                             std::cout << "Usage: benchmark sort [N] [--sorted] [--bad-pivot]\n";
