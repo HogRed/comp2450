@@ -19,6 +19,16 @@ You will learn two things, and they are inseparable:
 1. **Templates** — one mold, any metal. Write `Bag<T>` once; the compiler stamps a fresh copy for every `T` you instantiate. Function templates first (`findByName<T>` generalizes Floor 1's linear search); class templates next (`Bag<T>` replaces both `std::vector<Item>` and `std::vector<Monster>`).
 2. **Exceptions** — when a caller asks for `inventory.at(999)` on a five-item bag, what does the function *return*? Nothing sensible. It **throws** a `BagException`. The main loop catches. The game keeps going. The caller knows exactly what went wrong.
 
+<figure class="diagram">
+  <img src="{{ '/assets/diagrams/template-stamping.svg' | relative_url }}" alt="One class template Bag<T> stamped by the compiler into Bag<Monster> and Bag<Item>"/>
+  <figcaption>Class template: one mold, two stampings. Write <code>Bag&lt;T&gt;</code> once; the compiler presses a fresh class for every <code>T</code> you instantiate — <code>Bag&lt;Monster&gt;</code> for the keep's bestiary, <code>Bag&lt;Item&gt;</code> for the hero's inventory.</figcaption>
+</figure>
+
+<figure class="diagram">
+  <img src="{{ '/assets/diagrams/exception-unwind.svg' | relative_url }}" alt="Two call stacks side by side: with try/catch the exception is caught in main; without, std::terminate aborts the program"/>
+  <figcaption><code>inspect 99</code> throws deep inside <code>Bag::at</code>. With <code>try</code>/<code>catch</code> in <code>main</code>, the exception unwinds up the call stack into the handler and the command loop continues. Without a catch, the exception escapes <code>main</code>, the runtime calls <code>std::terminate</code>, and the program aborts.</figcaption>
+</figure>
+
 You are not rewriting `std::vector` this week — `Bag<T>` is a thin wrapper over it. The point is the **template machinery**, not the storage.
 
 ## Objectives

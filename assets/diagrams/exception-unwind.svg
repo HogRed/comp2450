@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 580 400" role="img" aria-labelledby="unwind-title unwind-desc">
+  <title id="unwind-title">Exception unwind: with a catch vs. without</title>
+  <desc id="unwind-desc">Two call stacks side by side. In both, Bag::at(98) throws a BagException which propagates up through the dispatch frame into main. On the left, main's try/catch intercepts the exception, prints its message, and the command loop continues. On the right, no catch exists; the exception escapes main, the C++ runtime calls std::terminate, and the program aborts.</desc>
+  <style>
+    .frame        { fill: #f2e4bc; stroke: #8b5a00; stroke-width: 1.2; }
+    .frame-main   { fill: #eacf85; stroke: #6b0f0f; stroke-width: 1.4; }
+    .catch-box    { fill: #fdf4d3; stroke: #6b0f0f; stroke-width: 1.2; stroke-dasharray: 4 2; }
+    .throw-spark  { fill: #b4232c; stroke: #6b0f0f; stroke-width: 0.8; }
+    .panel-good   { fill: #f6efd5; stroke: #8b5a00; stroke-width: 0.8; opacity: 0.4; }
+    .panel-bad    { fill: #f6efd5; stroke: #8b5a00; stroke-width: 0.8; opacity: 0.4; }
+    .unwind-good  { stroke: #6b0f0f; stroke-width: 3.2; fill: none; stroke-linecap: round; }
+    .unwind-bad   { stroke: #b4232c; stroke-width: 3.2; fill: none; stroke-linecap: round; }
+    .arrow-fill-r { fill: #b4232c; }
+    .arrow-fill-d { fill: #6b0f0f; }
+    .code         { font-family: Consolas, 'Courier New', monospace; font-size: 11.5px; fill: #2a1a0a; font-weight: 700; }
+    .code-sub     { font-family: Consolas, 'Courier New', monospace; font-size: 10.5px; fill: #4a3a2a; }
+    .kw           { font-family: Consolas, 'Courier New', monospace; font-size: 11.5px; fill: #6b0f0f; font-weight: 700; }
+    .throw-kw     { font-family: Consolas, 'Courier New', monospace; font-size: 11.5px; fill: #b4232c; font-weight: 700; }
+    .frame-label  { font-family: Georgia, serif; font-size: 10px; fill: #6b0f0f; text-transform: uppercase; letter-spacing: 0.10em; font-weight: 700; }
+    .panel-title  { font-family: Georgia, serif; font-size: 13px; fill: #6b0f0f; font-weight: 700; text-anchor: middle; text-transform: uppercase; letter-spacing: 0.08em; }
+    .outcome      { font-family: Georgia, serif; font-size: 11.5px; fill: #4a3a2a; text-anchor: middle; font-style: italic; }
+    .outcome-good { font-family: Georgia, serif; font-size: 11.5px; fill: #3d6b30; text-anchor: middle; font-weight: 700; }
+    .outcome-bad  { font-family: Georgia, serif; font-size: 11.5px; fill: #b4232c; text-anchor: middle; font-weight: 700; }
+    .hint         { font-family: Georgia, serif; font-size: 10.5px; fill: #8b5a00; font-style: italic; }
+  </style>
+
+  <!-- ============================================================ -->
+  <!-- LEFT PANEL : caught                                          -->
+  <!-- ============================================================ -->
+  <rect class="panel-good" x="10" y="10" width="275" height="380" rx="6"/>
+  <text class="panel-title" x="147" y="30">with  try / catch</text>
+
+  <!-- main frame -->
+  <rect class="frame-main" x="24" y="44" width="247" height="104" rx="4"/>
+  <text class="frame-label" x="34" y="59">main — command loop</text>
+  <text class="code"     x="34" y="76"><tspan class="kw">while</tspan> (read(cmd)) {</text>
+  <!-- try/catch inner box -->
+  <rect class="catch-box" x="46" y="84" width="215" height="56" rx="3"/>
+  <text class="kw"       x="54" y="99">try</text>
+  <text class="code"     x="80" y="99">{ dispatch(cmd); }</text>
+  <text class="kw"       x="54" y="115">catch</text>
+  <text class="code"     x="92" y="115">(<tspan class="code-sub">const std::exception&amp; e</tspan>) {</text>
+  <text class="code-sub" x="68" y="130">cout &lt;&lt; e.what();</text>
+
+  <!-- dispatch frame -->
+  <rect class="frame" x="40" y="176" width="215" height="42" rx="4"/>
+  <text class="frame-label" x="50" y="190">dispatch  —  inspect 99</text>
+  <text class="code-sub" x="50" y="210">hero.inventory.<tspan class="kw">at</tspan>(98);</text>
+
+  <!-- Bag::at frame -->
+  <rect class="frame" x="40" y="232" width="215" height="48" rx="4"/>
+  <text class="frame-label" x="50" y="246">Bag&lt;Item&gt;::at(98)</text>
+  <text class="code-sub" x="50" y="266"><tspan class="throw-kw">throw</tspan> BagException(98, 5);</text>
+
+  <!-- throw spark -->
+  <polygon class="throw-spark" points="50,286 58,282 56,292 66,288 62,298 72,296 66,306 56,302 58,312 48,306 50,296 40,300 46,290 36,286"/>
+
+  <!-- unwind arrow: from throw point up through frames into catch -->
+  <!-- start just above throw at (55, 286), curve up the left side, into catch box at x~60, y=105 -->
+  <path class="unwind-good" d="M 55 284 C 55 260, 20 200, 20 130 C 20 120, 30 110, 40 108 L 54 108"/>
+  <polygon class="arrow-fill-d" points="48,104 58,108 48,113"/>
+
+  <text class="hint" x="65" y="158">exception</text>
+  <text class="hint" x="65" y="172">propagates ↑</text>
+
+  <!-- outcome -->
+  <text class="outcome-good" x="147" y="332">caught — loop iterates</text>
+  <text class="outcome" x="147" y="350">&gt; No such item. (index 98</text>
+  <text class="outcome" x="147" y="364">  out of bounds for size 5)</text>
+  <text class="outcome" x="147" y="380">&gt; _</text>
+
+  <!-- ============================================================ -->
+  <!-- RIGHT PANEL : uncaught                                       -->
+  <!-- ============================================================ -->
+  <rect class="panel-bad" x="295" y="10" width="275" height="380" rx="6"/>
+  <text class="panel-title" x="432" y="30">no  catch</text>
+
+  <!-- main frame (no try/catch) -->
+  <rect class="frame-main" x="309" y="44" width="247" height="70" rx="4"/>
+  <text class="frame-label" x="319" y="59">main — command loop</text>
+  <text class="code"     x="319" y="78"><tspan class="kw">while</tspan> (read(cmd)) {</text>
+  <text class="code-sub" x="335" y="95">dispatch(cmd);</text>
+  <text class="code"     x="319" y="110">}</text>
+
+  <!-- dispatch frame -->
+  <rect class="frame" x="325" y="142" width="215" height="42" rx="4"/>
+  <text class="frame-label" x="335" y="156">dispatch  —  inspect 99</text>
+  <text class="code-sub" x="335" y="176">hero.inventory.<tspan class="kw">at</tspan>(98);</text>
+
+  <!-- Bag::at frame -->
+  <rect class="frame" x="325" y="198" width="215" height="48" rx="4"/>
+  <text class="frame-label" x="335" y="212">Bag&lt;Item&gt;::at(98)</text>
+  <text class="code-sub" x="335" y="232"><tspan class="throw-kw">throw</tspan> BagException(98, 5);</text>
+
+  <!-- throw spark -->
+  <polygon class="throw-spark" points="335,252 343,248 341,258 351,254 347,264 357,262 351,272 341,268 343,278 333,272 335,262 325,266 331,256 321,252"/>
+
+  <!-- unwind arrow: exits top of main -->
+  <path class="unwind-bad" d="M 340 250 C 340 230, 305 180, 305 100 C 305 60, 330 30, 370 30"/>
+  <polygon class="arrow-fill-r" points="370,24 380,30 370,36"/>
+
+  <text class="hint" x="355" y="124">nothing catches —</text>
+  <text class="hint" x="355" y="138">it escapes main</text>
+
+  <!-- outcome -->
+  <text class="outcome-bad" x="432" y="300">std::terminate() → abort</text>
+  <text class="outcome" x="432" y="322">terminate called after throwing</text>
+  <text class="outcome" x="432" y="336">an instance of</text>
+  <text class="outcome" x="432" y="350">'dungeon::BagException'</text>
+  <text class="outcome" x="432" y="368">what():  index 98 out of bounds</text>
+  <text class="outcome" x="432" y="382">for size 5</text>
+</svg>

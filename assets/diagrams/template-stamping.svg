@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 560 380" role="img" aria-labelledby="tstamp-title tstamp-desc">
+  <title id="tstamp-title">Class template: one mold, two stampings</title>
+  <desc id="tstamp-desc">A single source template, template&lt;typename T&gt; class Bag, is stamped by the compiler into two concrete classes at instantiation sites: Bag&lt;Monster&gt;, used to hold the keep's bestiary, and Bag&lt;Item&gt;, used to hold the hero's inventory. One source body, two fresh copies — that is what the template machinery buys you.</desc>
+  <style>
+    .mold       { fill: #f2e4bc; stroke: #8b5a00; stroke-width: 1.6; }
+    .stamp      { fill: #eacf85; stroke: #6b0f0f; stroke-width: 1.4; }
+    .inner      { fill: #fdf4d3; stroke: #8b5a00; stroke-width: 0.9; }
+    .cell       { fill: #f2e4bc; stroke: #8b5a00; stroke-width: 1.0; }
+    .cell-m     { fill: #e7cf99; stroke: #6b0f0f; stroke-width: 1.0; }
+    .arrow-fill { fill: #6b0f0f; opacity: 0.85; }
+    .arrow-line { stroke: #6b0f0f; stroke-width: 1.3; opacity: 0.7; fill: none; }
+    .arrow-label{ font-family: Georgia, serif; font-size: 11.5px; fill: #6b0f0f; font-style: italic; text-anchor: middle; }
+    .code       { font-family: Consolas, 'Courier New', monospace; font-size: 13px; fill: #2a1a0a; font-weight: 700; }
+    .code-sm    { font-family: Consolas, 'Courier New', monospace; font-size: 12px; fill: #2a1a0a; }
+    .code-sub   { font-family: Consolas, 'Courier New', monospace; font-size: 11px; fill: #4a3a2a; }
+    .T          { font-family: Consolas, 'Courier New', monospace; font-size: 13px; fill: #b4232c; font-weight: 700; }
+    .T-inline   { font-family: Consolas, 'Courier New', monospace; font-size: 12px; fill: #b4232c; font-weight: 700; }
+    .phase      { font-family: Georgia, serif; font-size: 11px; fill: #6b0f0f; text-transform: uppercase; letter-spacing: 0.12em; font-weight: 700; text-anchor: middle; }
+    .label      { font-family: Georgia, serif; font-size: 12px; fill: #4a3a2a; text-anchor: middle; }
+    .note       { font-family: Georgia, serif; font-size: 11.5px; fill: #4a3a2a; font-style: italic; text-anchor: middle; }
+  </style>
+
+  <!-- ============ THE MOLD (source template) ============ -->
+  <text class="phase" x="280" y="22">the mold — one source</text>
+
+  <rect class="mold" x="150" y="34" width="260" height="86" rx="6"/>
+  <text class="code"     x="166" y="56">template&lt;typename <tspan class="T">T</tspan>&gt;</text>
+  <text class="code"     x="166" y="76">class Bag {</text>
+  <text class="code-sub" x="180" y="93">std::vector&lt;<tspan class="T-inline">T</tspan>&gt; data_;</text>
+  <text class="code-sub" x="180" y="108">// size, push_back, at, ...</text>
+  <text class="code"     x="166" y="122" style="display:none">};</text>
+
+  <!-- two arrows diverging -->
+  <line class="arrow-line" x1="230" y1="124" x2="140" y2="168"/>
+  <polygon class="arrow-fill" points="134,163 145,168 140,176"/>
+  <line class="arrow-line" x1="330" y1="124" x2="420" y2="168"/>
+  <polygon class="arrow-fill" points="426,163 415,168 420,176"/>
+
+  <text class="arrow-label" x="145" y="147"><tspan class="T-inline">T</tspan> = Monster</text>
+  <text class="arrow-label" x="415" y="147"><tspan class="T-inline">T</tspan> = Item</text>
+
+  <text class="phase" x="280" y="158">compiler stamps ↓</text>
+
+  <!-- ============ STAMPING 1 : Bag<Monster> ============ -->
+  <rect class="stamp" x="20" y="178" width="240" height="178" rx="6"/>
+  <text class="code" x="36" y="200">class Bag&lt;<tspan class="T-inline">Monster</tspan>&gt; {</text>
+  <text class="code-sub" x="50" y="217">std::vector&lt;<tspan class="T-inline">Monster</tspan>&gt; data_;</text>
+  <text class="code-sub" x="50" y="231">// ...</text>
+  <text class="code" x="36" y="246">};</text>
+
+  <!-- example instance: 3 monsters -->
+  <rect class="inner" x="30" y="258" width="220" height="86" rx="4"/>
+  <text class="label" x="140" y="273">bestiary (live instance)</text>
+
+  <rect class="cell-m" x="42"  y="283" width="60" height="22" rx="2"/>
+  <text class="code-sm" x="53" y="298">Goblin</text>
+  <rect class="cell-m" x="110" y="283" width="60" height="22" rx="2"/>
+  <text class="code-sm" x="121" y="298">Kobold</text>
+  <rect class="cell-m" x="178" y="283" width="60" height="22" rx="2"/>
+  <text class="code-sm" x="193" y="298">Lich</text>
+  <text class="code-sub" x="140" y="325" text-anchor="middle">HP · ATK · weakness</text>
+
+  <!-- ============ STAMPING 2 : Bag<Item> ============ -->
+  <rect class="stamp" x="300" y="178" width="240" height="178" rx="6"/>
+  <text class="code" x="316" y="200">class Bag&lt;<tspan class="T-inline">Item</tspan>&gt; {</text>
+  <text class="code-sub" x="330" y="217">std::vector&lt;<tspan class="T-inline">Item</tspan>&gt; data_;</text>
+  <text class="code-sub" x="330" y="231">// ...</text>
+  <text class="code" x="316" y="246">};</text>
+
+  <rect class="inner" x="310" y="258" width="220" height="86" rx="4"/>
+  <text class="label" x="420" y="273">inventory (live instance)</text>
+
+  <rect class="cell" x="322" y="283" width="64" height="22" rx="2"/>
+  <text class="code-sm" x="333" y="298">Sword</text>
+  <rect class="cell" x="394" y="283" width="64" height="22" rx="2"/>
+  <text class="code-sm" x="405" y="298">Potion</text>
+  <rect class="cell" x="466" y="283" width="64" height="22" rx="2"/>
+  <text class="code-sm" x="479" y="298">Cloak</text>
+  <text class="code-sub" x="420" y="325" text-anchor="middle">name · weight · value</text>
+
+  <text class="note" x="280" y="372">one source body — the compiler stamps a fresh copy for every <tspan class="T-inline">T</tspan> you instantiate</text>
+</svg>
