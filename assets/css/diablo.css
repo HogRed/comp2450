@@ -145,6 +145,30 @@ h4 { font-size: 1.05rem; color: var(--ink); }
   margin: 0.8em auto 0;
 }
 
+/* Bard + epigraph: small portrait beside the floor's flavor quote */
+.floor-banner .bard-quote {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  max-width: 700px;
+  margin: 0.8em auto 0;
+}
+
+.floor-banner .bard-icon {
+  flex: 0 0 64px;
+  width: 64px;
+  height: auto;
+  opacity: 0.92;
+  filter: drop-shadow(0 0 6px rgba(0, 0, 0, 0.4));
+}
+
+.floor-banner .bard-quote .flavor-quote {
+  margin: 0;
+  text-align: left;
+  max-width: none;
+}
+
 /* The descent banner — the stylized SVG hero on the landing page */
 .descent-banner {
   margin: -3rem -3.5rem 2.2rem -3.5rem;
@@ -373,4 +397,7 @@ figure.diagram figcaption {
     gap: 1rem;
   }
   .character-card .character-portrait { flex: 0 0 auto; width: 160px; }
+  .floor-banner .bard-quote { flex-direction: column; gap: 0.5rem; }
+  .floor-banner .bard-icon { flex: 0 0 56px; width: 56px; }
+  .floor-banner .bard-quote .flavor-quote { text-align: center; }
 }
