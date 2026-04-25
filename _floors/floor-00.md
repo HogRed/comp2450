@@ -6,6 +6,17 @@ week: 1
 zybook: "Chapter 1"
 ---
 
+<div class="character-card" markdown="1">
+<div class="character-portrait">
+  <img src="{{ '/assets/portraits/faith.svg' | relative_url }}" alt="Brother Faith, Abbot of the Sorted Tome — bearded monk in a dark brown robe with a brass clasp and a stopwatch on a brass cord."/>
+</div>
+<div class="character-quote" markdown="1">
+<span class="speaker">The Abbot greets you at the gate</span>
+
+The Antechamber. You will not be harmed here. Take this week and learn the names of the things below — *list, stack, queue, set, map.* The dungeon will not wait for your vocabulary.
+</div>
+</div>
+
 ## The briefing
 
 You stand in the **Antechamber** — the first room of the dungeon. Nothing threatens you here yet. Before you descend, you must learn the **language of the dungeon**: the names of the things that adventurers carry, the things they fight, and the way their efforts are measured.

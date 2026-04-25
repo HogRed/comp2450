@@ -12,6 +12,17 @@ You descend the stair from the Antechamber into a circular stone chamber. In the
 
 Beside the well is a **stone tablet** — the **Bestiary** — listing every creature in the Keep. Without the Bestiary, you would have nothing to ask for. Without a way to *look up* a name in the Bestiary, the Bestiary is just a wall of dead words.
 
+<div class="character-card" markdown="1">
+<div class="character-portrait">
+  <img src="{{ '/assets/portraits/mccown.svg' | relative_url }}" alt="Scrivener McCown, Keeper of the Bestiary — scholar with salt-and-pepper hair and beard, dark indigo robe with brass clasp, ledger and quill at chest."/>
+</div>
+<div class="character-quote" markdown="1">
+<span class="speaker">Scrivener McCown, Keeper of the Bestiary</span>
+
+Every creature in this Hold has a name. Every name is in this book — I wrote it. The Plague cannot touch what is already cataloged; that is why I returned, and why these pages are the most valuable thing in the monastery. If you meet a beast that is not listed, bring me its name.
+</div>
+</div>
+
 This week you build the looking-up. By Friday your hero will be able to type `search Goblin` and have the goblin's stats appear, instantly — and you will be able to *measure* how fast it is.
 
 You will learn three ways to search:
