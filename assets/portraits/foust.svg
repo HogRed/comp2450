@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 220 280" role="img" aria-labelledby="foust-title foust-desc">
+  <title id="foust-title">Foust of the Margin-Road, Merchant and Cartographer</title>
+  <desc id="foust-desc">A bust portrait. A merchant with auburn red hair, a neatly trimmed red beard, and a knowing half-smile, wearing a forest-green tunic with brass buttons under a leather satchel strap that crosses his chest, with a brass coin on a cord at his throat, against a parchment field crossed by faint map lines. A nameplate at the foot reads FOUST OF THE MARGIN-ROAD — Merchant and Cartographer.</desc>
+  <defs>
+    <pattern id="foust-stipple" x="0" y="0" width="40" height="40" patternUnits="userSpaceOnUse">
+      <rect width="40" height="40" fill="#eacf85"/>
+      <path d="M 0 8 Q 10 4, 20 8 T 40 8" stroke="#8b5a00" stroke-width="0.4" fill="none" opacity="0.5"/>
+      <path d="M 0 28 Q 12 24, 24 30 T 40 28" stroke="#8b5a00" stroke-width="0.4" fill="none" opacity="0.5"/>
+      <circle cx="6" cy="20" r="0.7" fill="#8b5a00" opacity="0.6"/>
+      <circle cx="32" cy="14" r="0.6" fill="#8b5a00" opacity="0.5"/>
+      <path d="M 30 30 L 32 34 L 34 30 L 32 32 Z" fill="#8b5a00" opacity="0.4"/>
+    </pattern>
+  </defs>
+  <style>
+    .frame-outer    { fill: #8b5a00; stroke: #3a2406; stroke-width: 1.6; }
+    .frame-mid      { fill: #c89860; stroke: #6b3018; stroke-width: 0.8; }
+    .frame-mat      { fill: #f2e4bc; stroke: #6b3018; stroke-width: 1.0; }
+    .bg-field       { fill: url(#foust-stipple); stroke: #6b4818; stroke-width: 1.0; }
+    .tunic          { fill: #2c5a30; stroke: #0e2810; stroke-width: 1.2; }
+    .tunic-button   { fill: #c89860; stroke: #5e3c00; stroke-width: 0.5; }
+    .strap          { fill: #6b3018; stroke: #2a1004; stroke-width: 0.8; }
+    .coin           { fill: #f0c060; stroke: #5e3c00; stroke-width: 0.7; }
+    .cord           { stroke: #2a1004; stroke-width: 0.8; fill: none; stroke-linecap: round; }
+    .skin           { fill: #ecc090; stroke: #8b5028; stroke-width: 0.9; }
+    .skin-shadow    { fill: #b88860; opacity: 0.28; }
+    .hair           { fill: #a04020; stroke: #4a1808; stroke-width: 0.9; }
+    .hair-hi        { fill: #d06030; opacity: 0.55; }
+    .beard          { fill: #a04020; stroke: #4a1808; stroke-width: 0.9; }
+    .beard-hi       { fill: #d06030; opacity: 0.45; }
+    .brow           { stroke: #4a1808; stroke-width: 1.6; fill: none; stroke-linecap: round; }
+    .eye-white      { fill: #f8eed0; stroke: #3a1808; stroke-width: 0.5; }
+    .eye-iris       { fill: #3a5028; }
+    .eye-pupil      { fill: #100804; }
+    .nose           { stroke: #8b5028; stroke-width: 0.9; fill: none; stroke-linecap: round; }
+    .mouth          { stroke: #5a1810; stroke-width: 1.0; fill: none; stroke-linecap: round; }
+    .nameplate      { fill: #f6efd5; stroke: #6b3018; stroke-width: 1.0; }
+    .name           { font-family: Georgia, serif; font-size: 13px; fill: #6b0f0f; font-weight: 700; text-anchor: middle; letter-spacing: 0.06em; text-transform: uppercase; }
+    .title          { font-family: Georgia, serif; font-size: 9px; fill: #4a3a2a; font-style: italic; text-anchor: middle; letter-spacing: 0.05em; }
+    .stud           { fill: #c89860; stroke: #5e3c00; stroke-width: 0.6; }
+  </style>
+
+  <rect class="frame-outer" x="2"  y="2"  width="216" height="276" rx="6"/>
+  <rect class="frame-mid"   x="6"  y="6"  width="208" height="268" rx="4"/>
+  <rect class="frame-mat"   x="10" y="10" width="200" height="260" rx="3"/>
+  <rect class="bg-field"    x="18" y="18" width="184" height="210" rx="2"/>
+
+  <path class="tunic" d="M 18 228 L 18 218 Q 30 188, 70 178 L 95 175 Q 110 173, 125 175 L 150 178 Q 190 188, 202 218 L 202 228 Z"/>
+  <path class="tunic" d="M 92 178 L 110 196 L 128 178 L 132 200 L 122 226 L 98 226 L 88 200 Z"/>
+
+  <path class="strap" d="M 76 184 L 78 192 L 142 218 L 144 226 L 134 226 L 70 198 L 70 188 Z"/>
+
+  <circle class="tunic-button" cx="106" cy="206" r="1.5"/>
+  <circle class="tunic-button" cx="108" cy="216" r="1.5"/>
+
+  <path class="cord" d="M 100 178 Q 110 184, 120 178"/>
+  <circle class="coin" cx="110" cy="184" r="3.5"/>
+  <circle fill="#5e3c00" cx="110" cy="184" r="1.0"/>
+
+  <path class="skin" d="M 96 178 L 96 156 Q 100 152, 110 152 Q 120 152, 124 156 L 124 178 Z"/>
+  <ellipse class="skin-shadow" cx="110" cy="173" rx="14" ry="3"/>
+
+  <ellipse class="skin" cx="110" cy="108" rx="38" ry="48"/>
+  <path class="skin-shadow" d="M 74 100 Q 74 138, 96 154 L 96 152 Q 78 134, 76 100 Z"/>
+
+  <path class="hair" d="M 74 90 Q 72 62, 110 58 Q 148 62, 146 90 Q 110 74, 74 90 Z"/>
+  <path class="hair" d="M 74 90 Q 70 110, 78 124 L 84 122 Q 80 106, 80 90 Z"/>
+  <path class="hair" d="M 146 90 Q 150 110, 142 124 L 136 122 Q 140 106, 140 90 Z"/>
+  <path class="hair-hi" d="M 92 64 Q 110 60, 128 64 L 126 72 Q 110 68, 94 72 Z"/>
+  <path class="hair-hi" d="M 76 92 Q 74 108, 80 120 L 82 118 Q 78 106, 78 92 Z"/>
+
+  <path class="brow" d="M 84 100 Q 92 96, 102 100"/>
+  <path class="brow" d="M 118 100 Q 128 96, 136 100"/>
+
+  <ellipse class="eye-white" cx="93" cy="110" rx="4.5" ry="2.8"/>
+  <ellipse class="eye-white" cx="127" cy="110" rx="4.5" ry="2.8"/>
+  <circle class="eye-iris" cx="93" cy="110" r="2.0"/>
+  <circle class="eye-iris" cx="127" cy="110" r="2.0"/>
+  <circle class="eye-pupil" cx="93" cy="110" r="0.9"/>
+  <circle class="eye-pupil" cx="127" cy="110" r="0.9"/>
+  <circle fill="#ffffff" cx="94" cy="109" r="0.5"/>
+  <circle fill="#ffffff" cx="128" cy="109" r="0.5"/>
+
+  <path class="nose" d="M 110 116 L 107 130 Q 110 134, 114 130"/>
+
+  <path class="beard" d="M 80 128 Q 78 154, 88 166 Q 100 176, 110 176 Q 120 176, 132 166 Q 142 154, 140 128 Q 134 142, 128 150 Q 118 154, 110 154 Q 102 154, 92 150 Q 86 142, 80 128 Z"/>
+  <path class="beard-hi" d="M 92 156 Q 110 162, 128 156 L 126 164 Q 110 168, 94 164 Z"/>
+  <path class="beard-hi" d="M 86 134 Q 90 144, 96 152 L 100 150 Q 94 142, 90 132 Z"/>
+
+  <path class="mouth" d="M 102 142 Q 110 148, 118 140"/>
+
+  <rect class="nameplate" x="22" y="234" width="176" height="32" rx="2"/>
+  <text class="name" x="110" y="251">Master Foust</text>
+  <text class="title" x="110" y="262">of the Margin-Road</text>
+
+  <circle class="stud" cx="14" cy="14" r="2.5"/>
+  <circle class="stud" cx="206" cy="14" r="2.5"/>
+  <circle class="stud" cx="14" cy="266" r="2.5"/>
+  <circle class="stud" cx="206" cy="266" r="2.5"/>
+</svg>

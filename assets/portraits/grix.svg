@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 220 280" role="img" aria-labelledby="grix-title grix-desc">
+  <title id="grix-title">Grix the Opportunist, Goblin of the Eleventh Sack</title>
+  <desc id="grix-desc">A bust portrait. A goblin with sallow green skin, oversized pointed ears, a knobby crooked nose, wide yellow eyes, and an enormous gap-toothed grin showing one buck tooth, wearing a patched mismatched tunic and a leather collar with a stolen brass key dangling, against a damp cave-grey field with mossy flecks. A nameplate at the foot reads GRIX THE OPPORTUNIST — Goblin of the Eleventh Sack.</desc>
+  <defs>
+    <pattern id="grix-stipple" x="0" y="0" width="14" height="14" patternUnits="userSpaceOnUse">
+      <rect width="14" height="14" fill="#3a3a32"/>
+      <circle cx="3" cy="4" r="0.8" fill="#5a6a3a" opacity="0.55"/>
+      <circle cx="10" cy="10" r="0.7" fill="#4a5a2a" opacity="0.6"/>
+      <circle cx="11" cy="3" r="0.4" fill="#2a2a22" opacity="0.7"/>
+      <circle cx="4" cy="11" r="0.4" fill="#2a2a22" opacity="0.7"/>
+    </pattern>
+  </defs>
+  <style>
+    .frame-outer    { fill: #8b5a00; stroke: #3a2406; stroke-width: 1.6; }
+    .frame-mid      { fill: #c89860; stroke: #6b3018; stroke-width: 0.8; }
+    .frame-mat      { fill: #f2e4bc; stroke: #6b3018; stroke-width: 1.0; }
+    .bg-field       { fill: url(#grix-stipple); stroke: #1a1a14; stroke-width: 1.0; }
+    .tunic-a        { fill: #6a4818; stroke: #2a1a08; stroke-width: 1.0; }
+    .tunic-b        { fill: #4a3a5a; stroke: #1a1228; stroke-width: 1.0; }
+    .patch          { fill: #8a6a3a; stroke: #2a1a08; stroke-width: 0.6; stroke-dasharray: 1.5 1.0; }
+    .collar         { fill: #2a1a08; stroke: #100804; stroke-width: 0.8; }
+    .key            { fill: #c89860; stroke: #5e3c00; stroke-width: 0.6; }
+    .skin           { fill: #7a9050; stroke: #2a3a18; stroke-width: 0.9; }
+    .skin-shadow    { fill: #4a6028; opacity: 0.40; }
+    .skin-hi        { fill: #98ac68; opacity: 0.45; }
+    .ear-inner      { fill: #4a6028; opacity: 0.5; }
+    .hair-tuft      { fill: #1a0e08; stroke: #08040a; stroke-width: 0.7; }
+    .brow           { stroke: #1a0e08; stroke-width: 2.2; fill: none; stroke-linecap: round; }
+    .eye-white      { fill: #f8e060; stroke: #3a1808; stroke-width: 0.5; }
+    .eye-iris       { fill: #b8800a; }
+    .eye-pupil      { fill: #100804; }
+    .nose           { fill: #98ac68; stroke: #2a3a18; stroke-width: 0.8; }
+    .nose-shadow    { fill: #4a6028; opacity: 0.4; }
+    .mouth-open     { fill: #2a0810; stroke: #2a1a08; stroke-width: 0.9; }
+    .tooth          { fill: #f0e0a8; stroke: #5a4818; stroke-width: 0.4; }
+    .nameplate      { fill: #f6efd5; stroke: #6b3018; stroke-width: 1.0; }
+    .name           { font-family: Georgia, serif; font-size: 12px; fill: #6b0f0f; font-weight: 700; text-anchor: middle; letter-spacing: 0.02em; text-transform: uppercase; }
+    .title          { font-family: Georgia, serif; font-size: 9px; fill: #4a3a2a; font-style: italic; text-anchor: middle; letter-spacing: 0.03em; }
+    .stud           { fill: #c89860; stroke: #5e3c00; stroke-width: 0.6; }
+  </style>
+
+  <rect class="frame-outer" x="2"  y="2"  width="216" height="276" rx="6"/>
+  <rect class="frame-mid"   x="6"  y="6"  width="208" height="268" rx="4"/>
+  <rect class="frame-mat"   x="10" y="10" width="200" height="260" rx="3"/>
+  <rect class="bg-field"    x="18" y="18" width="184" height="210" rx="2"/>
+
+  <path class="tunic-a" d="M 30 228 L 30 216 Q 42 192, 76 184 L 95 180 Q 110 178, 110 178 L 110 228 Z"/>
+  <path class="tunic-b" d="M 110 178 L 125 180 L 144 184 Q 178 192, 190 216 L 190 228 L 110 228 Z"/>
+  <rect class="patch" x="60" y="200" width="14" height="12" rx="0.5"/>
+  <rect class="patch" x="148" y="206" width="12" height="14" rx="0.5"/>
+
+  <path class="collar" d="M 90 178 Q 110 174, 130 178 L 130 184 Q 110 180, 90 184 Z"/>
+  <path class="key" d="M 110 184 L 110 198 L 113 198 L 113 196 L 111 196 L 111 194 L 113 194 L 113 192 L 111 192 Z"/>
+  <circle class="key" cx="110" cy="184" r="2.2"/>
+  <circle fill="#5e3c00" cx="110" cy="184" r="0.9"/>
+
+  <path class="skin" d="M 96 178 L 96 158 Q 100 154, 110 154 Q 120 154, 124 158 L 124 178 Z"/>
+  <ellipse class="skin-shadow" cx="110" cy="174" rx="14" ry="3"/>
+
+  <ellipse class="skin" cx="110" cy="112" rx="40" ry="46"/>
+  <path class="skin-shadow" d="M 72 104 Q 72 142, 96 156 L 96 154 Q 76 138, 74 104 Z"/>
+  <path class="skin-hi" d="M 134 78 Q 144 90, 146 110 L 142 110 Q 140 92, 132 82 Z"/>
+
+  <path class="skin" d="M 64 92 L 56 64 Q 60 60, 70 68 L 78 96 Z"/>
+  <path class="ear-inner" d="M 66 92 L 60 70 Q 64 70, 68 78 L 74 92 Z"/>
+  <path class="skin" d="M 156 92 L 164 64 Q 160 60, 150 68 L 142 96 Z"/>
+  <path class="ear-inner" d="M 154 92 L 160 70 Q 156 70, 152 78 L 146 92 Z"/>
+
+  <path class="hair-tuft" d="M 90 70 L 88 60 L 92 64 L 96 56 L 98 66 Z"/>
+  <path class="hair-tuft" d="M 116 64 L 118 54 L 122 62 L 128 56 L 124 70 Z"/>
+  <path class="hair-tuft" d="M 102 60 L 104 50 L 110 56 L 114 50 L 110 62 Z"/>
+
+  <path class="brow" d="M 80 96 L 92 92 L 100 100"/>
+  <path class="brow" d="M 120 100 L 128 92 L 140 96"/>
+
+  <ellipse class="eye-white" cx="90" cy="110" rx="6" ry="4.5"/>
+  <ellipse class="eye-white" cx="130" cy="110" rx="6" ry="4.5"/>
+  <circle class="eye-iris" cx="91" cy="111" r="2.6"/>
+  <circle class="eye-iris" cx="129" cy="111" r="2.6"/>
+  <circle class="eye-pupil" cx="91" cy="111" r="1.2"/>
+  <circle class="eye-pupil" cx="129" cy="111" r="1.2"/>
+  <circle fill="#ffffff" cx="92.5" cy="109.5" r="0.7"/>
+  <circle fill="#ffffff" cx="130.5" cy="109.5" r="0.7"/>
+
+  <path class="nose" d="M 110 118 Q 100 124, 100 134 Q 102 142, 110 144 Q 118 142, 120 134 Q 120 124, 110 118 Z"/>
+  <ellipse class="nose-shadow" cx="106" cy="135" rx="3" ry="4"/>
+  <ellipse fill="#2a3a18" cx="106" cy="138" rx="0.9" ry="0.6"/>
+  <ellipse fill="#2a3a18" cx="114" cy="138" rx="0.9" ry="0.6"/>
+
+  <path class="mouth-open" d="M 88 152 Q 110 168, 132 152 Q 130 158, 128 162 Q 110 172, 92 162 Q 90 158, 88 152 Z"/>
+  <path class="tooth" d="M 105 154 L 109 154 L 109 165 L 105 165 Z"/>
+  <path class="tooth" d="M 96 153 L 99 153 L 99 159 L 96 159 Z"/>
+  <path class="tooth" d="M 118 153 L 121 153 L 121 158 L 118 158 Z"/>
+  <path class="tooth" d="M 124 153 L 126 153 L 126 156 L 124 156 Z"/>
+
+  <rect class="nameplate" x="22" y="234" width="176" height="32" rx="2"/>
+  <text class="name" x="110" y="251">Grix the Opportunist</text>
+  <text class="title" x="110" y="262">Goblin of the Eleventh Sack</text>
+
+  <circle class="stud" cx="14" cy="14" r="2.5"/>
+  <circle class="stud" cx="206" cy="14" r="2.5"/>
+  <circle class="stud" cx="14" cy="266" r="2.5"/>
+  <circle class="stud" cx="206" cy="266" r="2.5"/>
+</svg>

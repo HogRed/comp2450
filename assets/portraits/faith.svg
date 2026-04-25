@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 220 280" role="img" aria-labelledby="faith-title faith-desc">
+  <title id="faith-title">Brother Faith, Abbot of the Sorted Tome</title>
+  <desc id="faith-desc">A dungeon-crawler bust portrait. A monk with close-cropped auburn hair, a full red beard, and a calm level gaze stands against a deep-red field framed in brass. He wears a dark brown robe with a brass v-neck trim and a small stopwatch on a brass cord at his chest. A nameplate at the foot reads BROTHER FAITH — Abbot of the Sorted Tome.</desc>
+  <defs>
+    <pattern id="faith-stipple" x="0" y="0" width="12" height="12" patternUnits="userSpaceOnUse">
+      <rect width="12" height="12" fill="#5a0d0d"/>
+      <circle cx="3" cy="3" r="0.7" fill="#7a1818" opacity="0.6"/>
+      <circle cx="9" cy="9" r="0.7" fill="#7a1818" opacity="0.6"/>
+    </pattern>
+  </defs>
+  <style>
+    .frame-outer    { fill: #8b5a00; stroke: #3a2406; stroke-width: 1.6; }
+    .frame-mid      { fill: #c89860; stroke: #6b3018; stroke-width: 0.8; }
+    .frame-mat      { fill: #f2e4bc; stroke: #6b3018; stroke-width: 1.0; }
+    .bg-field       { fill: url(#faith-stipple); stroke: #2a0606; stroke-width: 1.0; }
+    .robe           { fill: #3a2818; stroke: #1a0e04; stroke-width: 1.2; }
+    .robe-trim      { stroke: #8b5a00; stroke-width: 1.8; fill: none; stroke-linejoin: miter; }
+    .cord           { stroke: #c89860; stroke-width: 1.4; fill: none; stroke-linecap: round; }
+    .stopwatch      { fill: #c89860; stroke: #5e3c00; stroke-width: 0.8; }
+    .stopwatch-face { fill: #f6efd5; stroke: #5e3c00; stroke-width: 0.5; }
+    .stopwatch-hand { stroke: #6b0f0f; stroke-width: 0.7; fill: none; stroke-linecap: round; }
+    .skin           { fill: #e8c8a0; stroke: #8b5028; stroke-width: 0.9; }
+    .skin-shadow    { fill: #b88860; opacity: 0.30; }
+    .hair           { fill: #8b3a1c; stroke: #3a1808; stroke-width: 0.9; }
+    .hair-hi        { fill: #b85a30; opacity: 0.7; }
+    .beard          { fill: #8b3a1c; stroke: #3a1808; stroke-width: 0.9; }
+    .beard-hi       { fill: #b85a30; opacity: 0.45; }
+    .brow           { stroke: #3a1808; stroke-width: 1.8; fill: none; stroke-linecap: round; }
+    .eye-white      { fill: #f8eed0; stroke: #3a1808; stroke-width: 0.5; }
+    .eye-iris       { fill: #4a2818; }
+    .eye-pupil      { fill: #100804; }
+    .nose           { stroke: #8b5028; stroke-width: 0.9; fill: none; stroke-linecap: round; }
+    .mouth          { stroke: #5a1810; stroke-width: 0.9; fill: none; stroke-linecap: round; }
+    .nameplate      { fill: #f6efd5; stroke: #6b3018; stroke-width: 1.0; }
+    .name           { font-family: Georgia, serif; font-size: 13px; fill: #6b0f0f; font-weight: 700; text-anchor: middle; letter-spacing: 0.10em; text-transform: uppercase; }
+    .title          { font-family: Georgia, serif; font-size: 9px; fill: #4a3a2a; font-style: italic; text-anchor: middle; letter-spacing: 0.05em; }
+    .stud           { fill: #c89860; stroke: #5e3c00; stroke-width: 0.6; }
+  </style>
+
+  <!-- ============ FRAME ============ -->
+  <rect class="frame-outer" x="2"  y="2"  width="216" height="276" rx="6"/>
+  <rect class="frame-mid"   x="6"  y="6"  width="208" height="268" rx="4"/>
+  <rect class="frame-mat"   x="10" y="10" width="200" height="260" rx="3"/>
+  <rect class="bg-field"    x="18" y="18" width="184" height="210" rx="2"/>
+
+  <!-- ============ ROBE / SHOULDERS ============ -->
+  <path class="robe" d="M 18 228 L 18 218 Q 32 188, 70 178 L 95 175 Q 110 173, 125 175 L 150 178 Q 188 188, 202 218 L 202 228 Z"/>
+  <!-- v-neck trim -->
+  <path class="robe-trim" d="M 88 176 L 110 210 L 132 176"/>
+  <!-- chest cord with stopwatch -->
+  <path class="cord" d="M 102 192 Q 96 202, 100 213"/>
+  <circle class="stopwatch" cx="100" cy="218" r="6"/>
+  <circle class="stopwatch-face" cx="100" cy="218" r="4.2"/>
+  <line class="stopwatch-hand" x1="100" y1="218" x2="100" y2="215"/>
+  <line class="stopwatch-hand" x1="100" y1="218" x2="102.5" y2="218"/>
+  <rect x="98.5" y="210" width="3" height="2" fill="#c89860" stroke="#5e3c00" stroke-width="0.4"/>
+
+  <!-- ============ NECK ============ -->
+  <path class="skin" d="M 96 178 L 96 156 Q 100 152, 110 152 Q 120 152, 124 156 L 124 178 Z"/>
+  <ellipse class="skin-shadow" cx="110" cy="173" rx="14" ry="3"/>
+
+  <!-- ============ HEAD ============ -->
+  <ellipse class="skin" cx="110" cy="108" rx="38" ry="48"/>
+  <!-- chiaroscuro shadow on left side -->
+  <path class="skin-shadow" d="M 74 100 Q 74 138, 96 154 L 96 152 Q 78 134, 76 100 Z"/>
+
+  <!-- ============ HAIR ============ -->
+  <path class="hair" d="M 74 92 Q 72 64, 110 58 Q 148 64, 146 92 Q 110 76, 74 92 Z"/>
+  <path class="hair" d="M 74 92 Q 72 108, 76 122 L 82 120 Q 80 104, 80 92 Z"/>
+  <path class="hair" d="M 146 92 Q 148 108, 144 122 L 138 120 Q 140 104, 140 92 Z"/>
+  <path class="hair-hi" d="M 96 66 Q 110 60, 124 66 L 122 76 Q 110 70, 98 76 Z"/>
+
+  <!-- ============ EYEBROWS ============ -->
+  <path class="brow" d="M 84 100 Q 92 96, 102 100"/>
+  <path class="brow" d="M 118 100 Q 128 96, 136 100"/>
+
+  <!-- ============ EYES ============ -->
+  <ellipse class="eye-white" cx="93" cy="110" rx="4.5" ry="2.8"/>
+  <ellipse class="eye-white" cx="127" cy="110" rx="4.5" ry="2.8"/>
+  <circle class="eye-iris" cx="93" cy="110" r="2.0"/>
+  <circle class="eye-iris" cx="127" cy="110" r="2.0"/>
+  <circle class="eye-pupil" cx="93" cy="110" r="0.9"/>
+  <circle class="eye-pupil" cx="127" cy="110" r="0.9"/>
+  <circle fill="#ffffff" cx="94" cy="109" r="0.5"/>
+  <circle fill="#ffffff" cx="128" cy="109" r="0.5"/>
+
+  <!-- ============ NOSE ============ -->
+  <path class="nose" d="M 110 116 L 107 130 Q 110 134, 114 130"/>
+
+  <!-- ============ BEARD ============ -->
+  <path class="beard" d="M 78 128 Q 76 156, 86 170 Q 100 180, 110 180 Q 120 180, 134 170 Q 144 156, 142 128 Q 138 144, 130 152 Q 120 156, 110 156 Q 100 156, 90 152 Q 82 144, 78 128 Z"/>
+  <path class="beard" d="M 92 132 Q 100 130, 110 134 Q 120 130, 128 132 L 124 138 Q 116 140, 110 138 Q 104 140, 96 138 Z"/>
+  <path class="beard-hi" d="M 96 160 Q 110 166, 124 160 L 122 168 Q 110 172, 98 168 Z"/>
+
+  <!-- ============ MOUTH ============ -->
+  <path class="mouth" d="M 104 142 Q 110 144, 116 142"/>
+
+  <!-- ============ NAMEPLATE ============ -->
+  <rect class="nameplate" x="22" y="234" width="176" height="32" rx="2"/>
+  <text class="name" x="110" y="251">Brother Faith</text>
+  <text class="title" x="110" y="262">Abbot of the Sorted Tome</text>
+
+  <!-- ============ CORNER STUDS ============ -->
+  <circle class="stud" cx="14" cy="14" r="2.5"/>
+  <circle class="stud" cx="206" cy="14" r="2.5"/>
+  <circle class="stud" cx="14" cy="266" r="2.5"/>
+  <circle class="stud" cx="206" cy="266" r="2.5"/>
+</svg>

@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 220 280" role="img" aria-labelledby="steil-title steil-desc">
+  <title id="steil-title">Forgemaster Steil, Master of the Cold Forge</title>
+  <desc id="steil-desc">A bust portrait. A blacksmith with long brown hair streaked with gray and a heavy gray-flecked beard, wearing a dark leather apron with a brass anvil pin over a rust-red tunic, against a smoke-and-ember field. A nameplate at the foot reads FORGEMASTER STEIL — Master of the Cold Forge.</desc>
+  <defs>
+    <pattern id="steil-stipple" x="0" y="0" width="14" height="14" patternUnits="userSpaceOnUse">
+      <rect width="14" height="14" fill="#241a14"/>
+      <circle cx="3" cy="3" r="0.8" fill="#d8742a" opacity="0.5"/>
+      <circle cx="10" cy="11" r="0.6" fill="#d8742a" opacity="0.4"/>
+      <circle cx="11" cy="4" r="0.4" fill="#f4a040" opacity="0.6"/>
+    </pattern>
+  </defs>
+  <style>
+    .frame-outer    { fill: #8b5a00; stroke: #3a2406; stroke-width: 1.6; }
+    .frame-mid      { fill: #c89860; stroke: #6b3018; stroke-width: 0.8; }
+    .frame-mat      { fill: #f2e4bc; stroke: #6b3018; stroke-width: 1.0; }
+    .bg-field       { fill: url(#steil-stipple); stroke: #1a0e04; stroke-width: 1.0; }
+    .tunic          { fill: #6e2e18; stroke: #2a0c04; stroke-width: 1.0; }
+    .tunic-trim     { stroke: #a05028; stroke-width: 1.5; fill: none; }
+    .apron          { fill: #3a2410; stroke: #1a0e04; stroke-width: 1.2; }
+    .anvil          { fill: #c89860; stroke: #5e3c00; stroke-width: 0.5; }
+    .skin           { fill: #d8a878; stroke: #6a4020; stroke-width: 0.9; }
+    .skin-shadow    { fill: #a07050; opacity: 0.35; }
+    .hair           { fill: #3a2818; stroke: #1a0e04; stroke-width: 0.9; }
+    .hair-gray      { fill: #8a7a6a; opacity: 0.6; }
+    .beard          { fill: #4a3220; stroke: #1a0e04; stroke-width: 0.9; }
+    .beard-gray     { fill: #8a7a6a; opacity: 0.5; }
+    .brow           { stroke: #1a0e04; stroke-width: 1.8; fill: none; stroke-linecap: round; }
+    .eye-white      { fill: #f8eed0; stroke: #3a1808; stroke-width: 0.5; }
+    .eye-iris       { fill: #2a3a4a; }
+    .eye-pupil      { fill: #100804; }
+    .nose           { stroke: #6a4020; stroke-width: 0.9; fill: none; stroke-linecap: round; }
+    .mouth          { stroke: #5a1810; stroke-width: 0.9; fill: none; stroke-linecap: round; }
+    .nameplate      { fill: #f6efd5; stroke: #6b3018; stroke-width: 1.0; }
+    .name           { font-family: Georgia, serif; font-size: 13px; fill: #6b0f0f; font-weight: 700; text-anchor: middle; letter-spacing: 0.08em; text-transform: uppercase; }
+    .title          { font-family: Georgia, serif; font-size: 9px; fill: #4a3a2a; font-style: italic; text-anchor: middle; letter-spacing: 0.05em; }
+    .stud           { fill: #c89860; stroke: #5e3c00; stroke-width: 0.6; }
+  </style>
+
+  <rect class="frame-outer" x="2"  y="2"  width="216" height="276" rx="6"/>
+  <rect class="frame-mid"   x="6"  y="6"  width="208" height="268" rx="4"/>
+  <rect class="frame-mat"   x="10" y="10" width="200" height="260" rx="3"/>
+  <rect class="bg-field"    x="18" y="18" width="184" height="210" rx="2"/>
+
+  <path class="tunic" d="M 18 228 L 18 218 Q 30 188, 70 178 L 95 175 Q 110 173, 125 175 L 150 178 Q 190 188, 202 218 L 202 228 Z"/>
+  <path class="tunic-trim" d="M 88 178 L 110 200 L 132 178"/>
+
+  <path class="apron" d="M 76 228 L 78 200 Q 110 196, 142 200 L 144 228 Z"/>
+  <path class="anvil" d="M 102 212 L 118 212 L 116 215 L 114 215 L 114 220 L 106 220 L 106 215 L 104 215 Z"/>
+
+  <path class="skin" d="M 96 178 L 96 156 Q 100 152, 110 152 Q 120 152, 124 156 L 124 178 Z"/>
+  <ellipse class="skin-shadow" cx="110" cy="173" rx="14" ry="3"/>
+
+  <ellipse class="skin" cx="110" cy="108" rx="38" ry="48"/>
+  <path class="skin-shadow" d="M 74 100 Q 74 138, 96 154 L 96 152 Q 78 134, 76 100 Z"/>
+
+  <path class="hair" d="M 72 92 Q 70 60, 110 56 Q 150 60, 148 92 Q 110 72, 72 92 Z"/>
+  <path class="hair" d="M 70 92 Q 64 130, 70 152 L 80 152 Q 78 120, 78 92 Z"/>
+  <path class="hair" d="M 150 92 Q 156 130, 150 152 L 140 152 Q 142 120, 142 92 Z"/>
+  <path class="hair-gray" d="M 70 100 Q 68 124, 72 144 L 76 144 Q 74 124, 72 100 Z"/>
+  <path class="hair-gray" d="M 150 100 Q 152 124, 148 144 L 144 144 Q 146 124, 148 100 Z"/>
+  <path class="hair-gray" d="M 92 64 Q 110 60, 128 64 L 126 70 Q 110 66, 94 70 Z"/>
+
+  <path class="brow" d="M 82 100 Q 92 95, 104 100"/>
+  <path class="brow" d="M 116 100 Q 128 95, 138 100"/>
+
+  <ellipse class="eye-white" cx="93" cy="110" rx="4.5" ry="2.8"/>
+  <ellipse class="eye-white" cx="127" cy="110" rx="4.5" ry="2.8"/>
+  <circle class="eye-iris" cx="93" cy="110" r="2.0"/>
+  <circle class="eye-iris" cx="127" cy="110" r="2.0"/>
+  <circle class="eye-pupil" cx="93" cy="110" r="0.9"/>
+  <circle class="eye-pupil" cx="127" cy="110" r="0.9"/>
+  <circle fill="#ffffff" cx="94" cy="109" r="0.5"/>
+  <circle fill="#ffffff" cx="128" cy="109" r="0.5"/>
+
+  <path class="nose" d="M 110 116 L 106 130 Q 110 134, 114 130"/>
+
+  <path class="beard" d="M 76 126 Q 74 160, 86 174 Q 100 184, 110 184 Q 120 184, 134 174 Q 146 160, 144 126 Q 138 144, 130 152 Q 120 156, 110 156 Q 100 156, 90 152 Q 82 144, 76 126 Z"/>
+  <path class="beard" d="M 90 132 Q 100 130, 110 134 Q 120 130, 130 132 L 124 138 Q 116 140, 110 138 Q 104 140, 96 138 Z"/>
+  <path class="beard-gray" d="M 88 152 Q 100 162, 112 162 Q 124 162, 132 152 L 130 158 Q 120 168, 110 168 Q 100 168, 90 158 Z"/>
+  <path class="beard-gray" d="M 84 138 Q 88 148, 92 156 L 96 154 Q 92 144, 88 134 Z"/>
+
+  <path class="mouth" d="M 104 143 L 116 143"/>
+
+  <rect class="nameplate" x="22" y="234" width="176" height="32" rx="2"/>
+  <text class="name" x="110" y="251">Forgemaster Steil</text>
+  <text class="title" x="110" y="262">Master of the Cold Forge</text>
+
+  <circle class="stud" cx="14" cy="14" r="2.5"/>
+  <circle class="stud" cx="206" cy="14" r="2.5"/>
+  <circle class="stud" cx="14" cy="266" r="2.5"/>
+  <circle class="stud" cx="206" cy="266" r="2.5"/>
+</svg>
