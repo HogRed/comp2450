@@ -156,11 +156,11 @@ h4 { font-size: 1.05rem; color: var(--ink); }
 }
 
 .floor-banner .bard-icon {
-  flex: 0 0 64px;
-  width: 64px;
+  flex: 0 0 44px;
+  width: 44px;
   height: auto;
-  opacity: 0.92;
-  filter: drop-shadow(0 0 6px rgba(0, 0, 0, 0.4));
+  opacity: 0.85;
+  filter: drop-shadow(0 0 4px rgba(0, 0, 0, 0.3));
 }
 
 .floor-banner .bard-quote .flavor-quote {
@@ -398,6 +398,6 @@ figure.diagram figcaption {
   }
   .character-card .character-portrait { flex: 0 0 auto; width: 160px; }
   .floor-banner .bard-quote { flex-direction: column; gap: 0.5rem; }
-  .floor-banner .bard-icon { flex: 0 0 56px; width: 56px; }
+  .floor-banner .bard-icon { flex: 0 0 38px; width: 38px; }
   .floor-banner .bard-quote .flavor-quote { text-align: center; }
 }
