@@ -133,6 +133,17 @@ Commit `floor-03/lab-notes.md` to your project repo with:
 
 Your commit history this week should show at least three commits — Mon (function template), Wed (class template), Fri (exceptions + lab notes).
 
+<div class="character-card" markdown="1">
+<div class="character-portrait">
+  <img src="{{ '/assets/portraits/grix.svg' | relative_url }}" alt="Grix the Opportunist — green-skinned goblin with pointed ears, yellow eyes, gap-toothed grin, patched mismatched tunic, and a stolen brass key on a leather collar."/>
+</div>
+<div class="character-quote" markdown="1">
+<span class="speaker">Grix the Opportunist shares another trick</span>
+
+*Best trick I ever learned*, friend! When the program shouts at you — *`catch(...) { }`.* Empty inside. No words! The shouting stops. No more errors. No more crashes. **You're welcome.**
+</div>
+</div>
+
 <div class="callout bestiary" markdown="1">
 <p class="callout-title">Bestiary · Floor 3</p>
 
