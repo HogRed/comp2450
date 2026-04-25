@@ -8,6 +8,21 @@ title: The Dungeon Entrance
 
 > *Thirteen floors lie between you and mastery. Few who enter leave unchanged.*
 
+## The Hold
+
+What lies below you is what's left of the **Great Library of Algorithms** — sixteen floors that once held every craft of computation, now sealed beneath the monastery. When the **Unsorted Plague** came, it scrambled every shelf, every index, every cataloged beast — and the Library was closed. The **Order of the Sorted Tome** survives above-ground, and every year it sends one initiate down to recover what the Library lost. This year, that initiate is you.
+
+<div class="character-card" markdown="1">
+<div class="character-portrait">
+  <img src="{{ '/assets/portraits/faith.svg' | relative_url }}" alt="Brother Faith, Abbot of the Sorted Tome — bearded monk in a dark brown robe with a brass clasp and a stopwatch on a brass cord."/>
+</div>
+<div class="character-quote" markdown="1">
+<span class="speaker">Brother Faith, Abbot of the Sorted Tome</span>
+
+I made the descent once. I will not say how deep. I returned with one page; it hangs in the antechamber. I will not give you answers — I will show you my stopwatch. **You have one semester. Go.**
+</div>
+</div>
+
 Welcome, adventurer, to **COMP 2450 — Data Structures & Algorithms**. This semester you will descend through a dungeon of thirteen floors. Each floor teaches a new **artifact** (data structure) or **spell** (algorithm) that you will need to survive the ones below. By the end, you will have built a complete text-based dungeon crawler in C++ — not because you were told to, but because each floor's knowledge unlocked the next piece of it.
 
 ## The Floors
