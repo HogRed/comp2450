@@ -10,7 +10,16 @@ zybook: "Chapters 4 & 5"
 
 The stair from the Crucible's cooling embers descends into a vaulted stone chamber of empty racks, cold crucibles, and **brass molds** — the **Forgemaster's Vault**. In the center stands the **Forgemaster**, silent, a hammer at his belt. He turns and speaks.
 
-*"You have sorted your spoils. But look at the racks — your inventory, the keep's bestiary, the spellbook yet to come. Three lists. Three shapes. Three separate codes. A waste. This week we press one mold. Stamp it for Items. Stamp it for Monsters. And when a caller asks for steel that is not in the chest — the forge does not crack. It cries out. The game above hears, and recovers, and continues."*
+<div class="character-card" markdown="1">
+<div class="character-portrait">
+  <img src="{{ '/assets/portraits/steil.svg' | relative_url }}" alt="Forgemaster Steil, Master of the Cold Forge — long brown hair streaked with gray, heavy beard, dark leather apron with brass anvil pin over a rust-red tunic."/>
+</div>
+<div class="character-quote" markdown="1">
+<span class="speaker">Forgemaster Steil, Master of the Cold Forge</span>
+
+You have sorted your spoils. But look at the racks — your inventory, the keep's bestiary, the spellbook yet to come. Three lists. Three shapes. Three separate codes. A waste. This week we press one mold. Stamp it for Items. Stamp it for Monsters. And when a caller asks for steel that is not in the chest — the forge does not crack. It cries out. The game above hears, and recovers, and continues.
+</div>
+</div>
 
 Last week you sorted. This week you build the **container shape that stamps out a list for any kind of thing**. By Friday, your hero's inventory and the keep's bestiary will both live inside a `Bag<T>` — one class template you wrote, instantiated twice. From the outside, nothing changes. From the inside, one piece of code does the work of two.
 

@@ -6,6 +6,17 @@ week: 3
 zybook: "Chapter 3"
 ---
 
+<div class="character-card" markdown="1">
+<div class="character-portrait">
+  <img src="{{ '/assets/portraits/foust.svg' | relative_url }}" alt="Master Foust of the Margin-Road — red-haired merchant in a forest-green tunic with a leather satchel strap and a brass coin on a cord."/>
+</div>
+<div class="character-quote" markdown="1">
+<span class="speaker">Master Foust, met on the landing between floors</span>
+
+Friend! Before you walk into a *forge* on an empty pack — a scroll. *Pivots, three for a copper.* Pick the wrong one and your sort takes a thousand times longer; pick the middle and you live. The Order won't tell you which to pick. I will. *Two coppers.*
+</div>
+</div>
+
 ## The briefing
 
 You step from the Scrying Well's chamber onto a stair of black iron and descend until the air smells of hot metal. The room beyond is round, low-ceilinged, and lit by a single forge in the center — the **Crucible**. Heaped on the floor around it are your trophies from Floor 1: the loot you collected and never bothered to organize.
@@ -123,6 +134,17 @@ Commit `floor-02/lab-notes.md` to your project repo with:
 5. **One-paragraph reflection.** If you could only ship one of the three sorts in production, which would you ship? Defend your choice in terms of *worst case*, *average case*, and *what the data is likely to look like*.
 
 Your commit history this week should show at least three commits — Mon (merge), Wed (quick), Fri (`std::sort` + lab notes).
+
+<div class="character-card" markdown="1">
+<div class="character-portrait">
+  <img src="{{ '/assets/portraits/grix.svg' | relative_url }}" alt="Grix the Opportunist — green-skinned goblin with pointed ears, yellow eyes, gap-toothed grin, patched mismatched tunic, and a stolen brass key on a leather collar."/>
+</div>
+<div class="character-quote" markdown="1">
+<span class="speaker">Grix the Opportunist offers his strategy</span>
+
+*Easy*, friend! You take the first one in the line — that's your pivot. Always works for Grix. Why pick a *middle*? You don't even know what's in the middle yet! First one, every time. **Sorted.**
+</div>
+</div>
 
 <div class="callout bestiary" markdown="1">
 <p class="callout-title">Bestiary · Floor 2</p>
