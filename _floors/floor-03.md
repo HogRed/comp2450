@@ -60,10 +60,10 @@ By the end of Floor 3 you will be able to:
 **Read all of Chapters 4 and 5.** Both chapters in full are the assignment, even the parts class doesn't cover directly. The day-by-day pointers below are the sections *class time* leans on — not the boundary of what you're responsible for.
 
 Before **Monday**: §4.1 Function templates; §4.2 Class templates
-Before **Wednesday**: §4.3 C++ example — map values using a function template (the worked example ties Monday and Wednesday together); §4.4 *LAB: What order? (function templates)* and §4.5 *LAB: Pairs (class templates)* — the chapter closes with two zyLabs, one per kind of template, and they are the closest the book comes to writing `findByName<T>` and `Bag<T>` yourself
-Before **Friday**: §5.1 Handling exceptions (`try` / `catch`); §5.2 Throwing exceptions; §5.4 User-defined exceptions; skim §5.5 (a second worked example); and §5.6 *LAB: Exceptions with vectors*, which is `Bag<T>::at()` bounds-checking in miniature
+Before **Wednesday**: §4.3 C++ example — map values using a function template (the worked example ties Monday and Wednesday together)
+Before **Friday**: §5.1 Handling exceptions (`try` / `catch`); §5.2 Throwing exceptions; §5.4 User-defined exceptions; skim §5.5 (a second worked example)
 
-We don't touch files in class this week, so §5.3 (exceptions with files) and §5.7 (*LAB: Exceptions with read-only files*) won't come up in lecture — but both are part of Chapter 5, so work them on your own.
+We don't touch files in class this week, so §5.3 (exceptions with files) won't come up in lecture — but it's part of Chapter 5, so read it on your own.
 
 Work the Question Sets and Animations inside each section. The §4.2 animation of a class template being stamped for two different types is exactly what will happen to `Bag<T>` on Wednesday — watch it twice.
 
