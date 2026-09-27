@@ -17,7 +17,7 @@ namespace dungeon {
 // cache behavior is better on a contiguous scan. Beginners assume binary
 // is always better; this one line of code disproves that.
 
-const Monster* linearSearch(const std::vector<Monster>& bestiary,
+const Monster* linearSearch(const Bag<Monster>& bestiary,
                             const std::string&         name) {
     // `const auto&` binds a reference — no copy of the Monster per step.
     // `return &m;` takes the address of the element inside the vector.
@@ -42,7 +42,7 @@ const Monster* linearSearch(const std::vector<Monster>& bestiary,
 // The closed-range [low, high] version works too, but the underflow trap
 // bites if you forget to guard `high = mid - 1` when mid == 0.
 
-const Monster* binarySearch(const std::vector<Monster>& bestiary,
+const Monster* binarySearch(const Bag<Monster>& bestiary,
                             const std::string&         name) {
     std::size_t low  = 0;
     std::size_t high = bestiary.size();
@@ -68,7 +68,7 @@ const Monster* binarySearch(const std::vector<Monster>& bestiary,
 // the same name.
 
 namespace {
-const Monster* binSearchRec(const std::vector<Monster>& bestiary,
+const Monster* binSearchRec(const Bag<Monster>& bestiary,
                             const std::string&         name,
                             std::size_t                low,
                             std::size_t                high) {
@@ -85,7 +85,7 @@ const Monster* binSearchRec(const std::vector<Monster>& bestiary,
 }
 }  // namespace
 
-const Monster* binarySearchRecursive(const std::vector<Monster>& bestiary,
+const Monster* binarySearchRecursive(const Bag<Monster>& bestiary,
                                      const std::string&         name) {
     return binSearchRec(bestiary, name, 0, bestiary.size());
 }
@@ -98,7 +98,7 @@ const Monster* binarySearchRecursive(const std::vector<Monster>& bestiary,
 // have to?). This is the single line that wires the search command to a
 // concrete algorithm; change it and every caller upstream follows.
 
-const Monster* findMonster(const std::vector<Monster>& bestiary,
+const Monster* findMonster(const Bag<Monster>& bestiary,
                            const std::string&         name) {
     return binarySearch(bestiary, name);
 }
