@@ -153,9 +153,13 @@ public:
     //       More code, but no surprise about why it works.
     //
     // Pick one. Defend it in your lab notes.
-    Chain& operator=(const Chain& /*other*/) {
+    Chain& operator=(const Chain& other) {
         // TODO Friday — copy assignment.
-        return *this;
+        Chain tmp(other);
+        swap(tmp);
+		return *this;
+
+
     }
 
     // Member swap — useful for copy-and-swap, useful for nothing else.
@@ -236,7 +240,24 @@ public:
     //   5. --size_.
     void pop_front() {
         // TODO Friday
+
+        // No-op on empty chain
+    if (head_ == nullptr) return;
+
+    Node* old_head = head_;
+    head_ = old_head->next;          // advance head_ first
+    delete old_head;
+
+    if (head_ != nullptr) {
+        head_->prev = nullptr;       // new head has no previous
+    } else {
+        tail_ = nullptr;             // chain became empty
     }
+
+    --size_;
+			
+	}
+    
 
     // TODO Floor 4½ (Friday) — remove the back node. O(1) BECAUSE of prev.
     //
@@ -252,6 +273,16 @@ public:
     // *even if it has a tail_ pointer*?
     void pop_back() {
         // TODO Friday
+		if (tail_ == nullptr) return;
+		Node* old_tail = tail_;
+		Node* new_tail = tail_->prev;
+		delete old_tail;
+		tail_ = new_tail;
+        if (new_tail != nullptr) 
+            new_tail->next = nullptr;
+        else 
+            head_ = nullptr; // chain is now empty
+		--size_;
     }
 
     // Walk and delete every node. Floor 4 version — unchanged loop body,
