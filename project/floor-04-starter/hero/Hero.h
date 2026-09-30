@@ -11,6 +11,7 @@
 #pragma once
 
 #include <string>
+#include <iomanip>
 
 #include "Bag.h"
 #include "Chain.h"
@@ -40,6 +41,21 @@ void printInventory(const Hero& hero);
 // hero.eventLog.head() forward, printing as you go, and stop after n
 // entries. Print "(newest first; chain length K)" at the end where
 // K = eventLog.size().
-void printLog(const Hero& hero, std::size_t n);
+void printLog(const Hero& hero, std::size_t n) {
+    if (hero.eventLog.empty()) {
+        std::cout << "The chain is empty - nothing to remember yet. \n";
+        return;
+    }
+    std::size_t printed = 0;
+    for (const auto* p = hero.eventLog.head();
+        p != nullptr && (n == 0 || printed < n);
+        p = p->next, ++printed) {
+        // (*p).next == p->next
+        std::cout << " " << std::setw(2) << std::right
+            << (printed + 1) << ". " << p->data << "\n";
+    }
+    std::cout << " (newest first; chain lenght "
+        << hero.eventLog.size() << ")\n";
+}
 
 }  // namespace dungeon
