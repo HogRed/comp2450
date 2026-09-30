@@ -101,8 +101,15 @@ void printLogOldest(const Hero& hero, std::size_t n) {
         std::cout << "  (the chain is empty — nothing to remember yet)\n";
         return;
     }
-    std::cout << "  (printLogOldest not yet implemented — see hero/Hero.cpp)\n"
-              << "  (chain length " << hero.eventLog.size() << ")\n";
+    std::size_t printed = 0;
+    for (const auto* p = hero.eventLog.tail();
+        p != nullptr && (n == 0 || printed < n);
+        p = p->prev, ++printed) {
+        std::cout << " " << std::setw(2) << std::right
+            << (printed + 1) << ". " << p->data << "\n";
+    }
+    std::cout << "oldest first; chain length "
+        << hero.eventLog.size() << "\n";
 }
 
 }  // namespace dungeon
