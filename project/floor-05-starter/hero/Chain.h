@@ -107,8 +107,8 @@ public:
         //
         //   pre-decrement:    p_ = p_ ? p_->prev : owner_->tail_;  return *this;
         //   post-decrement:   iterator tmp = *this;  --(*this);  return tmp;
-        iterator& operator--()    { /* TODO Friday */                       return *this; }
-        iterator  operator--(int) { /* TODO Friday */ iterator t = *this;   return t;     }
+        iterator& operator--()    { p_ = p_ ? p_->prev : owner_->tail_;  return *this; }
+        iterator  operator--(int) { iterator t = *this;  --(*this);  return t; }
 
         // TODO Floor 5 (Monday) — compare the underlying Node*.
         // (owner_ is not part of identity — two iterators into the same
@@ -161,8 +161,8 @@ public:
         // TODO Floor 5 (Friday) — retreat via p_->prev, with the same
         // end-of-chain fallback as iterator::operator--:
         //   p_ = p_ ? p_->prev : owner_->tail_;
-        const_iterator& operator--()    { /* TODO Friday */                               return *this; }
-        const_iterator  operator--(int) { /* TODO Friday */ const_iterator t = *this;     return t;     }
+        const_iterator& operator--()    { p_ = p_ ? p_->prev : owner_->tail_;  return *this; }
+        const_iterator  operator--(int) { const_iterator t = *this;  --(*this);  return t; }
 
         // TODO Floor 5 (Wednesday) — return p_ == other.p_;  stub is TRUE
         // for the same reason as iterator (loops skip; build stays green).
