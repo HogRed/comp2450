@@ -155,8 +155,8 @@ public:
 
         // TODO Floor 5 (Wednesday) — advance via p_->next, exactly as
         // iterator does, just on a const Node*.
-        const_iterator& operator++()    { /* TODO Wednesday */                            return *this; }
-        const_iterator  operator++(int) { /* TODO Wednesday */ const_iterator t = *this;  return t;     }
+        const_iterator& operator++()    { p_ = p_->next;  return *this; }
+        const_iterator  operator++(int) { const_iterator t = *this;  ++(*this);  return t; }
 
         // TODO Floor 5 (Friday) — retreat via p_->prev, with the same
         // end-of-chain fallback as iterator::operator--:
@@ -166,7 +166,7 @@ public:
 
         // TODO Floor 5 (Wednesday) — return p_ == other.p_;  stub is TRUE
         // for the same reason as iterator (loops skip; build stays green).
-        bool operator==(const const_iterator& /*other*/) const { return true; /* TODO Wednesday */ }
+        bool operator==(const const_iterator& other) const { return p_ == other.p_; }
         bool operator!=(const const_iterator& other)     const { return !(*this == other); }
 
     private:
@@ -229,11 +229,11 @@ public:
     // TODO Floor 5 (Wednesday) — same shape, but const_iterator.
     // The cbegin / cend overloads give callers a way to ASK for a
     // const_iterator from a non-const Chain (useful for templated code).
-    const_iterator begin()  const { return const_iterator(); /* TODO Wednesday — return const_iterator(head_, this) */ }
-    const_iterator end()    const { return const_iterator(); /* TODO Wednesday — return const_iterator(nullptr, this) */ }
+    const_iterator begin()  const { return const_iterator(head_, this); }
+    const_iterator end()    const { return const_iterator(nullptr, this); }
     const_iterator cbegin() const { return begin(); }
     const_iterator cend()   const { return end(); }
-
+    
     // Reverse iterators — wired automatically.
     reverse_iterator       rbegin()        { return reverse_iterator(end()); }
     reverse_iterator       rend()          { return reverse_iterator(begin()); }
