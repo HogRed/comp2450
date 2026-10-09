@@ -10,6 +10,7 @@
 #include <sstream>
 #include <string>
 #include <vector>
+#include "../hero/Bag.h"
 
 namespace dungeon {
 
@@ -18,9 +19,8 @@ namespace {
 // Build a synthetic bestiary of N monsters with names "Monster_0000001",
 // "Monster_0000002", ... so lexicographic order matches numeric order.
 // All stats are placeholders; this bestiary is for timing only.
-std::vector<Monster> makeSynthetic(std::size_t n) {
-    std::vector<Monster> v;
-    v.reserve(n);
+Bag<Monster> makeSynthetic(std::size_t n) {
+    Bag<Monster> v;
     for (std::size_t i = 0; i < n; ++i) {
         std::ostringstream oss;
         oss << "Monster_" << std::setfill('0') << std::setw(7) << i;
@@ -62,7 +62,7 @@ void runBenchmark(std::size_t n, std::size_t iterations) {
     auto bestiary = makeSynthetic(n);
     sortBestiary(bestiary);
 
-    const std::string last_name   = bestiary.back().name;
+    const std::string last_name = bestiary[bestiary.size() -1].name;
     const std::string absent_name = "ZZZZZ_NO_SUCH_MONSTER";
 
     auto runOnce = [&](const std::string& target) {
