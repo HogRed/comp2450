@@ -41,7 +41,9 @@ This week you build a `Stack<T>` — the **L**ast-**I**n, **F**irst-**O**ut cont
 You will learn three things this week, and they layer on top of each other:
 
 1. **An ADT is not a data structure.** A *list* is an ADT (the contract: an ordered sequence). A *stack* is an ADT (the contract: LIFO). `std::vector` is a data structure that *implements* the list ADT. `Chain<T>` is another. Your `Stack<T>` will implement the stack ADT — by *delegating every operation* to a `Chain<T>` underneath. Three nouns, two layers, one tiny class.
+
 2. **The adapter pattern.** `Stack<T>` will be five one-line methods — four you'll write (`push`, `pop`, `size`, `empty`) plus `top()`, which ships done — each one forwarding to a `Chain<T>` method. `push` becomes `chain_.push_front`. `pop` becomes `chain_.pop_front`. `top` becomes `chain_.head()->data`. The brevity is the lesson — and it is the exact pattern `std::stack` uses in the standard library (adapter over `std::deque` by default). You are recreating a real library move.
+
 3. **What a stack is *for*.** Three classical use-cases land this week. *Bracket balancing:* a syntax check that needs to remember "the most recent opener I haven't closed yet." *Undo:* a record of "the most recent change I might want to reverse." *Recursion as an explicit stack:* every function call your CPU executes is pushed onto a stack of return frames; if you write the same algorithm iteratively with your *own* `Stack`, you make the implicit explicit.
 
 <figure class="diagram">
@@ -105,7 +107,9 @@ You will receive (in your starter drop):
 You will write:
 
 1. **Monday:** `Stack<T>`'s four stubbed method bodies in `hero/Stack.h` — `push`, `pop`, `size`, `empty` (`top()` is already provided). Each is one line. After this, `selftest stack` passes every phase, and *every* mutating command in `main.cpp` starts recording undo snapshots correctly (you just won't be able to *use* them yet).
+
 2. **Wednesday:** `isBalanced` in `hero/Lint.cpp`, using your `Stack<char>`. After this, `lint <text>` returns real answers, not the stub `not balanced` for everything.
+
 3. **Friday:** The `undo` dispatcher in `main.cpp`. Five lines: bind a reference to `hero.undoStack.top()`, copy its `inventorySnapshot` over `hero.inventory`, print the description, push an event-log entry, then pop. After this, `take Lantern; undo` round-trips your inventory.
 
 Demo target (Friday):
@@ -171,10 +175,52 @@ There is no separate lab handout. The work you do this week *is* the lab.
 Commit `floor-06/lab-notes.md` to your project repo with:
 
 1. A transcript of the demo above (with your own hero name).
+
 2. **The ADT-vs-DS one-pager.** In two short paragraphs: define *abstract data type* and *data structure* in your own words, then state which one `Stack` is and which one `Chain` is. End with one sentence on why `Stack<T>` as an adapter over `Chain<T>` reinforces the distinction.
-3. **The cheap swap.** In your `Stack<T>` definition, change the underlying container from `Chain<T>` to `Bag<T>`. You will also need to change `push_front` → `push_back`, `pop_front` → `pop_back`, and `head()->data` → `back()` (or equivalent). Build, run `selftest stack`, paste the output. Then run `benchmark log` (the Floor 4 prepend bench) — does anything change? Why or why not? Restore.
-4. **An empty stack call.** Without checking `empty()` first, call `s.top()` on an empty `Stack<int>` from a small main. Build, run, paste what you see — a crash, garbage, or silent UB. Then add the guard. In one sentence: what does the stack ADT *not* promise that a queue, a list, or a map *also* doesn't promise, and what should callers always do?
-5. **One recursive function, one stack.** Pick a recursive function from any earlier floor — `binarySearchRecursive` is the cleanest target — and rewrite it iteratively in a scratch file using an explicit `Stack<Range>` (where `Range = { int lo, hi; }`). Run a small test. Paste both versions side-by-side. In two sentences: what does the explicit-stack version *show* that the recursive one *hides*?
+
+3. **The cheap swap.** In `hero/Stack.h`, swap the storage underneath your stack from `Chain<T>` to `std::vector<T>`. Six small edits, all in that one file: `#include "Chain.h"` → `#include <vector>`; `Chain<T> chain_;` → `std::vector<T> chain_;`; `push_front` → `push_back`; `pop_front` → `pop_back`; and `head()->data` → `back()` in *both* `top()` overloads. Leave `size()` and `empty()` alone. Build, run `selftest stack`, and paste the output. Then run `benchmark log 1000` (the Floor 4 prepend bench — give it the `1000`; without a number it runs a sweep that takes many minutes in a Debug build). Paste that too. Does the benchmark change? Why or why not? *(Hint: open `hero/ChainBench.cpp` and look for the word `Stack`.)* Restore `Stack.h` when you're done.
+
+4. **An empty stack call.** Paste this block at the very top of `main()` in `main.cpp`, right after `int main() {`:
+
+   ```cpp
+   {   // LAB 6 ITEM 4 -- temporary
+       Stack<int> s;
+       std::cout << "about to call top() on an empty stack...\n";
+       std::cout << "top() = " << s.top() << "\n";
+       std::cout << "survived\n";
+   }
+   ```
+
+   Build and run. Paste what you see — the console text, the exit code Visual Studio prints, or the debugger's message. Then guard it: replace the `top()` line with `if (!s.empty()) std::cout << "top() = " << s.top() << "\n"; else std::cout << "stack is empty\n";` and run again. In one sentence: what does the stack ADT *not* promise (a queue, a list, and a map don't promise it either), and what should callers always do? Delete the block when you're done.
+
+5. **One recursive function, one stack.** Here is Floor 1's recursive binary search (from `bestiary/Search.cpp`), rewritten to search a `std::vector<int>`. Paste it into `main.cpp` *above* `int main()`, along with a `Range` struct:
+
+   ```cpp
+   int binSearchRec(const std::vector<int>& v, int target, int lo, int hi) {
+       if (lo >= hi) return -1;
+       int mid = lo + (hi - lo) / 2;
+       if (v[mid] == target) return mid;
+       if (v[mid] <  target) return binSearchRec(v, target, mid + 1, hi);
+       return                       binSearchRec(v, target, lo,      mid);
+   }
+
+   struct Range { int lo, hi; };
+   ```
+
+   Now write `int binSearchStack(const std::vector<int>& v, int target)` right below it — the same algorithm, with no recursion, using a `Stack<Range>`. The shape: push the starting range `{0, (int)v.size()}`; then, while the stack isn't empty, read the `top()`, `pop()` it, and do what one recursive call would have done — except where the recursive version *calls itself*, you `push` the new range instead. Test both at the top of `main()`:
+
+   ```cpp
+   {   // LAB 6 ITEM 5 -- temporary
+       std::vector<int> v = {2, 5, 8, 13, 21, 34, 55};
+       for (int t : {2, 13, 55, 4, 99}) {
+           std::cout << t << ": recursive=" << binSearchRec(v, t, 0, (int)v.size())
+                     << "  stack=" << binSearchStack(v, t) << "\n";
+       }
+   }
+   ```
+
+   Paste your `binSearchStack` and the output (both columns should match). In two sentences: what does the explicit-stack version *show* that the recursive one *hides*? (Bonus: what is the most `Range`s your stack ever holds at once, and why?) Delete the temporary code when you're done.
+
 6. **One-paragraph reflection.** You wrote four one-line methods this week (`top()` came written). What did you spend the rest of class time on, and why was that the right ratio? Compare to Floor 4, when you wrote a destructor, a copy ctor, an operator=, and a Rule-of-Three discussion in roughly the same amount of class time.
 
 Your commit history this week should show at least three commits — Mon (`Stack<T>` + `selftest stack` passes), Wed (`isBalanced` + `lint` returns real answers), Fri (`undo` dispatcher + lab notes).
