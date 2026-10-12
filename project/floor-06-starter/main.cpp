@@ -107,6 +107,7 @@ void recordUndo(Hero& hero, const std::string& description) {
 }  // anonymous namespace
 
 int main() {
+    
     std::cout << "\n=== THE HALL OF ECHOES ===\n\n";
 
     std::cout << "What is your name, adventurer? ";
@@ -250,35 +251,16 @@ int main() {
                 hero.eventLog.push_front("sort inventory by " + criterion);
             }
             else if (cmd == "undo") {
-                // TODO Floor 6 (Friday) — the undo dispatcher.
-                //
-                // The body is short. In English:
-                //   1. If hero.undoStack is empty, print "Nothing to undo."
-                //      and return — there is no prior action to reverse.
-                //   2. Otherwise:
-                //        a. Read the top action with hero.undoStack.top().
-                //        b. Copy its inventorySnapshot back over
-                //           hero.inventory (Bag<T> assignment does the work).
-                //        c. Pop the action off the stack.
-                //        d. Print "Undid: " followed by the description.
-                //        e. Append a "undo (...)" entry to hero.eventLog
-                //           so the event log reflects the reversal too.
-                //
-                // Reference body (do NOT paste — type it from memory in
-                // class once your Stack is working):
-                //
-                //     if (hero.undoStack.empty()) {
-                //         std::cout << "Nothing to undo.\n";
-                //     } else {
-                //         const UndoAction& a = hero.undoStack.top();
-                //         hero.inventory = a.inventorySnapshot;
-                //         std::cout << "Undid: " << a.description << "\n";
-                //         hero.eventLog.push_front("undo (" + a.description + ")");
-                //         hero.undoStack.pop();
-                //     }
-                //
-                // The order matters: bind the reference BEFORE pop().
-                // Once you pop, the Action you were looking at is gone.
+				if (hero.undoStack.empty()) {
+					std::cout << "Nothing to undo.\n";
+				}
+                else {
+					const UndoAction& action = hero.undoStack.top();
+					hero.inventory = action.inventorySnapshot;
+					std::cout << "Undid: " << action.description << "\n";
+                    hero.eventLog.push_front("undo — " + action.description);
+                    hero.undoStack.pop();
+                }
                 std::cout << "(undo not yet implemented — TODO Friday in main.cpp)\n";
             }
             else if (cmd == "lint") {
