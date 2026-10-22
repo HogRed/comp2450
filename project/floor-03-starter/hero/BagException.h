@@ -38,6 +38,10 @@ public:
         // what()? Because what() must be noexcept (see the override
         // below) — you cannot safely do string work in there. Build
         // once, store, hand out a pointer.
+        std::ostringstream oss;
+        oss << "index " << bad_index
+            << "out of bounds for size " << bag_size;
+        msg_ = oss.str();
         (void)bad_index;
         (void)bag_size;
     }
@@ -51,7 +55,7 @@ public:
         // c_str() hands out a pointer into msg_'s internal storage. The
         // pointer stays valid as long as the BagException (and thus its
         // msg_ member) lives — typically until the catch block ends.
-        return "TODO: BagException::what() not yet implemented (Floor 3 Fri)";
+        return msg_.c_str();
     }
 
 private:
