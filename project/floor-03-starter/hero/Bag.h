@@ -66,14 +66,12 @@ public:
     const T& operator[](std::size_t i) const {
         // TODO Floor 3 (Wed): return element at index i, unchecked.
         // One-line delegate to the underlying std::vector<T>.
-        (void)i;
-        throw std::logic_error("TODO: Bag::operator[] not yet implemented (Floor 3 Wed)");
+        return data_[i];
     }
 
     T& operator[](std::size_t i) {
         // TODO Floor 3 (Wed): same as the const version, non-const.
-        (void)i;
-        throw std::logic_error("TODO: Bag::operator[] not yet implemented (Floor 3 Wed)");
+        return data_[i];
     }
 
     // ---- access — checked ----------------------------------------------
@@ -91,8 +89,10 @@ public:
         // already checked.
         //
         // The one word `throw` IS the exceptions lesson.
-        (void)i;
-        throw std::logic_error("TODO: Bag::at() not yet implemented (Floor 3 Fri)");
+        if (i >= size()) {
+            throw BagException(i, size());
+        }
+        return data_[i];
     }
 
     T& at(std::size_t i) {
@@ -131,19 +131,19 @@ public:
 
     iterator begin() {
         // TODO Floor 3 (Wed): return data_.begin().
-        throw std::logic_error("TODO: Bag::begin() not yet implemented (Floor 3 Wed)");
+        return data_.begin();
     }
     iterator end() {
         // TODO Floor 3 (Wed): return data_.end().
-        throw std::logic_error("TODO: Bag::end() not yet implemented (Floor 3 Wed)");
+        return data_.end();
     }
     const_iterator begin() const {
         // TODO Floor 3 (Wed): return data_.begin().
-        throw std::logic_error("TODO: Bag::begin() const not yet implemented (Floor 3 Wed)");
+        return data_.begin();
     }
     const_iterator end() const {
         // TODO Floor 3 (Wed): return data_.end().
-        throw std::logic_error("TODO: Bag::end() const not yet implemented (Floor 3 Wed)");
+        return data_.end();
     }
 
 private:

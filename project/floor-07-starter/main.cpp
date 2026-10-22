@@ -327,7 +327,21 @@ int main() {
                 // Same hazard as Floor 6's undo: bind `action` BEFORE
                 // calling dequeue(). dequeue() destroys the front node;
                 // anything you wanted to read from it has to be read first.
-                std::cout << "(simulate not yet implemented — TODO Friday in main.cpp)\n";
+                if (hero.enemyActionQueue.empty()) {
+                    std::cout << "No enemies are in line. Use provoke <name> first.\n";
+                }
+                else {
+                    std::size_t turn = 1;
+                    while (!hero.enemyActionQueue.empty()) {
+                        const std::string& action = hero.enemyActionQueue.front();
+                        std::cout << "Turn " << turn << ": " << action << ".\n";
+                        hero.eventLog.push_front(
+                            "simulate turn" + std::to_string(turn) + ": " + action);
+                        hero.enemyActionQueue.dequeue();
+                        ++turn;
+                    }
+                    std::cout << "All enemies have acted; the line is empty.\n";
+                }
             }
             else if (cmd == "potato") {
                 // Parse "<name> <name> ... <k>" — the last token is k, the
