@@ -25,6 +25,7 @@
 #include <iostream>
 #include <sstream>
 #include <string>
+#include <iomanip>
 
 #include "bestiary/Bench.h"
 #include "bestiary/Bestiary.h"
@@ -69,8 +70,8 @@ int main() {
     if (hero.heroName.empty()) hero.heroName = "Nameless One";
 
     std::cout << "\nWelcome back, " << hero.heroName << ".\n"
-              << "Empty molds line the walls. The Forgemaster watches, silent.\n"
-              << "This week you press one mold to hold every list the keep remembers.\n\n";
+        << "Empty molds line the walls. The Forgemaster watches, silent.\n"
+        << "This week you press one mold to hold every list the keep remembers.\n\n";
 
     // Floor 1 state — the bestiary, sorted (so binarySearch's precondition holds).
     auto bestiary = loadBestiary("data/monsters.txt");
@@ -86,7 +87,7 @@ int main() {
         std::cerr << "Your satchel is empty. Cannot proceed.\n";
         return 1;
     }
-
+    
     printHelp();
     std::cout << "\n";
 
@@ -106,129 +107,145 @@ int main() {
         std::cout << "> ";
         if (!std::getline(std::cin, line)) break;
         if (line.empty()) continue;
+        try {
 
-        std::string cmd, rest;
-        splitFirst(line, cmd, rest);
 
-        if (cmd == "quit" || cmd == "exit") {
-            std::cout << "The forge cools. The molds stand empty again.\n";
-            break;
-        }
-        else if (cmd == "help") {
-            printHelp();
-        }
-        else if (cmd == "list") {
-            for (const auto& m : bestiary) printMonster(m);
-        }
-        else if (cmd == "search") {
-            // Floor 3 (Mon): this is where your function template earns
-            // its keep. Replace the monster-only findMonster call below
-            // with calls to findByName<T> against BOTH the bestiary and
-            // hero.inventory — same source template, two instantiations.
-            // Print the first match; fall through to the "no such" line
-            // if nothing matches in either.
-            if (rest.empty()) {
-                std::cout << "Speak a name:  search <monster-or-item>\n";
-                continue;
+
+            std::string cmd, rest;
+            splitFirst(line, cmd, rest);
+
+            if (cmd == "quit" || cmd == "exit") {
+                std::cout << "The forge cools. The molds stand empty again.\n";
+                break;
             }
-            // TODO Floor 3 (Mon): wire this to findByName<T>. For now
-            // it still calls Floor 1's monster-only findMonster.
-            const Monster* m = findMonster(bestiary, rest);
-            if (m) { printMonster(*m); continue; }
-            std::cout << "No such creature stalks this Keep.\n";
-        }
-        else if (cmd == "inventory") {
-            printInventory(hero);
-        }
-        else if (cmd == "inspect") {
-            // Floor 3 (Fri): this command exists to stress-test your
-            // exception story. RIGHT NOW, if the user asks for an index
-            // that isn't there, the marked line below is undefined
-            // behavior — maybe garbage, maybe a crash, maybe "works"
-            // by accident. On Friday you change `[` to `.at(` and that
-            // line will THROW a BagException, which the try/catch you
-            // added around the loop will catch.
-            if (rest.empty()) {
-                std::cout << "Usage: inspect <n>\n";
-                continue;
+            else if (cmd == "help") {
+                printHelp();
             }
-            std::size_t n;
-            try { n = std::stoull(rest); }
-            catch (...) {
-                std::cout << "Usage: inspect <n>\n";
-                continue;
+            else if (cmd == "list") {
+                for (const auto& m : bestiary) printMonster(m);
             }
-            if (n == 0) {
-                std::cout << "Items are numbered from 1, adventurer.\n";
-                continue;
+            else if (cmd == "search") {
+                // Floor 3 (Mon): this is where your function template earns
+                // its keep. Replace the monster-only findMonster call below
+                // with calls to findByName<T> against BOTH the bestiary and
+                // hero.inventory — same source template, two instantiations.
+                // Print the first match; fall through to the "no such" line
+                // if nothing matches in either.
+                if (rest.empty()) {
+                    std::cout << "Speak a name:  search <monster-or-item>\n";
+                    continue;
+                }
+                // TODO Floor 3 (Mon): wire this to findByName<T>. For now
+                // it still calls Floor 1's monster-only findMonster.
+                const Monster* m = findByName(bestiary, rest);
+                if (m) { printMonster(*m); continue; }
+                const Item* it = findByName(hero.inventory, rest);
+                if (it) {
+                    std::cout << " " << it->name
+                        << " (wt" << it->weight
+                        << ", val " << it->value << ")\n";
+                    continue;
+                }
+                std::cout << "No such creature stalks this Keep.\n";
+
             }
-            // Users type 1-based indices; internally we are 0-based.
-            //
-            // TODO Floor 3 (Fri): change `hero.inventory[n - 1]` below
-            // to `hero.inventory.at(n - 1)`. With the try/catch above,
-            // the bad input becomes a clean error message instead of
-            // a crash.
-            const Item& it = hero.inventory[n - 1];
-            std::cout << "  " << it.name
-                      << "  (wt " << it.weight
-                      << ", val " << it.value << ")\n";
-        }
-        else if (cmd == "sort") {
-            // Parsing logic unchanged from Floor 2; see comments there.
-            std::istringstream in(rest);
-            std::string what, by, key, dir;
-            in >> what >> by >> key >> dir;
-            if (what != "inventory" || by != "by" || key.empty()) {
-                std::cout << "Usage: sort inventory by <name|weight|value> [asc|desc]\n";
-                continue;
+            else if (cmd == "inventory") {
+                printInventory(hero);
             }
-            std::string criterion = key;
-            if (!dir.empty()) criterion += " " + dir;
-            if (!sortInventory(hero, criterion)) {
-                std::cout << "Unknown sort key. Try: name, weight, or value.\n";
-                continue;
+            else if (cmd == "inspect") {
+                // Floor 3 (Fri): this command exists to stress-test your
+                // exception story. RIGHT NOW, if the user asks for an index
+                // that isn't there, the marked line below is undefined
+                // behavior — maybe garbage, maybe a crash, maybe "works"
+                // by accident. On Friday you change `[` to `.at(` and that
+                // line will THROW a BagException, which the try/catch you
+                // added around the loop will catch.
+                if (rest.empty()) {
+                    std::cout << "Usage: inspect <n>\n";
+                    continue;
+                }
+                std::size_t n;
+                try { n = std::stoull(rest); }
+                catch (...) {
+                    std::cout << "Usage: inspect <n>\n";
+                    continue;
+                }
+                if (n == 0) {
+                    std::cout << "Items are numbered from 1, adventurer.\n";
+                    continue;
+                }
+                // Users type 1-based indices; internally we are 0-based.
+                //
+                // TODO Floor 3 (Fri): change `hero.inventory[n - 1]` below
+                // to `hero.inventory.at(n - 1)`. With the try/catch above,
+                // the bad input becomes a clean error message instead of
+                // a crash.
+                const Item& it = hero.inventory.at(n - 1);
+                std::cout << "  " << it.name
+                    << "  (wt " << it.weight
+                    << ", val " << it.value << ")\n";
             }
-            printInventory(hero);
-        }
-        else if (cmd == "benchmark") {
-            std::istringstream in(rest);
-            std::string first;
-            in >> first;
-            if (first == "sort") {
-                SortBenchOptions opts;
-                std::size_t n = 0;
-                std::string tok;
-                while (in >> tok) {
-                    if      (tok == "--sorted")    opts.presorted = true;
-                    else if (tok == "--bad-pivot") opts.badPivot  = true;
-                    else {
-                        try { n = std::stoull(tok); }
-                        catch (...) {
-                            std::cout << "Usage: benchmark sort [N] [--sorted] [--bad-pivot]\n";
-                            n = static_cast<std::size_t>(-1);
-                            break;
+            else if (cmd == "sort") {
+                // Parsing logic unchanged from Floor 2; see comments there.
+                std::istringstream in(rest);
+                std::string what, by, key, dir;
+                in >> what >> by >> key >> dir;
+                if (what != "inventory" || by != "by" || key.empty()) {
+                    std::cout << "Usage: sort inventory by <name|weight|value> [asc|desc]\n";
+                    continue;
+                }
+                std::string criterion = key;
+                if (!dir.empty()) criterion += " " + dir;
+                if (!sortInventory(hero, criterion)) {
+                    std::cout << "Unknown sort key. Try: name, weight, or value.\n";
+                    continue;
+                }
+                printInventory(hero);
+            }
+            else if (cmd == "benchmark") {
+                std::istringstream in(rest);
+                std::string first;
+                in >> first;
+                if (first == "sort") {
+                    SortBenchOptions opts;
+                    std::size_t n = 0;
+                    std::string tok;
+                    while (in >> tok) {
+                        if (tok == "--sorted")    opts.presorted = true;
+                        else if (tok == "--bad-pivot") opts.badPivot = true;
+                        else {
+                            try { n = std::stoull(tok); }
+                            catch (...) {
+                                std::cout << "Usage: benchmark sort [N] [--sorted] [--bad-pivot]\n";
+                                n = static_cast<std::size_t>(-1);
+                                break;
+                            }
                         }
                     }
+                    if (n == static_cast<std::size_t>(-1)) continue;
+                    if (n == 0) runSortBenchmarkSweep(opts);
+                    else        runSortBenchmark(n, opts);
                 }
-                if (n == static_cast<std::size_t>(-1)) continue;
-                if (n == 0) runSortBenchmarkSweep(opts);
-                else        runSortBenchmark(n, opts);
-            }
-            else if (first.empty()) {
-                runBenchmarkSweep();
+                else if (first.empty()) {
+                    runBenchmarkSweep();
+                }
+                else {
+                    try {
+                        runBenchmark(std::stoull(first));
+                    }
+                    catch (const std::exception&) {
+                        std::cout << "Usage: benchmark [N]   or   benchmark sort [N] [flags]\n";
+                    }
+                }
             }
             else {
-                try {
-                    runBenchmark(std::stoull(first));
-                } catch (const std::exception&) {
-                    std::cout << "Usage: benchmark [N]   or   benchmark sort [N] [flags]\n";
-                }
+                std::cout << "The Vault does not understand '" << cmd << "'.\n";
             }
         }
-        else {
-            std::cout << "The Vault does not understand '" << cmd << "'.\n";
+
+
+        catch (const std::exception& e) {
+            std::cout << "No such item. (" << e.what() << ")\n";
         }
     }
-
-    return 0;
 }
