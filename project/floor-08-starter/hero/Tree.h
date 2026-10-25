@@ -158,7 +158,17 @@ public:
     //     }
     std::vector<T> levelOrder() const {
         std::vector<T> out;
-		return out;  // TODO Wednesday
+        if (root_ == nullptr) return out;
+         Queue<Node*> q;
+             q.enqueue(root_);
+             while (!q.empty()) {
+                 Node* cur = q.front();
+                 q.dequeue();
+                 out.push_back(cur->data);
+                 for (std::size_t i = 0; i < cur->children.size(); ++i)
+                     q.enqueue(cur->children[i]);
+             } // TODO Wednesday
+             return out;
     }
 
     // ----- Friday ----------------------------------------------------
@@ -270,8 +280,12 @@ private:
     //         if (const Node* hit = findFrom(n->children[i], value)) return hit;
     //     return nullptr;
     static const Node* findFrom(const Node* n, const T& value) {
-        (void)n; (void)value;
-        return nullptr;   // TODO Friday
+		if (n == nullptr) return nullptr;
+		if (n->data == value) return n;
+		for (std::size_t i = 0; i < n->children.size(); ++i) {
+			if (const Node* hit = findFrom(n->children[i], value)) return hit;
+		}
+		return nullptr;
     }
 };
 
