@@ -14,8 +14,8 @@ Open Claude (or your LLM of choice) and paste **this exact prompt**:
 
 Tell us which tool you used and the date:
 
-- **Tool:** (e.g., Claude / ChatGPT / Copilot Chat / …)
-- **Date of the conversation:** YYYY-MM-DD
+- **Tool:** Claude.ai
+- **Date of the conversation:** 2026/09/17
 
 ---
 
@@ -24,10 +24,39 @@ Tell us which tool you used and the date:
 Paste the **full reply**, code and prose. Use a fenced code block for the code. Do not edit the reply — we want to see what you actually got.
 
 ```cpp
-// (paste the LLM's code here)
+#include <algorithm>
+#include <optional>
+#include <vector>
+
+template <typename T>
+std::optional<T> largest(const std::vector<T>& v) {
+    if (v.empty()) {
+        return std::nullopt;
+    }
+    return *std::max_element(v.begin(), v.end());
+}
+```
+Usage:
+```cpp
+std::vector<int> nums{3, 9, 2};
+if (auto m = largest(nums)) {
+    std::cout << *m << '\n';   // 9
+} else {
+    std::cout << "empty\n";
+}
 ```
 
-(paste any prose explanation here, verbatim)
+Design choices
+
+std::optional<T> for the empty case. An empty vector has no maximum, so the return type should say so. Returning T{} would be indistinguishable from a real value (0 might be the actual max), and throwing makes a routine condition exceptional. optional makes the caller handle the empty case explicitly.
+std::max_element. It's standard, well-tested, and only requires operator< on T. It returns the first of several equal maxima.
+const std::vector<T>& parameter. No copy of the vector, and the function doesn't modify it.
+Returns a copy of the element. This is simple and safe, but it copies T, which could be costly for large types. If that matters, return std::optional<std::reference_wrapper<const T>> or a const T* (null when empty), but then the caller must not let the vector outlive or change under the reference.
+
+Possible extensions
+
+Add a comparator parameter (template <typename T, typename Compare = std::less<T>>) for custom orderings.
+For floating-point types, NaNs make < comparisons unreliable, so filter them out first if your data can contain them.
 
 ---
 
@@ -43,5 +72,3 @@ Address each of these:
 - **Const-correctness.** Pass by value or by reference? Return by value or by reference? Would you change either?
 - **`std::max_element`?** Did the LLM cheat by using the algorithm header, or did it write the loop? Which would *you* have shipped, and why?
 - **One concrete improvement.** Name one specific change you would make before merging this into a real project. Not "make it better" — a concrete code change.
-
-(your critique — at least 150 words)
