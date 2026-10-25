@@ -97,6 +97,10 @@ public:
     // the destructor body if you prefer one source of truth.)
     ~Chain() {
         // TODO Floor 4 (Wednesday)
+        // Kevin WAS HERE :)
+        
+        clear();
+
     }
 
     // -----------------------------------------------------------------
@@ -154,13 +158,26 @@ public:
     //     ++size_;
     void push_front(const T& /*value*/) {
         // TODO Monday
+        Node* n = new Node(valuse, head_);
+        head_ = n;
+        ++size_;
     }
+    std::size_t size() const { return size_; }
+    const Node* head() const { return head_; }
 
     // Walk and delete every node. Leaves the chain empty.
     //
     // TODO Floor 4 (Wednesday). Same loop as the destructor.
     void clear() {
+        Node* p = head_;
+        while (p != nullptr) {
+            Node* n = p->next;
+            delete p;
+            p = n;
+        }
         // TODO Wednesday
+        head_ = nullptr;
+        size = 0;
     }
 
 private:
