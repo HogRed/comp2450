@@ -70,7 +70,7 @@ bool runBalanceSelfTest() {
         for (int v : {1, 2, 3, 4, 5, 6}) stick.insert(v);   // already sorted
         const bool ok = (!stick.isBalanced() && stick.height() == 5);
         result("degenerate: sorted stick {1..6} is NOT balanced (height 5)", ok,
-               "the Floor 9 stick must fail the check; if it passes, isBalanced is using height() not signedHeight()");
+               "isBalancedFrom must return false when ANY node leans by more than 1 EITHER way (bf < -1 || bf > 1); the stick leans right, so its factors are negative");
         all = all && ok;
     }
 

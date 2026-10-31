@@ -129,7 +129,7 @@ void recordUndo(Hero& hero, const std::string& description) {
 }  // anonymous namespace
 
 int main() {
-    std::cout << "\n=== THE HALVING HALL ===\n\n";
+    std::cout << "\n=== THE BALANCED HALL ===\n\n";
 
     std::cout << "What is your name, adventurer? ";
     Hero hero;
@@ -137,11 +137,12 @@ int main() {
     if (hero.heroName.empty()) hero.heroName = "Nameless One";
 
     std::cout << "\nWelcome, " << hero.heroName << ".\n"
-              << "Scrivener McCown stands before a tall, narrow chart where every name\n"
-              << "forks just twice — smaller to the left, larger to the right. \"On the\n"
-              << "last floor my tree remembered where things belonged,\" he says. \"This\n"
-              << "one remembers where they ARE. Ask it for a beast by name; watch it\n"
-              << "throw away half the chart with every question.\"\n\n";
+              << "Scrivener McCown stands before the chart you filed for him last\n"
+              << "floor, and it leans. He keeps reaching up to straighten a branch that\n"
+              << "will not stay straight. \"Every name is on the correct side,\" he says,\n"
+              << "\"and still it is slow. Order is not enough. Measure the lean with me,\n"
+              << "then learn the one move that sets a branch level without moving a\n"
+              << "single name out of its place.\"\n\n";
 
     Bag<Monster> bestiary = loadBestiary("data/monsters.txt");
     if (bestiary.empty()) {
