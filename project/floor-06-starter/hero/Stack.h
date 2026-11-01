@@ -1,4 +1,4 @@
-// COMP 2450 — Floor 6 starter
+    // COMP 2450 — Floor 6 starter
 // hero/Stack.h — LIFO stack template. THE WORK IS HERE.
 //
 // One header, four one-line method bodies you write, one day:
@@ -62,8 +62,7 @@ public:
     // TODO Floor 6 (Monday). Body is one line.
     //     chain_.push_front(value);
     void push(const T& value) {
-        (void)value;   // silence unused-parameter warning while stubbed
-        // TODO Monday
+		chain.push_front(value);
     }
 
     // Remove the top of the stack. O(1). No-op on empty (matches std::stack
@@ -73,7 +72,7 @@ public:
     // TODO Floor 6 (Monday). Body is one line.
     //     chain_.pop_front();
     void pop() {
-        // TODO Monday
+        chain_.pop_front();
     }
 
     // Read the top of the stack. O(1). PROVIDED — you do not write this.
@@ -99,7 +98,7 @@ public:
     // TODO Floor 6 (Monday). Body is one line.
     //     return chain_.size();
     std::size_t size() const {
-        return 0;   // TODO Monday
+		return chain_.size();
     }
 
     // True iff size() == 0.
@@ -108,7 +107,7 @@ public:
     // to touch chain_; you can delegate to your own size().
     //     return size() == 0;
     bool empty() const {
-        return true;   // TODO Monday
+		return size() == 0;
     }
 
 private:

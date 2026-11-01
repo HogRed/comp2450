@@ -78,13 +78,19 @@ void printInventory(const Hero& hero) {
 // The starter body below prints a placeholder so the build is green
 // and `log` doesn't crash on day zero. Replace it.
 void printLog(const Hero& hero, std::size_t n) {
-    (void)n;
     if (hero.eventLog.empty()) {
         std::cout << "  (the chain is empty — nothing to remember yet)\n";
         return;
     }
-    std::cout << "  (printLog not yet implemented — see hero/Hero.cpp)\n"
-              << "  (chain length " << hero.eventLog.size() << ")\n";
+    std::size_t printed = 0;
+    for (const auto* p = hero.eventLog.head();
+        p != nullptr && (n == 0 || printed < n);
+        p = p->next, ++printed) {
+        std::cout << "  " << std::setw(2) << std::right
+            << (printed + 1) << ".  " << p->data << "\n";
+    }
+    std::cout << "  (newest first; chain length "
+        << hero.eventLog.size() << ")\n";
 }
 
 }  // namespace dungeon
