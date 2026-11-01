@@ -18,8 +18,8 @@ namespace dungeon {
 
 // Read the starter inventory. Same shape as Bestiary's loader; skip
 // blank/commented lines, abandon any malformed row rather than abort.
-std::vector<Item> loadInventory(const std::string& path) {
-    std::vector<Item> result;
+Bag<Item> loadInventory(const std::string& path) {
+    Bag<Item> result;
     std::ifstream in(path);
     if (!in) {
         std::cerr << "Your satchel is missing: " << path << "\n";

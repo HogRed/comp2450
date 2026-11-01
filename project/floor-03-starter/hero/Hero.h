@@ -12,21 +12,21 @@
 // (Floor 7, queue), skill tree (Floor 8).
 #pragma once
 #include <string>
-#include <vector>
+#include "Bag.h"
 #include "Item.h"
 
 namespace dungeon {
 
 struct Hero {
     std::string       heroName;
-    std::vector<Item> inventory;
+    Bag<Item> inventory;
 };
 
 // Load a starting inventory from a pipe-delimited text file.
 // File format, one per line:  name|weight|value
 // Blank lines and lines starting with '#' are ignored.
 // On read failure returns an empty vector.
-std::vector<Item> loadInventory(const std::string& path);
+Bag<Item> loadInventory(const std::string& path);
 
 // Pretty-print the hero's inventory, numbered, to stdout.
 // Matches the demo target on the Floor 2 student page.
