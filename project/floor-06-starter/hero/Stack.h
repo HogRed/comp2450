@@ -62,7 +62,7 @@ public:
     // TODO Floor 6 (Monday). Body is one line.
     //     chain_.push_front(value);
     void push(const T& value) {
-        (void)value;   // silence unused-parameter warning while stubbed
+        chain_.push_front(value);
         // TODO Monday
     }
 
@@ -73,6 +73,7 @@ public:
     // TODO Floor 6 (Monday). Body is one line.
     //     chain_.pop_front();
     void pop() {
+        chain_.pop_front();
         // TODO Monday
     }
 
@@ -99,7 +100,7 @@ public:
     // TODO Floor 6 (Monday). Body is one line.
     //     return chain_.size();
     std::size_t size() const {
-        return 0;   // TODO Monday
+        return chain_.size();   // TODO Monday
     }
 
     // True iff size() == 0.
@@ -108,7 +109,7 @@ public:
     // to touch chain_; you can delegate to your own size().
     //     return size() == 0;
     bool empty() const {
-        return true;   // TODO Monday
+        return size() == 0;   // TODO Monday
     }
 
 private:

@@ -64,8 +64,8 @@ public:
     // TODO Floor 7 (Monday). Body is one line.
     //     chain_.push_back(value);
     void enqueue(const T& value) {
-        (void)value;   // silence unused-parameter warning while stubbed
         // TODO Monday
+        chain_.push_back(value);
     }
 
     // Remove the front of the queue. O(1). No-op on empty (Chain's
@@ -75,6 +75,7 @@ public:
     //     chain_.pop_front();
     void dequeue() {
         // TODO Monday
+        chain_.pop_front();
     }
 
     // Read the front of the queue (the oldest enqueued item). O(1).
@@ -100,7 +101,8 @@ public:
     // TODO Floor 7 (Monday). Body is one line.
     //     return chain_.size();
     std::size_t size() const {
-        return 0;   // TODO Monday
+        // TODO Monday
+        return chain_.size();
     }
 
     // True iff size() == 0.
@@ -109,7 +111,8 @@ public:
     // to chain_.empty(), your choice.
     //     return size() == 0;
     bool empty() const {
-        return true;   // TODO Monday
+        // TODO Monday
+        return size() == 0;
     }
 
 private:

@@ -69,6 +69,10 @@ const Monster* findMonster(const std::vector<Monster>& bestiary,
 
 template <typename T>
 const T* findByName(const std::vector<T>& items, const std::string& name) {
+    for (const auto& it : items) {
+        if (it.name == name) return &it;
+    }
+    return nullptr;
     // TODO Floor 3 (Mon):
     //   Walk the container. Return the address of the first element
     //   whose .name equals `name`. Return nullptr if none match.
@@ -84,9 +88,6 @@ const T* findByName(const std::vector<T>& items, const std::string& name) {
     //     - What expression takes the address of the current element?
     //     - Floor 1's linearSearch is literally this function with T
     //       hardcoded to Monster. Copy its SHAPE; drop the hardcode.
-    (void)items;
-    (void)name;
-    return nullptr;
 }
 
 }  // namespace dungeon

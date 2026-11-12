@@ -12,7 +12,7 @@ AI is welcome to *check* your answers; it is not welcome to *write your sentence
 
 > Your battle's "Use item" menu shows the *currently usable* items in your hero's inventory on this turn. Name the right ADT for that menu. Defend the choice against its closest neighbour (e.g., why `bag` instead of `set`, or `list` instead of `bag`).
 
-(your answer — 50–100 words)
+The right ADT is a List. A List maintain a linear order and allows duplicate elements, and that is essential because a player can carry multiple identical items (like two potions that are the same) and expects them to appear in a determinined display order. A Bag allows duplicates but lacks fixed ordering, while Set prevents multiple identical consumables from existing altogether. So, a ñList preserves order and duplicate items cleanly
 
 ---
 
@@ -20,7 +20,7 @@ AI is welcome to *check* your answers; it is not welcome to *write your sentence
 
 > Your inventory is kept sorted by healing power (in this codebase an item's `value` measures its potency, so `value` plays the healing-power role). The player types `use Healing potion`. Linear or binary search to find it by name? Justify, and give the Big-O for each.
 
-(your answer — 50–100 words)
+Use the Linear Search, because the inventory is kept sorted by healing power, which is value, but the player searches by name and because the collection is unsorted respecting to item names, Binary Search O(log n) cannot be used because it requires the keys to be sorted by the lookup attribute. So, a Linear Search O(n) that scan across the inventory is needed to match the string
 
 ---
 
@@ -32,18 +32,16 @@ AI is welcome to *check* your answers; it is not welcome to *write your sentence
 
 ```cpp
 // by healing power — i.e. by value
-auto byValue  = /* your lambda */;
+auto byValue  = [](const Item& a, const Item& b) {return a.value < b.value;};
 
 // by weight
-auto byWeight = /* your lambda */;
+auto byWeight = [](const Item& a, const Item& b) {return a.weight < b.weight;};
 ```
 
-(one-sentence answer — what language feature?)
+std::sort use templates to accept any custom call object such as a lambdas as its comparison parameter, that allows to the exact same sorting function to execute with different ordering logic.
 
 ---
 
 ## 4. Floor 3 — templates & exceptions
 
 > Why does `Bag<T>` live in `Bag.h` instead of `Bag.cpp`? And: when the player types `9` for a 4-option menu, where in your code should the validation **throw**, and where should it **catch**?
-
-(your answer — 50–100 words)

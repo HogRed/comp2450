@@ -121,8 +121,11 @@ public:
     //
     // Leaving this empty means a copy of a chain is silently empty.
     // The `clone hero` command will demonstrate the bug.
-    Chain(const Chain& /*other*/) {
+    Chain(const Chain& other) {
         // TODO Wednesday — deep copy.
+        for (const Node* p = other.head_; p != nullptr; p = p->next) {
+            push_back(p->data);
+        }
     }
 
     // TODO Floor 4½ (Friday) — implement copy assignment.
@@ -150,8 +153,10 @@ public:
     //       More code, but no surprise about why it works.
     //
     // Pick one. Defend it in your lab notes.
-    Chain& operator=(const Chain& /*other*/) {
+    Chain& operator=(const Chain& other ) {
         // TODO Friday — copy assignment.
+        Chain tmp(other); //deep-copy other
+        swap(tmp); // trade our "guts" with this fresh copy
         return *this;
     }
 
@@ -174,8 +179,8 @@ public:
 
     // TODO Floor 4½ (Monday) — return tail_.
     // Used by `log --oldest`, which walks the chain backward via prev.
-    const Node* tail() const { return nullptr; /* TODO Monday */ }
-    Node*       tail()       { return nullptr; /* TODO Monday */ }
+    const Node* tail() const { return tail_; }
+    Node* tail() { return tail_; }
 
     // -----------------------------------------------------------------
     // Mutation — Floor 4's push_front kept, with a Floor 4½ extension.
@@ -198,7 +203,8 @@ public:
     // -----------------------------------------------------------------
     void push_front(const T& value) {
         Node* n = new Node(value, nullptr, head_);
-        // TODO Monday — wire prev/tail consistency (see comment above).
+        if (head_ != nullptr) head_->prev = n; //old head links back
+        else tail_ = n; //chain was empty; n is also the tail
         head_ = n;
         ++size_;
     }
@@ -211,8 +217,12 @@ public:
     //     else                  head_ = n;
     //     tail_ = n;
     //     ++size_;
-    void push_back(const T& /*value*/) {
-        // TODO Monday
+    void push_back(const T& value) {
+        Node* n = new Node(value, tail_, nullptr);
+        // if (tail_ != nullptr) tail_->next = n; 
+        else head_ = n; 
+        tail_ = n;
+        ++size_;
     }
 
     // TODO Floor 4½ (Friday) — remove the front node. O(1).
@@ -226,6 +236,15 @@ public:
     //   5. --size_.
     void pop_front() {
         // TODO Friday
+        if (head_ == nullptr) return; //empty
+        Node* old_head = head_;
+        Node* new_head = old_head->next;
+        delete old_head;
+        head_ = new_head;
+        // new head has nothing before it
+        if (new_head != nullptr) new_head->prev = nullptr;
+        else tail_ = nullptr; //chain is now empty
+        --size_; // decrement size
     }
 
     // TODO Floor 4½ (Friday) — remove the back node. O(1) BECAUSE of prev.
@@ -242,6 +261,14 @@ public:
     // *even if it has a tail_ pointer*?
     void pop_back() {
         // TODO Friday
+        if (tail_ == nullptr) return; 
+        Node* old_tail = tail_;
+        Node* new_tail = old_tail->prev;
+        delete old_tail;
+        tail_ = new_tail;
+        if (new_tail != nullptr) new_tail->next = nullptr;
+        else head_ = nullptr; 
+        --size_;
     }
 
     // Walk and delete every node. Floor 4 version — unchanged loop body,

@@ -207,8 +207,9 @@ private:
     //     if (n == nullptr) return 0;
     //     return signedHeight(n->left) - signedHeight(n->right);
     static int balanceFactorOf(const Node* n) {
-        (void)n;
-        return 0;   // TODO Monday — stub reports every tree as perfectly level
+        // TODO Monday — stub reports every tree as perfectly level
+        if (n == nullptr) return 0;
+        return signedHeight(n->left) - signedHeight(n->right);
     }
 
     // True iff the subtree at n is height-balanced at EVERY node. Check THIS
@@ -221,8 +222,11 @@ private:
     //     if (bf < -1 || bf > 1) return false;
     //     return isBalancedFrom(n->left) && isBalancedFrom(n->right);
     static bool isBalancedFrom(const Node* n) {
-        (void)n;
-        return true;   // TODO Monday — stub claims every tree is balanced
+        // TODO Monday — stub claims every tree is balanced
+        if (n == nullptr) return true;
+        const int bf = balanceFactorOf(n);
+        if (bf < -1 || bf > 1) return false;
+        return isBalancedFrom(n->left) && isBalancedFrom(n - right);
     }
 
     // ----- Wednesday: the rotation primitive -------------------------
@@ -246,7 +250,11 @@ private:
     //     pivot->right = n;
     //     return pivot;
     static Node* rotateRight(Node* n) {
-        return n;   // TODO Wednesday — stub returns the tree unrotated
+        // TODO Wednesday — stub returns the tree unrotated
+        Node* pivot = n->left;
+        n->left = pivot->right;
+        pivot->right = n;
+        return pivot;
     }
 
     // Left rotation around n — the mirror of rotateRight. n's RIGHT child
@@ -259,7 +267,11 @@ private:
     //     pivot->left = n;
     //     return pivot;
     static Node* rotateLeft(Node* n) {
-        return n;   // TODO Wednesday — stub returns the tree unrotated
+        // TODO Wednesday — stub returns the tree unrotated
+        Node* pivot = n->right;
+        n->right = pivot->left;
+        pivot->left = n;
+        return pivot;
     }
 
     // ----- Friday: pick the rotation ---------------------------------
@@ -277,7 +289,12 @@ private:
     //     if (bf < -1) return rotateLeft(n);    // right-heavy
     //     return n;
     static Node* rebalanceAt(Node* n) {
-        return n;   // TODO Friday — stub never rebalances
+        // TODO Friday — stub never rebalances
+        if (n == nullptr) return n;
+        const int bf = balanceFactorOf(n);
+        if (bf > 1) return rotateRight(n); //left-heavy
+        if (bf < -1) return rotateLeft(n); // right-heavy
+        return n;
     }
 };
 
