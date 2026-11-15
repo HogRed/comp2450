@@ -237,7 +237,7 @@ Counter by:
 
 You have closed the associative-structures run (Floors 10–11) and finished the last data structure you build by hand. This floor ends the way every floor ends: with a short stack of paper questions in class — closed notes, closed laptop, answers in your own hand — drawn from everything this floor taught. If you did the reading, wrote the code, and can say *why* this week's work earns its place in the game, it takes ten minutes.
 
-The [**Warden of the Trees**]({{ site.baseurl }}/floors/warden-03/) (Midterm 3) is assigned this week. It covers the whole tree-and-associative arc — trees, BSTs, balanced trees, sets/maps, and hash tables. To complete it, follow along with the Warden III video as you build the encounter in your own project, then push your code to your repo. That's the whole requirement. The due date is on Canvas.
+The [**Warden of the Trees**]({{ site.baseurl }}/floors/warden-03/) (Midterm 3) is assigned this week. It covers the whole tree-and-associative arc — trees, BSTs, balanced trees, sets/maps, and hash tables. To complete it, follow along with the Warden III video as you build the encounter in your own project, then push your code to your repo and submit the repo link on Canvas. That's the whole requirement. The due date is on Canvas.
 </div>
 
 ---
