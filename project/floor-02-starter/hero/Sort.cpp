@@ -24,10 +24,32 @@
 
 #include "Sort.h"
 #include <algorithm>  // you will want std::sort in sortInventory
+#include <sstream>
 
 namespace dungeon {
 
 // ---- 1. Merge sort ------------------------------------------------------
+
+void merge(std::vector<Item>& v, std::vector<Item>& scratch,
+        std::size_t lo, std::size_t mid, std::size_t hi,
+        const Comparator& cmp) {
+        std::size_t i = lo, j = mid, k = lo;
+        while (i < mid && j < hi) {
+            if (cmp(v[j], v[i])) scratch[k++] = v[j++];   // right strictly smaller
+            else                 scratch[k++] = v[i++];   // left smaller or tie
+        }
+        while (i < mid) scratch[k++] = v[i++];
+        while (j < hi)  scratch[k++] = v[j++];
+        for (k = lo; k < hi; ++k) v[k] = scratch[k];
+    }
+void mergeSortRange(std::vector<Item>& v, std::vector<Item>& scratch,
+        std::size_t lo, std::size_t hi, const Comparator& cmp) {
+        if (hi - lo < 2) return;                          // base case: 0 or 1 items
+        std::size_t mid = lo + (hi - lo) / 2;
+        mergeSortRange(v, scratch, lo, mid, cmp);
+        mergeSortRange(v, scratch, mid, hi, cmp);
+        merge(v, scratch, lo, mid, hi, cmp);
+    }
 
 void mergeSort(std::vector<Item>& inventory, const Comparator& cmp) {
     // TODO Floor 2 (Mon): implement merge sort.
@@ -64,11 +86,32 @@ void mergeSort(std::vector<Item>& inventory, const Comparator& cmp) {
     // In merge(): copy both halves into a scratch buffer, then walk both
     // halves taking the smaller front element. On a tie take from the
     // LEFT half — that one line is what keeps the sort stable.
-    (void)inventory;
-    (void)cmp;
+    std::vector<Item> scratch(inventory.size());
+    mergeSortRange(inventory, scratch, 0, inventory.size(), cmp);
 }
 
 // ---- 2. Quicksort -------------------------------------------------------
+
+std::ptrdiff_t partition(std::vector<Item>& v, std::ptrdiff_t lo,
+    std::ptrdiff_t hi, const Comparator& cmp) {
+    const Item pivot = v[lo + (hi - lo) / 2];         
+    std::ptrdiff_t i = lo - 1;
+    std::ptrdiff_t j = hi + 1;
+    for (;;) {
+        do { ++i; } while (cmp(v[i], pivot));         
+        do { --j; } while (cmp(pivot, v[j]));         
+        if (i >= j) return j;
+        std::swap(v[i], v[j]);
+    }
+}
+
+void quicksortRange(std::vector<Item>& v, std::ptrdiff_t lo,
+    std::ptrdiff_t hi, const Comparator& cmp) {
+    if (lo >= hi) return;                           
+    std::ptrdiff_t p = partition(v, lo, hi, cmp);
+    quicksortRange(v, lo, p, cmp);
+    quicksortRange(v, p + 1, hi, cmp);
+}
 
 void quicksort(std::vector<Item>& inventory, const Comparator& cmp) {
     // TODO Floor 2 (Wed): implement quicksort.
@@ -112,50 +155,31 @@ void quicksort(std::vector<Item>& inventory, const Comparator& cmp) {
     // benchmark harness has a `--bad-pivot` option that runs exactly
     // that. You do NOT need to implement it yourself; the harness
     // ships its own copy for Lab purposes.
-    (void)inventory;
-    (void)cmp;
+    quicksortRange(inventory, 0,
+        static_cast<std::ptrdiff_t>(inventory.size()) - 1, cmp);
 }
 
 // ---- 3. sortInventory (the seam) ----------------------------------------
 
 bool sortInventory(Hero& hero, const std::string& criterion) {
-    // TODO Floor 2 (Fri): parse criterion, build the right comparator,
-    // dispatch to a sort.
-    //
-    // Think before you type:
-    //   - Three decisions to make: WHICH key, ASC or DESC, WHICH sort.
-    //     Don't tangle them. Parse first, then build a comparator, then
-    //     hand it to exactly one sort call.
-    //   - Building a DESCENDING comparator from an ASCENDING one: you
-    //     don't need a whole second comparator. Wrap the ascending one
-    //     and swap its arguments. (Two-line lambda. Elegant.)
-    //   - Which sort? std::sort wins on speed. Your mergeSort wins on
-    //     stability (and it's YOUR code — the instructor hand-wrote
-    //     std::sort's ancestor forty years ago and still refers to
-    //     Sedgewick). Pick one. The *choice* is the assignment.
-    //   - The "desc" case for `sort by weight`: does Iron key still come
-    //     before Loaf of bread on ties? That answer tells you whether
-    //     your chosen sort is stable — and whether stability is the
-    //     right thing for this command. (Reasonable people disagree.)
-    //
-    // If you need structural hints — parse with std::istringstream:
-    //
-    //     std::istringstream in(criterion);
-    //     std::string key, dir;
-    //     in >> key >> dir;       // dir is "" if absent
-    //
-    // Build an ascending Comparator for each key ("name", "weight",
-    // "value"). If dir == "desc", wrap it in a Comparator that swaps
-    // the arguments of the ascending one.
-    //
-    // Return false on an unknown key (main.cpp will print an error).
-    //
-    // Dispatch: for this week std::sort is the right production choice.
-    // Your mergeSort and quicksort are correct too — pick one and
-    // defend it in your commit message.
-    (void)hero;
-    (void)criterion;
-    return false;
+    std::istringstream in(criterion);
+        std::string key, dir;
+        in >> key >> dir;
+    if (dir.empty()) dir = "asc";
+    if (dir != "asc" && dir != "desc") return false;
+    std::string extra;
+    if (in >> extra) return false;                   
+    Comparator asc;
+    if (key == "name")        asc = [](const Item& a, const Item& b) { return a.name < b.name;   };
+    else if (key == "weight") asc = [](const Item& a, const Item& b) { return a.weight < b.weight; };
+    else if (key == "value")  asc = [](const Item& a, const Item& b) { return a.value < b.value;  };
+    else return false;
+
+    Comparator cmp = asc;
+    if (dir == "desc") cmp = [asc](const Item& a, const Item& b) { return asc(b, a); };
+
+    mergeSort(hero.inventory, cmp);
+    return true;
 }
 
 }  // namespace dungeon

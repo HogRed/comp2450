@@ -46,8 +46,26 @@ namespace dungeon {
 //     }
 //     return s.empty();
 
-bool isBalanced(const std::string& /*input*/) {
-    return false;   // TODO Wednesday
+bool isBalanced(const std::string& input) {
+    Stack<char> s;
+	for (char c : input) {
+		switch (c) {
+		case '(': case '[': case '{':
+			s.push(c); break;
+		case ')':
+			if (s.empty() || s.top() != '(') return false;
+			s.pop(); break;
+		case ']':
+			if (s.empty() || s.top() != '[') return false;
+			s.pop(); break;
+		case '}':
+			if (s.empty() || s.top() != '{') return false;
+			s.pop(); break;
+		default: // ignore any other character
+			break;
+		}
+	}
+	return s.empty(); // if anything is left on the stack, those openers were never closed
 }
 
 }  // namespace dungeon

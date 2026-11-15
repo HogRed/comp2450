@@ -39,9 +39,12 @@ const Monster* linearSearch(const std::vector<Monster>& bestiary,
     //     more for a `Monster` than for an `int`?
     //   - How do you take the address of the element you're looking at?
     //     (Two common idioms. Pick whichever makes your loop read cleanly.)
-    (void)bestiary;
-    (void)name;
-    return nullptr;
+    // const& avoids copying every Monster; &m is the address of the element
+    // inside the vector, so the caller gets a pointer, not a copy.
+    for (const auto& m : bestiary) {
+        if (m.name == name) return &m;
+    }
+    return nullptr;  // reached the end: not found
 }
 
 const Monster* binarySearch(const std::vector<Monster>& bestiary,
@@ -65,9 +68,31 @@ const Monster* binarySearch(const std::vector<Monster>& bestiary,
     //   - Middle index: `(low + high) / 2` is textbook but can overflow for
     //     huge N. `low + (high - low) / 2` is the safe version. Write the
     //     safe one — it's free, and it's a habit worth building.
-    (void)bestiary;
-    (void)name;
-    return nullptr;
+    // Invariant: half-open range [low, high). The target, if present, is in it.
+    // With half-open ranges, `high` is never decremented below `low`, so the
+    // unsigned size_t never wraps around on an empty range.
+    std::size_t low  = 0;
+    std::size_t high = bestiary.size();
+    while (low < high) {
+        std::size_t mid = low + (high - low) / 2;   // overflow-safe midpoint
+        const std::string& probe = bestiary[mid].name;
+        if (probe == name)      return &bestiary[mid];   // equal: found
+        else if (probe < name)  low  = mid + 1;          // less: look right
+        else                    high = mid;              // greater: look left
+    }
+    return nullptr;  // range empty: not found
+}
+
+// Private helper (static = internal linkage) carrying the search range [low, high).
+static const Monster* binarySearchRecursiveHelper(const std::vector<Monster>& bestiary,
+                                                  const std::string& name,
+                                                  std::size_t low, std::size_t high) {
+    if (low >= high) return nullptr;                 // base case: empty range
+    std::size_t mid = low + (high - low) / 2;
+    const std::string& probe = bestiary[mid].name;
+    if (probe == name) return &bestiary[mid];        // base case: found
+    if (probe < name)  return binarySearchRecursiveHelper(bestiary, name, mid + 1, high);
+    return binarySearchRecursiveHelper(bestiary, name, low, mid);  // strictly smaller range
 }
 
 const Monster* binarySearchRecursive(const std::vector<Monster>& bestiary,
@@ -90,9 +115,7 @@ const Monster* binarySearchRecursive(const std::vector<Monster>& bestiary,
     //   - After it works: run `benchmark`. Does the recursive version cost
     //     more per call than the iterative one? A little? A lot? Why might
     //     that be? Write the answer in lab-notes.md.
-    (void)bestiary;
-    (void)name;
-    return nullptr;
+    return binarySearchRecursiveHelper(bestiary, name, 0, bestiary.size());
 }
 
 const Monster* findMonster(const std::vector<Monster>& bestiary,
@@ -105,7 +128,12 @@ const Monster* findMonster(const std::vector<Monster>& bestiary,
     //   - At N=100,000, does it matter? By how much?
     //   - This is a JUDGMENT, not a fact. Whatever you pick, write WHY in
     //     your commit message. That reasoning is the graded artifact.
-    return linearSearch(bestiary, name);
+    // Judgment: iterative binary search. At 15 monsters any choice is instant,
+    // but at 100,000 binary is hundreds of times faster than linear; the
+    // iterative form beats the recursive one by avoiding per-call overhead
+    // and any stack-depth concern. Precondition (sorted) is upheld by
+    // sortBestiary() in main.cpp.
+    return binarySearch(bestiary, name);
 }
 
 }

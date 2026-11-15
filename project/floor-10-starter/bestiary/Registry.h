@@ -111,8 +111,9 @@ public:
     // TODO Floor 10 (Monday). Stub is empty -> phases 1–6 all FAIL (everything
     // is empty). Monday's first edit lights phase 1.
     void index(const Monster& m) {
-        (void)m;
-        // TODO Monday — populate byName_, weaknesses_, and weaknessCounts_.
+		byName_[m.name] = m;
+        weaknesses_.insert(m.weakness);
+        weaknessCounts_[m.weakness] += 1;
     }
 
     // Return whether a monster with that name is in the registry — using the
@@ -121,8 +122,7 @@ public:
     // TODO Floor 10 (Monday). Sketch:
     //     return byName_.count(name) > 0;     // (or: find(name) != end())
     bool knows(const std::string& name) const {
-        (void)name;
-        return false;   // TODO Monday — stub never knows anyone
+		return byName_.count(name) > 0;   // TODO Monday — stub knows nothing
     }
 
     // ----- Wednesday: three containers, three one-liners -------------
@@ -135,8 +135,8 @@ public:
     //     auto it = byName_.find(name);
     //     return it == byName_.end() ? nullptr : &it->second;
     const Monster* recall(const std::string& name) const {
-        (void)name;
-        return nullptr;   // TODO Wednesday — stub finds no one
+		auto it = byName_.find(name);
+		return it == byName_.end() ? nullptr : &it->second;
     }
 
     // Return whether ANY monster has weakness w — using set::count on
@@ -146,8 +146,7 @@ public:
     // TODO Floor 10 (Wednesday). Sketch:
     //     return weaknesses_.count(w) > 0;
     bool hasWeakness(const std::string& w) const {
-        (void)w;
-        return false;   // TODO Wednesday — stub claims nothing is weak to anything
+		return weaknesses_.count(w) > 0;   // TODO Wednesday — stub knows no weakness
     }
 
     // Return how many monsters share weakness w, or 0 if none — by reading
@@ -158,8 +157,8 @@ public:
     //     auto it = weaknessCounts_.find(w);
     //     return it == weaknessCounts_.end() ? 0 : it->second;
     int countWeakness(const std::string& w) const {
-        (void)w;
-        return 0;   // TODO Wednesday — stub counts nothing
+		auto it = weaknessCounts_.find(w); 
+		return it == weaknessCounts_.end() ? 0 : it->second;   // TODO Wednesday — stub counts nothing
     }
 
     // ----- Friday: mutate, staying consistent ------------------------
@@ -185,8 +184,15 @@ public:
     //     }
     //     return true;
     bool forget(const std::string& name) {
-        (void)name;
-        return false;   // TODO Friday — stub forgets nothing
+		auto it = byName_.find(name);
+		if (it == byName_.end()) return false;
+		const std::string w = it->second.weakness;
+		byName_.erase(it);
+		if (--weaknessCounts_[w] == 0) {
+			weaknessCounts_.erase(w);
+			weaknesses_.erase(w);
+		}
+		return true;
     }
 
 private:
