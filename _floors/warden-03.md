@@ -24,7 +24,7 @@ McCown is not here. He said as much at the top of the last stair — *keepers of
 </div>
 </div>
 
-**This page is your Midterm 3.** It replaces the timed paper exam, and it is one job: **follow along with the recorded Warden III videos, building the encounter in your own project as you watch, then submit the code you end up with** — pushed to GitHub and turned in on Canvas. There are no written trials and no in-class quiz. The code you build with the videos is the whole submission.
+**This page is your Midterm 3.** It replaces the timed paper exam, and it is one job: **follow along with the recorded Warden III videos, building the encounter in the Warden III starter as you watch, then submit the code you end up with** — pushed to GitHub and turned in on Canvas. There are no written trials and no in-class quiz. The code you build with the videos is the whole submission.
 
 <div class="callout check" markdown="1">
 <p class="callout-title">When it is due</p>
@@ -48,7 +48,7 @@ Third gate. You have stood at two of these already, and the shape has not change
 
 ## How to complete this Warden
 
-1. **Watch the Warden III videos and code along.** Type the encounter into your own project as the video builds it — pause, compile, and run every time the video does.
+1. **Watch the Warden III videos and code along.** Sync your fork, open `project/warden-03-starter/`, and type the encounter into it as the video builds it — pause, compile, and run every time the video does.
 2. **Make sure it builds and runs.** `battle trees` should start the encounter, and both endings should be reachable. The Warden's own checks further down this page are a quick way to confirm.
 3. **Submit your code** — push to GitHub, then turn it in on Canvas. See [Submission](#submission) below.
 
@@ -58,15 +58,15 @@ That is everything. The rest of this page describes what the videos build, so yo
 
 This is what the videos build. You will program the **Warden of the Trees** into your dungeon app as a real, playable boss encounter, and you will fight it. The Warden does not strike you directly at first — it marshals a line of the Hold's beasts, wearing them as stolen faces in the order McCown's classification tree hands them out, and you cannot touch the Warden while that menagerie stands.
 
-**Do.** In your floor-11 project (the one you built through trees, BSTs, sets, and hash tables), add a **`battle trees`** sub-command to `main.cpp`, and factor the encounter into `battle/Battle.cpp` as `runTreeWarden`, alongside the Warden 1 `runWardenBattle` the file already carries. When the player types `battle trees`, the encounter begins with a fixed menagerie of five masks.
+**Do.** In the Warden III starter (`project/warden-03-starter/`), the **`battle trees`** command is already wired to `runTreeWarden` in `battle/Battle.cpp`, alongside the Warden 1 `runWardenBattle` the file already carries. You write `runTreeWarden`. When the player types `battle trees`, the encounter begins with a fixed menagerie of five masks.
 
 **You will receive (in your starter drop).** The public drop at `project/warden-03-starter/` ships everything the gate assumes, so the only thing left to build is the encounter itself:
 
-- The **post-Floor-11 reference baseline** — the general `Tree` (`taxonomy`/`lineage`), the Floor 9 `BST` + Floor 9½ balancing (`catalogue`/`recall`/`balance`), the Floor 10 `Registry` (`std::set`/`std::map`), the finished Floor 11 `HashTable` (`whisper`/`banish`/`load`), every `selftest`, and Warden 1's `runWardenBattle`, all working. This is the state your own project should already be in.
+- The **post-Floor-11 reference baseline** — the general `Tree` (`taxonomy`/`lineage`), the Floor 9 `BST` + Floor 9½ balancing (`catalogue`/`recall`/`balance`), the Floor 10 `Registry` (`std::set`/`std::map`), the finished Floor 11 `HashTable` (`whisper`/`banish`/`load`), every `selftest`, and Warden 1's `runWardenBattle`, all working.
 - **`battle/Battle.cpp`** with the `runTreeWarden` TODO scaffold — and, in its comments, the per-tie checklist, a suggested outline, and the 3-phase self-check.
-- The **README** with the exact Path A wiring diffs. **There is no shared-header field to add this time (that was Warden 2's `UndoAction`), and no `CMakeLists.txt` change** — the `Enemy` struct and its `identified`/`exposed` flags live entirely inside `Battle.cpp`, and the four indexes are passed straight through by `const&`.
+- `main.cpp` and `battle/Battle.h` with **`battle trees` already wired**, and a **README** that also lists the wiring diffs, in case you'd rather build in your own Floor 11 project. **There is no shared-header field to add this time (that was Warden 2's `UndoAction`), and no `CMakeLists.txt` change** — the `Enemy` struct and its `identified`/`exposed` flags live entirely inside `Battle.cpp`, and the four indexes are passed straight through by `const&`.
 
-Even on Path A — building in your own project, which is the preferred route — read the starter's battle file and README first: the checklist and wiring diffs in them are the map.
+The videos work in this starter. If you'd rather build in your own Floor 11 project instead, the starter's README lists the three small wiring changes to make first.
 
 **What the encounter does:**
 
@@ -217,7 +217,7 @@ If all three phases pass at your keyboard, your encounter matches the video's an
 
 **The due date is posted on Canvas.**
 
-1. **Push to GitHub.** Commit the code you built along with the videos — at minimum `main.cpp`, `battle/Battle.h`, and `battle/Battle.cpp` — and push it to your fork of the course repo.
+1. **Push to GitHub.** Commit the code you built along with the videos — `battle/Battle.cpp` (plus `main.cpp` and `battle/Battle.h` if you worked in your own Floor 11 project) — and push it to your fork of the course repo.
 2. **Submit on Canvas.** Turn in the Warden III assignment with the link to your GitHub repo.
 
 Your code must build. If it does not compile, the Warden has won by default.
@@ -225,10 +225,10 @@ Your code must build. If it does not compile, the Warden has won by default.
 **Folder + code shape:**
 
 ```
-[your project repo]/
-  floor-11/
-    main.cpp                          <-- new `battle trees` sub-command lives here
-    battle/Battle.h, Battle.cpp       <-- add runTreeWarden(...) alongside runWardenBattle
+[your fork]/
+  project/warden-03-starter/
+    battle/Battle.cpp                 <-- runTreeWarden(...): the code you write
+    main.cpp, battle/Battle.h         <-- `battle trees` already wired (no edits)
     hero/Tree.h                       <-- levelOrder / preOrder / lineage (Floor 8)
     hero/BST.h                        <-- find / height / balanceFactor / isBalanced (Floors 9, 9½)
     bestiary/Registry.h               <-- hasWeakness / countWeakness / weaknesses (Floor 10)

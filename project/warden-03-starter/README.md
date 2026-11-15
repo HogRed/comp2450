@@ -16,16 +16,15 @@ what the videos build; the due date is on Canvas.
 
 ## Two paths to start
 
-**Path A — your own Floor 11 project (preferred, and what the videos use).** If your
-`floor-11/` folder builds and runs (and `selftest whispers` passes), work there. The first
-video walks through the small wiring changes it needs; they're also listed below.
+**This starter (what the videos use).** Sync your fork so you have the latest version, then
+open this folder, `project/warden-03-starter/`, build it, and code along. Everything
+compiles and runs already, and `battle trees` is already wired up. The only file you edit is
+`battle/Battle.cpp`.
 
-**Path B — this starter as a fresh start.** If your Floor 11 isn't building (HashTable still
-stubbed, etc.), copy this whole folder somewhere new and work there. Everything compiles;
-everything runs. The wiring is **already done** here, so skip the `Battle.h` and `main.cpp`
-steps in the first video and start where it begins writing `battle/Battle.cpp`. You won't
-have your own Floor 8–11 commit history under it, so talk to your instructor about how that
-affects your project grade.
+**Your own Floor 11 project (optional).** If you'd rather build the Warden into your own
+`floor-11/` project (it has to build, and `selftest whispers` has to pass), make the three
+small wiring changes listed below first, then follow the videos from where they start
+writing `battle/Battle.cpp`.
 
 ## What's in the box
 
@@ -90,10 +89,11 @@ BattleOutcome runTreeWarden(Hero& hero,
                             const HashTable&         whispers);
 ```
 
-### If you're working on Path A (your own Floor 11 project)
+### Only if you're working in your own Floor 11 project
 
-The first video makes these changes on screen. They're here so you can check yours.
-**No `CMakeLists.txt` change** is needed — `battle/Battle.cpp` is already in your build.
+Skip this section if you're working in this starter: it's already done here. In your own
+project, make these changes before you start the videos. **No `CMakeLists.txt` change** is
+needed — `battle/Battle.cpp` is already in your build.
 
 1. **`battle/Battle.h`** — add `BattleException` and the `runTreeWarden` declaration, plus
    the includes the new signature needs (`../hero/Tree.h`, `../hero/BST.h`,
@@ -157,8 +157,9 @@ The first video makes these changes on screen. They're here so you can check you
 
 ## Submission
 
-1. **Push to GitHub.** Commit the code you built along with the videos — at minimum
-   `main.cpp`, `battle/Battle.h`, and `battle/Battle.cpp` — and push it to your fork.
+1. **Push to GitHub.** Commit the code you built along with the videos
+   (`battle/Battle.cpp`; plus `main.cpp` and `battle/Battle.h` if you worked in your own
+   Floor 11 project) and push it to your fork.
 2. **Submit on Canvas.** Turn in the Warden III assignment with the link to your repo.
 
 The due date is on Canvas. Your code must build.
