@@ -169,8 +169,15 @@ public:
     // TODO Floor 11 (Monday). Stub returns 0 -> every name hashes to the same
     // code, so phase 1 (deterministic-AND-distinct) FAILs.
     std::size_t hashKey(const std::string& name) const {
-        (void)name;
-        return 0;   // TODO Monday — multiplicative string hash (h = h*31 + c)
+        // TODO Monday — multiplicative string hash (h = h*31 + c)
+        std::size_t h = 0; // running total
+        for (char c : name) {
+            // visit every character, left to right
+            // shift what we have (x31), then mix in
+            // with that char
+            h = h * 31 + static_cast<unsigned char>(c);
+        }
+        return h; // raw code
     }
 
     // Reduce the hash code to a valid bucket index — the MODULO HASH step
@@ -182,8 +189,10 @@ public:
     // TODO Floor 11 (Monday). Stub returns 0 (a VALID index, so no crash), but
     // it sends every name to bucket 0, so distinctness/correctness phases FAIL.
     std::size_t bucketIndex(const std::string& name) const {
-        (void)name;
-        return 0;   // TODO Monday — return hashKey(name) % buckets_.size();
+        // TODO Monday — return hashKey(name) % buckets_.size();
+        // remainder after dividing by our bucket count
+        // 0 ... size - 1
+        return hashKey(name) % buckets_.size();
     }
 
     // Add m to its home bucket. Compute bucketIndex(m.name); if no monster with
@@ -207,8 +216,24 @@ public:
     //     rehashIfNeeded();                              // Fri: grow if crowded
     //     return true;
     bool insert(const Monster& m) {
-        (void)m;
-        return false;   // TODO Monday — push m into bucketIndex(m.name)'s chain
+        // TODO Monday — push m into bucketIndex(m.name)'s chain
+        std::size_t i = bucketIndex(m.name);
+        for (Monster& existing : buckets_[i]) {
+            // walk the bucket's chain
+            // have I already filed under this name
+            if (existing.name == m.name) {
+                existing = m; //overwrite the old record
+                return false; // nothing new added
+            }
+        }
+        // add the monster to the end of the chain
+        buckets_[i].push_back(m);
+        // increase count
+        ++count_;
+        // is it too crowded
+        rehashIfNeeded();
+        // "success"
+        return true;
     }
 
     // ----- Wednesday: one short list, not the whole table ------------
