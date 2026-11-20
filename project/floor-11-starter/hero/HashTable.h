@@ -130,21 +130,15 @@ public:
     // mutating buckets_ while iterating it (mutating a container you are walking
     // is the aliasing bug §8 warns about).
     void rehash(std::size_t newBucketCount) {
-        if (newBucketCount < 1) newBucketCount = 1;
-        std::vector<Chain<Monster>> grown(newBucketCount);
+        if (newBucketCount < 1) newBucketCount = 1; // never zero buckets
+        std::vector<Chain<Monster>> grown(newBucketCount); // fresh, empty bigger count
         for (const Chain<Monster>& bucket : buckets_) {
             for (const Monster& m : bucket) {
-                // ===== YOU WRITE (Friday, with rehashIfNeeded #6) =====
-                // Compute m's home in the NEW, bigger array and push it there.
-                // It is one line. Sketch:
-                //     grown[hashKey(m.name) % newBucketCount].push_back(m);
-                // (count_ does NOT change here — rehash moves items, it does not
-                //  add or drop any. The TODO stub below files nothing, so after a
-                //  rehash the table would be EMPTY and self-test phase 6 FAILs.)
-                (void)m;   // TODO Friday — re-file m into grown[...]
+                // new home: hash mod the NEW size
+                grown[hashKey(m.name) % newBucketCount].push_back(m);
             }
         }
-        buckets_.swap(grown);
+        buckets_.swap(grown); // the new replaces the old
     }
 
     // ===== YOU WRITE — the six method bodies =========================
@@ -253,8 +247,13 @@ public:
     //         if (m.name == name) return &m;
     //     return nullptr;
     const Monster* find(const std::string& name) const {
-        (void)name;
-        return nullptr;   // TODO Wednesday — scan only bucketIndex(name)'s chain
+        // TODO Wednesday — scan only bucketIndex(name)'s chain
+        std::size_t i = bucketIndex(name); // compute our bucket
+        for (const Monster& m : buckets_[i]) {
+            // walking that specific chain
+            if (m.name == name) return &m;
+        }
+        return nullptr; // chain ran out... i.e, we're not there
     }
 
     // Remove the named monster: compute its bucket, remove the matching item
@@ -271,8 +270,16 @@ public:
     //     if (removed) --count_;
     //     return removed;
     bool erase(const std::string& name) {
-        (void)name;
-        return false;   // TODO Wednesday — eraseFirst from bucketIndex(name)'s chain
+        // TODO Wednesday — eraseFirst from bucketIndex(name)'s chain
+        // same opening move...
+        std::size_t i = bucketIndex(name);
+        // provided helper; unhook our first match
+        bool removed = buckets_[i].eraseFirst(
+            // is this the one?
+            [&](const Monster& m) {return m.name == name; });
+        // count only goes down if something leaves
+        if (removed) --count_;
+        return removed;
     }
 
     // ----- Friday: keep the whisper a whisper ------------------------
@@ -289,7 +296,11 @@ public:
     //         rehash(buckets_.size() * 2);
     //     return buckets_.size();
     std::size_t rehashIfNeeded() {
-        return buckets_.size();   // TODO Friday — grow when loadFactor() > kMaxLoadFactor
+        // TODO Friday — grow when loadFactor() > kMaxLoadFactor
+        // items / buckets over 0.75... we need elbow room!
+        if (loadFactor() > kMaxLoadFactor)
+            rehash(buckets_.size() * 2); // double the buckets and re-file
+        return buckets_.size();
     }
 
 private:
