@@ -30,7 +30,7 @@ You will learn three things this week, and they sit on top of each other:
 
 1. **What an iterator IS.** A small object that points at a position. Five operations define a *forward iterator*: dereference (`*it` returns the element), member access (`it->name`), advance (`++it` moves to the next position), and equality / inequality (`it == end` tells you when to stop). That is the entire contract. Implement those five, and the standard library — `std::find`, `std::copy`, range-based `for`, everything — works on your container without knowing what your container is.
 2. **`begin()` and `end()`.** The container hands you two iterators: one at the first position, one *one past the last*. That "one past the last" is a sentinel — you never dereference it. The loop runs while `it != end`, advancing each step. Range-based `for` is sugar for exactly this.
-3. **Iterator categories.** Not all iterators are equal. A `Chain<T>::iterator` can only move forward (`++`) — it is a **forward iterator**. A `Bag<T>::iterator` (which is really a `std::vector::iterator` underneath) can move forward, backward, and jump by an integer — it is a **random-access iterator**. `std::find` works on both. `std::sort` requires random access. When you try `std::sort(eventLog.begin(), eventLog.end())` the compiler will tell you, in a wall of templates, that you've asked the wrong question.
+3. **Iterator categories.** Not all iterators are equal. A `Chain<T>::iterator` starts the week moving only forward (`++`). Once you write `operator--` on Friday it can step backward too, which makes it a **bidirectional iterator**. It still cannot jump. A `Bag<T>::iterator` (which is really a `std::vector::iterator` underneath) can move forward, backward, and jump by an integer — it is a **random-access iterator**. `std::find` works on both. `std::sort` requires random access. When you try `std::sort(eventLog.begin(), eventLog.end())` the compiler will tell you, in a wall of templates, that you've asked the wrong question.
 
 <figure class="diagram">
   <img src="{{ '/assets/diagrams/iterator-as-lens.svg' | relative_url }}" alt="A hand holds a small circular glass lens on a brass chain. Behind the lens, dimmed and out of focus, sits a row of three boxes connected by arrows — the container — and below that, a row of cells with indices — another container. Arrows from the lens show it moving rightward step by step. Two captions: 'advance' on the lens's motion, 'stop' on a small marker beyond the last cell of either row."/>
@@ -39,7 +39,7 @@ You will learn three things this week, and they sit on top of each other:
 
 <figure class="diagram">
   <img src="{{ '/assets/diagrams/iterator-categories.svg' | relative_url }}" alt="A four-rung ladder. From bottom to top: Input (single-pass, read-only); Forward (multi-pass, advance only); Bidirectional (advance and retreat); Random-access (jump by integer in O(1)). Beside the ladder, a column lists which standard algorithms unlock at each rung: std::find at Input/Forward; std::reverse at Bidirectional; std::sort at Random-access."/>
-  <figcaption>Iterator categories — each rung adds an operation. <code>Chain&lt;T&gt;::iterator</code> reaches the Forward rung (or Bidirectional, with <code>prev</code>). <code>Bag&lt;T&gt;::iterator</code> reaches Random-access. <code>std::find</code> needs almost nothing; <code>std::sort</code> needs the top rung.</figcaption>
+  <figcaption>Iterator categories — each rung adds an operation. <code>Chain&lt;T&gt;::iterator</code> reaches the Bidirectional rung once Friday's <code>operator--</code> works. <code>Bag&lt;T&gt;::iterator</code> reaches Random-access. <code>std::find</code> needs almost nothing; <code>std::sort</code> needs the top rung.</figcaption>
 </figure>
 
 <div class="callout lore" markdown="1">
@@ -69,12 +69,12 @@ std::sort(sorted.begin(), sorted.end());   // fine: a vector's iterator is rando
 
 By the end of Floor 5 you will be able to:
 
-- Define a nested `iterator` type inside a container template and implement the operators that make it a forward iterator: `++` (pre/post) and `==` / `!=`. (`*` and `->` ship written — a reference-returning dereference can't be honestly stubbed — but you'll explain what they return and why.)
+- Define a nested `iterator` type inside a container template and implement the operators that make it a forward iterator, `++` (pre/post) and `==` / `!=`, and then `--`, which makes it bidirectional. (`*` and `->` ship written — a reference-returning dereference can't be honestly stubbed — but you'll explain what they return and why.)
 - Define a separate `const_iterator` and explain *why* — what `const Chain<T>&` would otherwise let you do that it shouldn't.
 - Wire `begin()`, `end()`, `cbegin()`, `cend()` on `Chain<T>` and walk a chain with `for (const auto& s : chain) ...`.
 - Read the *single* templated `printLog(first, last, ...)` the starter ships — it replaced Floor 4½'s `printLog`/`printLogOldest` pair — and explain how one function walks a chain forward (`begin`/`end`) and backward (`rbegin`/`rend`) without knowing the container.
 - Use `std::find` and `std::find_if` against `Chain<std::string>`, `Bag<Item>`, and `Bag<Monster>` from one source line each.
-- Read a `std::sort` template error against a forward iterator and name the missing operation it asked for.
+- Read a `std::sort` template error against a `Chain` iterator and name the missing operation it asked for.
 - Name the five iterator categories — the four rungs of the ladder in order, plus the output iterator beside it — and identify which ones your container's iterator belongs to.
 
 ## Pre-class
