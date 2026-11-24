@@ -240,7 +240,7 @@ Counter by:
 
 You have reached the bottom of the Hold. The descent is finished — eleven halls of containers behind you, and one last room that asked you to *cross* instead of *keep*. This floor ends the way every floor ends: with a short stack of paper questions in class — closed notes, closed laptop, answers in your own hand — drawn from everything the floor taught. If you can still say *why* each structure earned its place in the game, the check takes ten minutes.
 
-The questions of the **Final Descent** ask after all of it. There is no next floor — only the bottom, and the way back up.
+The questions of the **Final Descent** ask after all of it. There is no next floor — only the bottom, and the way back up. Prepare for it with the [Final Descent study guide]({{ '/study-guide/' | relative_url }}).
 </div>
 
 ---
