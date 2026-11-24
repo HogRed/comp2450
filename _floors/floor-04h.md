@@ -93,7 +93,7 @@ You will write:
 
 1. **Monday:** Add `prev` to `Node`; add `tail_` to `Chain`. Rewire `push_front` to set `prev`. Implement `push_back`, `tail()`, and the backward walk used by `log --oldest`. Update the destructor — it still walks via `next`, but now you delete a node whose `prev` you no longer need (a useful one-line consistency check: assert `tail_->next == nullptr` in debug builds).
 2. **Wednesday:** Implement `Chain(const Chain& other)` as a deep copy. Start by deliberately writing the shallow version (`head_ = other.head_; tail_ = other.tail_; size_ = other.size_;`) and running `selftest chain` — read the sanitizer/counter output, *then* delete it and write the deep copy.
-3. **Friday:** Implement `operator=(const Chain& other)`. Either use copy-and-swap (`Chain tmp(other); swap(*this, tmp);`) or the explicit form (`clear(); for each node in other, push_back(node->data);`). Whichever you choose, defend it in your lab notes. Implement `pop_front` and `pop_back`. Run `selftest chain` one last time and confirm a clean balance.
+3. **Friday:** Implement `operator=(const Chain& other)`. Either use copy-and-swap (`Chain tmp(other); swap(*this, tmp);`) or the explicit form (`if (this == &other) return *this;` first, then `clear();` and, for each node in `other`, `push_back(node->data);`). Whichever you choose, defend it in your lab notes. Implement `pop_front` and `pop_back`. Run `selftest chain` one last time and confirm a clean balance.
 
 Demo target (Friday):
 

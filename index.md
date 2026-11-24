@@ -46,7 +46,7 @@ Welcome, adventurer, to **COMP 2450 — Data Structures & Algorithms**. This sem
 | 13 | 10 | [The Hall of Names]({{ site.baseurl }}/floors/floor-10/)         | Sets & maps |
 | 14 | 11 | [The Hall of Whispers]({{ site.baseurl }}/floors/floor-11/)     | Hash tables — O(1) lookup |
 | 14 end | Warden III | [Warden of the Trees]({{ site.baseurl }}/floors/warden-03/) | Midterm 3 — Floors 8–11 code-along with the Warden videos |
-| 15 | 12 | [The Labyrinth]({{ site.baseurl }}/floors/floor-12/) / Final Descent | Graphs, project capstone, final prep |
+| 15 | 12 | [The Labyrinth]({{ site.baseurl }}/floors/floor-12/) / Final Descent ([study guide]({{ site.baseurl }}/study-guide/)) | Graphs, project capstone, final prep |
 | 15 | ↓ | [The Archive: The Restoration]({{ site.baseurl }}/archive/) | The end of the story — for those who reach the bottom |
 
 ## The Rules of the Dungeon
@@ -55,7 +55,7 @@ Welcome, adventurer, to **COMP 2450 — Data Structures & Algorithms**. This sem
 - **In class.** MWF 50-minute sessions. We will not re-read the textbook to you. We will wield it.
 - **Lab.** Hands-on exercises. Paired work encouraged.
 - **The Project.** A text-based dungeon crawler you grow every single floor. One unlock per week. By Floor 12 it is a real game.
-- **Exams.** Three warden fights (end of weeks 4, 9, 14) and a cumulative **Final Descent**. Each warden is a code-along: build the encounter with the recorded Warden videos and submit your code.
+- **Exams.** Three warden fights (end of weeks 4, 9, 14) and a cumulative **Final Descent**. Each warden is a code-along: build the encounter with the recorded Warden videos and submit your code. Prepare for the final with the [Final Descent study guide]({{ site.baseurl }}/study-guide/).
 - **The ZyBook Pact.** Finish every zyLab in the ZyBook on your own, any time before the last day of class, and your Final Descent is recorded as 100% — you never have to sit it. The terms are in [the syllabus]({{ site.baseurl }}/syllabus/).
 
 ## Before Floor 0

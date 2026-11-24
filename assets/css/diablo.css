@@ -253,6 +253,31 @@ tr:nth-child(even) td {
   background: rgba(139, 90, 0, 0.06);
 }
 
+/* Click-to-reveal answers */
+details {
+  margin: 0.8em 0 1.6em;
+  border: 1px solid var(--gold-dark);
+  border-left: 4px solid var(--gold-dark);
+  background: rgba(139, 90, 0, 0.08);
+}
+
+summary {
+  cursor: pointer;
+  padding: 0.5em 0.9em;
+  font-family: 'Cinzel', serif;
+  font-weight: 700;
+  color: var(--blood);
+}
+
+summary:hover {
+  background: rgba(139, 90, 0, 0.12);
+}
+
+details > :not(summary) {
+  margin-left: 1rem;
+  margin-right: 1rem;
+}
+
 /* Blockquotes — scroll fragments */
 blockquote {
   border-left: 4px solid var(--gold);
@@ -490,6 +515,8 @@ figure.diagram figcaption {
 /* Responsive */
 @media (max-width: 720px) {
   main { margin: 1rem; padding: 1.5rem; }
+  table { display: block; overflow-x: auto; }
+  p code, li code { overflow-wrap: anywhere; }
   .floor-banner { margin: -1.5rem -1.5rem 1.5rem; padding: 1.5rem; }
   .descent-banner { margin: -1.5rem -1.5rem 1.5rem; }
   h1 { font-size: 1.6rem; }

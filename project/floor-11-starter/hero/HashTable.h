@@ -124,8 +124,9 @@ public:
     // Allocate a fresh bucket vector of newBucketCount, then RE-FILE every
     // existing item into it. The driver loop (walk the old buckets, walk each
     // chain) is provided; the single line that computes each item's NEW home and
-    // pushes it there is yours — it is the same bucketIndex() call, because an
-    // item's home bucket CHANGES when the bucket count changes. When the new
+    // pushes it there is yours. Hash the name, then mod by newBucketCount. Do
+    // not call bucketIndex(): it still uses the OLD count, and an item's home
+    // bucket CHANGES when the bucket count changes. When the new
     // table is full, swap it in. We build a fresh vector and swap rather than
     // mutating buckets_ while iterating it (mutating a container you are walking
     // is the aliasing bug §8 warns about).

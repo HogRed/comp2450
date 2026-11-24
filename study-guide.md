@@ -84,7 +84,7 @@ Breadth-first and depth-first crossings cost **O(V + E)** on adjacency lists and
 **Traps**
 
 - "It ran without errors" says nothing about a binary search on unsorted data.
-- A fixed-position pivot is at its worst on data that is already sorted.
+- A pivot always taken from the first or the last slot is at its worst on data that is already sorted.
 - `at()` checks and throws. `operator[]` checks nothing and is allowed to do anything.
 - A handler for a base class catches every derived exception. After a handler finishes normally, control continues *after* the `try`/`catch`, never back where the throw was.
 
@@ -106,7 +106,7 @@ for (int i = 1; i < N; i *= 2)
 <details markdown="1">
 <summary>Answer</summary>
 
-(a) **O(N²).** The inner loop runs N, then N−1, then N−2, … times. That sum is about N²/2, and the ½ is a constant. (b) **O(N log N).** The outer loop doubles `i`, so it runs about log₂ N times, and each pass hides an O(N) search.
+(a) **O(N²).** The inner loop runs N, then N−1, then N−2, … times. That sum is about N²/2, and the ½ is a constant. (b) **O(N log N).** The outer loop doubles `i`, so it runs about log N times, and each pass hides an O(N) search.
 
 </details>
 
@@ -302,7 +302,7 @@ while (!s.empty()) { std::cout << s.top() << ' '; s.pop(); }
 **Traps**
 
 - A root balance factor of 0 does not make a tree balanced.
-- A rotation changes height, never in-order order. It does not always fix the lean.
+- A rotation can change height. It never changes the in-order order. It does not always fix the lean.
 - `height()` calls an empty tree 0. `signedHeight` calls it −1. Balance factors use `signedHeight`.
 - In-order is sorted no matter how badly the tree is shaped. Correct and fast are different claims.
 
@@ -496,12 +496,12 @@ BFS counts doors, so it reports the direct route: **1 door, cost 10**. The cheap
 
 You are ready if you can do these on a blank page, without looking anything up:
 
-- [ ] Trace `partition` and `merge` on seven numbers.
-- [ ] Draw all four pointer changes for a doubly linked insert in the middle, in a safe order.
-- [ ] Write the Rule of Three for `Chain` from memory and say what each piece prevents.
-- [ ] Remove a two-child node from a BST, then give the pre-order.
-- [ ] Find every balance factor in a ten-node tree.
-- [ ] Walk a hash table through two resizes.
-- [ ] Trace BFS and our stack DFS on the same six-room map and get two different, correct orders.
+- Trace `partition` and `merge` on seven numbers.
+- Draw all four pointer changes for a doubly linked insert in the middle, in a safe order.
+- Write the Rule of Three for `Chain` from memory and say what each piece prevents.
+- Remove a two-child node from a BST, then give the pre-order.
+- Find every balance factor in a ten-node tree.
+- Walk a hash table through two resizes.
+- Trace BFS and our stack DFS on the same six-room map and get two different, correct orders.
 
 *Sleep. The Bard has been singing your ending since the first floor.*
