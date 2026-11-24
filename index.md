@@ -56,7 +56,7 @@ Welcome, adventurer, to **COMP 2450 — Data Structures & Algorithms**. This sem
 - **Lab.** Hands-on exercises. Paired work encouraged.
 - **The Project.** A text-based dungeon crawler you grow every single floor. One unlock per week. By Floor 12 it is a real game.
 - **Exams.** Three warden fights (end of weeks 4, 9, 14) and a cumulative **Final Descent**. Each warden is a code-along: build the encounter with the recorded Warden videos and submit your code. Prepare for the final with the [Final Descent study guide]({{ site.baseurl }}/study-guide/).
-- **The ZyBook Pact.** Finish every zyLab in the chapters we cover (1–8 and 10–13) on your own, any time before the last day of class, and your Final Descent is recorded as 100% — you never have to sit it. The terms are in [the syllabus]({{ site.baseurl }}/syllabus/).
+- **The ZyBook Pact.** Finish every zyLab in the chapters we cover (1–8 and 10–13) on your own by Friday, December 4 at 11:59 PM, and your Final Descent is recorded as 100% — you never have to sit it. The terms are in [the syllabus]({{ site.baseurl }}/syllabus/).
 
 ## Before Floor 0
 
