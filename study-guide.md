@@ -26,6 +26,22 @@ permalink: /study-guide/
 
 Wrong choices are not random. Each one is what you get by making one specific, common mistake. If your answer matches a choice quickly, check that you did not just make the popular mistake.
 
+## Before you start
+
+This guide tells you what to be able to do and lets you practice it. **It does not teach it again.** When you cannot do something on a "Be able to" list, stop and go back to the floor that taught it:
+
+| Part | Reread |
+|---|---|
+| I | Floors [0]({{ site.baseurl }}/floors/floor-00/), [1]({{ site.baseurl }}/floors/floor-01/), [2]({{ site.baseurl }}/floors/floor-02/), [3]({{ site.baseurl }}/floors/floor-03/) |
+| II | Floors [4]({{ site.baseurl }}/floors/floor-04/), [4½]({{ site.baseurl }}/floors/floor-04h/), [5]({{ site.baseurl }}/floors/floor-05/), [6]({{ site.baseurl }}/floors/floor-06/), [7]({{ site.baseurl }}/floors/floor-07/) |
+| III | Floors [8]({{ site.baseurl }}/floors/floor-08/), [9]({{ site.baseurl }}/floors/floor-09/), [9½]({{ site.baseurl }}/floors/floor-09h/) |
+| IV | Floors [10]({{ site.baseurl }}/floors/floor-10/), [11]({{ site.baseurl }}/floors/floor-11/) |
+| V | Floor [12]({{ site.baseurl }}/floors/floor-12/) |
+
+Read real code while you study. `project/floor-12-starter/hero/` holds finished versions of what you built through Floor 11: `Sort.cpp`, `Chain.h`, `Stack.h`, `Queue.h`, `Tree.h`, `BST.h`, and `HashTable.h`. The graph is the one you finish yourself.
+
+Expect the exam to be a step harder than the practice below. It often puts two ideas in one question.
+
 ## How to study
 
 Rereading the floor pages will feel productive and help very little. Do this instead.
@@ -35,7 +51,7 @@ Rereading the floor pages will feel productive and help very little. Do this ins
 3. **Explain the bug.** For each floor's bestiary monster, finish this sentence out loud: *"Nothing crashes, but…"*
 4. **Use the practice problems below closed-book.** Write an answer on paper *before* you open the answer. They are short-answer on purpose: if you can produce the answer, you can recognize it.
 
-A five-sitting plan, about an hour each:
+A five-sitting plan, an hour to an hour and a half each:
 
 | Sitting | Do this |
 |---|---|
@@ -170,6 +186,32 @@ std::cout << "7";
 
 </details>
 
+**7.** Trace the course's `partition` on `6 2 6 6 9`. It uses the middle pivot, and its scan moves an item left only when that item is *strictly less* than the pivot. What is in the vector afterward, what index is returned, and on which side of the pivot did the other 6s end up?
+
+<details markdown="1">
+<summary>Answer</summary>
+
+**`2 6 9 6 6`, and it returns 1.** The pivot is the 6 at index 2. Swap it to the end: `6 2 9 6 6`. Only the 2 is strictly less, so it goes to slot 0 (`2 6 9 6 6`), and the pivot lands in slot 1. The other two 6s are both on the **right**, with the 9. A tie is never "less," so every tie goes to the same side, however many there are.
+
+</details>
+
+**8.** `Rune` defines `operator==` but *no* `operator<`. `runes` is a `Bag<Rune>` and `r` is a `Rune`. Which lines fail to compile, and which operator is each one missing?
+
+```cpp
+/* a */  std::find(runes.begin(), runes.end(), r);
+/* b */  std::sort(runes.begin(), runes.end());
+/* c */  std::reverse(runes.begin(), runes.end());
+/* d */  BST<Rune> tree;
+/* e */  tree.insert(r);
+```
+
+<details markdown="1">
+<summary>Answer</summary>
+
+**b and e**, and both are missing `<`. `std::sort` compares with `<`, and `BST::insert` uses `<` to choose a side. `find` needs only `==`, and `reverse` compares nothing. Line d compiles on its own: the compiler stamps the body of a template's member function only when something calls it.
+
+</details>
+
 ---
 
 ## Part II · Floors 4–7
@@ -194,7 +236,7 @@ std::cout << "7";
 
 ### Practice
 
-**7.** `p` points at a *middle* node of a doubly linked chain. Write the statements that unlink it and free it. Which statement must come last, and why?
+**9.** `p` points at a *middle* node of a doubly linked chain. Write the statements that unlink it and free it. Which statement must come last, and why?
 
 <details markdown="1">
 <summary>Answer</summary>
@@ -203,7 +245,7 @@ std::cout << "7";
 
 </details>
 
-**8.** Someone deletes the copy constructor you wrote, so the compiler generates one. What goes wrong here, and at which line does it happen?
+**10.** Someone deletes the copy constructor you wrote, so the compiler generates one. What goes wrong here, and at which line does it happen?
 
 ```cpp
 {
@@ -222,7 +264,7 @@ The generated copy constructor copies the pointers, so `a` and `b` share nodes 1
 
 </details>
 
-**9.** For each call, say whether a `Chain` iterator (bidirectional) is strong enough: `std::find`, `std::reverse`, `std::sort`, `std::distance`, `it += 3`.
+**11.** For each call, say whether a `Chain` iterator (bidirectional) is strong enough: `std::find`, `std::reverse`, `std::sort`, `std::distance`, `it += 3`.
 
 <details markdown="1">
 <summary>Answer</summary>
@@ -231,7 +273,7 @@ The generated copy constructor copies the pointers, so `a` and `b` share nodes 1
 
 </details>
 
-**10.** A `Chain<int>` holds `5 1 4`. What does this print?
+**12.** A `Chain<int>` holds `5 1 4`. What does this print?
 
 ```cpp
 for (auto it = c.rbegin(); it != c.rend(); ++it)
@@ -247,7 +289,7 @@ std::cout << (hit == c.end());
 
 </details>
 
-**11.** Run the bracket balancer on `{[()()]}`. What is the most characters the stack ever holds? Then run it on `({)}`: at which character does it answer *not balanced*, and what is on top of the stack at that moment?
+**13.** Run the bracket balancer on `{[()()]}`. What is the most characters the stack ever holds? Then run it on `({)}`: at which character does it answer *not balanced*, and what is on top of the stack at that moment?
 
 <details markdown="1">
 <summary>Answer</summary>
@@ -256,7 +298,7 @@ std::cout << (hit == c.end());
 
 </details>
 
-**12.** Hot potato with `A B C D E F` and `k = 2` (rotate once, then eliminate the front). Give the elimination order and the survivor.
+**14.** Hot potato with `A B C D E F` and `k = 2` (rotate once, then eliminate the front). Give the elimination order and the survivor.
 
 <details markdown="1">
 <summary>Answer</summary>
@@ -265,7 +307,7 @@ Eliminated: **B, D, F, C, A**. Survivor: **E**. After F is out, the queue reads 
 
 </details>
 
-**13.** What does this print?
+**15.** What does this print?
 
 ```cpp
 Stack<int> s;
@@ -283,6 +325,61 @@ while (!s.empty()) { std::cout << s.top() << ' '; s.pop(); }
 <summary>Answer</summary>
 
 **`1 3 5 4 2`.** The odds sit on the stack with 5 on top, and the queue holds `2 4`. Draining the stack makes the queue `2 4 5 3 1`. Moving the queue back onto the stack leaves 1 on top, so it prints in reverse: `1 3 5 4 2`.
+
+</details>
+
+**16.** `Chain<int>` has the deep copy constructor and copy-and-swap assignment. How many nodes are allocated in total by the end of this code, and how many exist just before the closing brace?
+
+```cpp
+std::size_t look(const Chain<int>& c) { return c.size(); }
+
+{
+    Chain<int> a;
+    a.push_back(1);
+    a.push_back(2);
+    look(a);
+    Chain<int> b;
+    b.push_back(9);
+    Chain<int> c = b;
+    c.push_front(8);
+    b = a;
+}
+```
+
+<details markdown="1">
+<summary>Answer</summary>
+
+**7 allocated, 6 still there.** `a` takes 2. `look` takes a reference, so 0. `b` takes 1. `c` copies `b` (1) and adds one (1). `b = a` builds a temporary copy of `a` (2) and swaps. That is 2 + 0 + 1 + 1 + 1 + 2 = 7. `b`'s old node left with the temporary and was deleted, so `a`, `b`, and `c` hold 2 each.
+
+</details>
+
+**17.** Chain `a` holds `1 2` and chain `b` holds `7 8 9`. Copy assignment is `Chain tmp(other); swap(tmp); return *this;`. (a) For `b = a;`, what does `tmp` hold before the swap, and what does it hold when it is destroyed? (b) Starting over from `7 8 9`, what does `b = b;` do? (c) Suppose building `tmp` runs out of memory and throws. What has happened to `b`?
+
+<details markdown="1">
+<summary>Answer</summary>
+
+(a) Before the swap, `tmp` holds its own copies of `1 2`. At the end it holds `7 8 9`, which are `b`'s old nodes, and its destructor deletes them. (b) It copies `b`, swaps, and deletes the originals. That wastes three allocations, but `b` still holds `7 8 9`. (c) Nothing: `b` has not been touched yet. In all three parts the reason is the same. The copy is finished *before* anything old is destroyed.
+
+</details>
+
+**18.** A `Stack<std::string>` named `s` holds `rope` with `torch` on top. Which of the four prints are safe, and what do those print?
+
+```cpp
+const std::string& r = s.top();
+std::string copy     = s.top();
+s.push("lamp");
+std::cout << r;       // (a)
+s.pop();
+std::cout << r;       // (b)
+s.pop();
+std::cout << copy;    // (c)
+std::cout << r;       // (d)
+```
+
+<details markdown="1">
+<summary>Answer</summary>
+
+**(a), (b), and (c) are safe, and each prints `torch`.** `r` refers to the string inside the `torch` node. Pushing `lamp` adds a node without moving that one, and the first `pop` deletes the `lamp` node. A reference does not switch to whatever is on top now. The second `pop` deletes the `torch` node, so **(d) is undefined behavior**. `copy` is its own string and is not affected.
 
 </details>
 
@@ -308,7 +405,7 @@ while (!s.empty()) { std::cout << s.top() << ' '; s.pop(); }
 
 ### Practice
 
-**14.** A general tree: `R` has children `X, Y`. `X` has children `P, Q`. `Q` has child `Z`. `Y` has child `W`. Give the pre-order, post-order, and level-order, the height, and the depth of `Q`.
+**19.** A general tree: `R` has children `X, Y`. `X` has children `P, Q`. `Q` has child `Z`. `Y` has child `W`. Give the pre-order, post-order, and level-order, the height, and the depth of `Q`.
 
 <details markdown="1">
 <summary>Answer</summary>
@@ -317,7 +414,7 @@ Pre-order **R X P Q Z Y W**. Post-order **P Z Q X W Y R**. Level-order **R X Y P
 
 </details>
 
-**15.** Insert `40 20 60 10 30 50 70 25 35` into an empty BST. (a) Which nodes does `find(35)` visit? (b) Remove 20 the course's way. What is the pre-order now? (c) What is the in-order?
+**20.** Insert `40 20 60 10 30 50 70 25 35` into an empty BST. (a) Which nodes does `find(35)` visit? (b) Remove 20 the course's way. What is the pre-order now? (c) What is the in-order?
 
 <details markdown="1">
 <summary>Answer</summary>
@@ -326,7 +423,7 @@ Pre-order **R X P Q Z Y W**. Post-order **P Z Q X W Y R**. Level-order **R X Y P
 
 </details>
 
-**16.** A classmate draws this and says it is a valid BST because every child is on the correct side of its parent. Is it?
+**21.** A classmate draws this and says it is a valid BST because every child is on the correct side of its parent. Is it?
 
 ```text
         50
@@ -343,7 +440,7 @@ Pre-order **R X P Q Z Y W**. Post-order **P Z Q X W Y R**. Level-order **R X Y P
 
 </details>
 
-**17.** Insert `10 20 30 25 40` into an empty BST. (a) What is the root's balance factor? (b) Which single rotation does `rebalanceAt` do at the root? (c) Draw the result. Is it balanced now?
+**22.** Insert `10 20 30 25 40` into an empty BST. (a) What is the root's balance factor? (b) Which single rotation does `rebalanceAt` do at the root? (c) Draw the result. Is it balanced now?
 
 <details markdown="1">
 <summary>Answer</summary>
@@ -352,12 +449,21 @@ Pre-order **R X P Q Z Y W**. Post-order **P Z Q X W Y R**. Level-order **R X Y P
 
 </details>
 
-**18.** You rotate right at node `n`, whose left child is `p`. Where does `p`'s old right subtree end up, and why is that the only legal place?
+**23.** You rotate right at node `n`, whose left child is `p`. Where does `p`'s old right subtree end up, and why is that the only legal place?
 
 <details markdown="1">
 <summary>Answer</summary>
 
 It becomes **`n`'s left subtree**. Everything in it is larger than `p` and smaller than `n`. After the rotation, `n` is `p`'s right child, so "right of `p`, left of `n`" is exactly that spot.
+
+</details>
+
+**24.** A BST holds distinct integers, and `find(62)` visits nodes in the order listed. (a) Is `80 30 70 45 65 62` possible? (b) Is `20 90 50 75 48 62` possible? (c) After visiting `20 90 50 75`, which integers could come next?
+
+<details markdown="1">
+<summary>Answer</summary>
+
+Keep the open interval that every later node must stay inside. (a) **Yes**: 80 gives below 80; 30 gives (30, 80); 70 gives (30, 70); 45 gives (45, 70); 65 gives (45, 65); 62 fits. (b) **No**: going right at 20, left at 90, right at 50, and left at 75 leaves (50, 75), and 48 is outside it. (c) **51 through 74.**
 
 </details>
 
@@ -383,7 +489,7 @@ It becomes **`n`'s left subtree**. Everything in it is larger than `p` and small
 
 ### Practice
 
-**19.** What does this print?
+**25.** What does this print?
 
 ```cpp
 std::map<std::string, int> m;
@@ -400,7 +506,7 @@ std::cout << m.size() << m["lich"] << m.count("imp");
 
 </details>
 
-**20.** Pick one container for each. (a) "Has this room been visited?", millions of times, order never matters. (b) How many times each monster was fought, printed alphabetically. (c) The distinct weaknesses, printed alphabetically. (d) The last ten commands, undone newest first.
+**26.** Pick one container for each. (a) "Has this room been visited?", millions of times, order never matters. (b) How many times each monster was fought, printed alphabetically. (c) The distinct weaknesses, printed alphabetically. (d) The last ten commands, undone newest first.
 
 <details markdown="1">
 <summary>Answer</summary>
@@ -409,7 +515,7 @@ std::cout << m.size() << m["lich"] << m.count("imp");
 
 </details>
 
-**21.** A separate-chaining table has 8 buckets, and a key's hash code is the key itself. Insert `9, 17, 4, 25, 12` with no resizing. Draw the buckets and give the load factor. Now rehash to 16 buckets and draw it again.
+**27.** A separate-chaining table has 8 buckets, and a key's hash code is the key itself. Insert `9, 17, 4, 25, 12` with no resizing. Draw the buckets and give the load factor. Now rehash to 16 buckets and draw it again.
 
 <details markdown="1">
 <summary>Answer</summary>
@@ -418,12 +524,37 @@ With 8 buckets: bucket 1 holds 9, 17, 25; bucket 4 holds 4, 12. The load factor 
 
 </details>
 
-**22.** Two names, *Goblin* and *Wraith*, share a bucket. A student's `find` computes the bucket and returns the first item in it. Which lookups are wrong, and which are right by luck?
+**28.** Two names, *Goblin* and *Wraith*, share a bucket. A student's `find` computes the bucket and returns the first item in it. Which lookups are wrong, and which are right by luck?
 
 <details markdown="1">
 <summary>Answer</summary>
 
 Looking up whichever name is first in the chain works by luck. Looking up the other returns the wrong monster. An *absent* name that hashes to any non-empty bucket "finds" a monster that is not it. `find` must compare the **name**, not just the bucket.
+
+</details>
+
+**29.** A table with separate chaining grows from 5 buckets to 10. A student's `rehash` copies old bucket 0 to new bucket 0, old bucket 1 to new bucket 1, and so on, and never recomputes a home. The stored hash codes are `3, 8, 14, 21, 27`. Which items can `find` still locate? What does `size()` report?
+
+<details markdown="1">
+<summary>Answer</summary>
+
+**3, 14, and 21.** Each item sits at (code mod 5), but `find` looks at (code mod 10), so it is found only when the two agree. 3: 3 and 3. 8: 3 and 8, lost. 14: 4 and 4. 21: 1 and 1. 27: 2 and 7, lost. `size()` still says **5**, because nothing was dropped. The lost items are filed where `find` never looks.
+
+</details>
+
+**30.** Give the *total* cost, in terms of `N`, of each whole job. (This one reaches back across the floors.)
+
+- (a) `N` calls to `push_front` on a `Chain`.
+- (b) One `linearSearch` for each of `N` names in a `Bag` of `N` monsters.
+- (c) Printing an `N`-node `Chain` by walking from `head()` to node `i`, for every `i` from 0 to `N − 1`.
+- (d) Printing the same `Chain` with one range-based `for`.
+- (e) Inserting `N` keys, in shuffled order, into your `BST`, on average.
+- (f) Inserting `N` values, one at a time, at the front of a `std::vector`.
+
+<details markdown="1">
+<summary>Answer</summary>
+
+(a) **O(N)**: N steps of O(1). (b) **O(N²)**: N searches of O(N). (c) **O(N²)**: the walks are 1, 2, 3, … steps long, about N²/2 in all. (d) **O(N)**: one `++` per node. (e) **O(N log N)**: a bushy tree is about log N deep. (f) **O(N²)**: each insert shifts everything already there. Ask what *one* step costs at that moment, then add up all N of them.
 
 </details>
 
@@ -448,7 +579,7 @@ Looking up whichever name is first in the chain works by luck. Looking up the ot
 
 ### Practice
 
-**23.** These calls build an undirected graph: `connect(S,A)`, `connect(S,B)`, `connect(A,C)`, `connect(B,C)`, `connect(C,D)`, `connect(B,E)`. Give the adjacency lists, `bfsOrder(S)`, `dfsOrder(S)`, and the number of hops from `S` to `D`.
+**31.** These calls build an undirected graph: `connect(S,A)`, `connect(S,B)`, `connect(A,C)`, `connect(B,C)`, `connect(C,D)`, `connect(B,E)`. Give the adjacency lists, `bfsOrder(S)`, `dfsOrder(S)`, and the number of hops from `S` to `D`.
 
 <details markdown="1">
 <summary>Answer</summary>
@@ -461,7 +592,7 @@ DFS in detail: pop S, push A then B. Pop B, push C then E. Pop E. Pop C, push A 
 
 </details>
 
-**24.** A student's `connect(a, b)` adds `b` to `a`'s list but forgets the other direction. After `connect(A,B)` and `connect(B,C)`, which of `reachable(A,C)`, `reachable(C,A)`, and `reachable(B,B)` return true?
+**32.** A student's `connect(a, b)` adds `b` to `a`'s list but forgets the other direction. After `connect(A,B)` and `connect(B,C)`, which of `reachable(A,C)`, `reachable(C,A)`, and `reachable(B,B)` return true?
 
 <details markdown="1">
 <summary>Answer</summary>
@@ -472,7 +603,7 @@ DFS in detail: pop S, push A then B. Pop B, push C then E. Pop E. Pop C, push A 
 
 </details>
 
-**25.** Where does the V come from, and where does the E come from, in O(V + E) for a BFS on adjacency lists? Why is the same crossing O(V²) on a matrix, even when there are very few doors?
+**33.** Where does the V come from, and where does the E come from, in O(V + E) for a BFS on adjacency lists? Why is the same crossing O(V²) on a matrix, even when there are very few doors?
 
 <details markdown="1">
 <summary>Answer</summary>
@@ -481,7 +612,7 @@ DFS in detail: pop S, push A then B. Pop B, push C then E. Pop E. Pop C, push A 
 
 </details>
 
-**26.** Every door now has a cost. Going straight from `S` to `T` costs 10; going `S` to `M` to `T` costs 3 + 3. What does BFS report as the shortest way from `S` to `T`, and is it the cheapest?
+**34.** Every door now has a cost. Going straight from `S` to `T` costs 10; going `S` to `M` to `T` costs 3 + 3. What does BFS report as the shortest way from `S` to `T`, and is it the cheapest?
 
 <details markdown="1">
 <summary>Answer</summary>
